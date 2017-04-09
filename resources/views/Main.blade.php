@@ -3,7 +3,7 @@
 <html xmlns="https://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Home page</title>
+    <title>@yield('title', 'Агенство недвижимости "Диоген"')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -47,12 +47,6 @@
         <div class="swipe-left"></div>
         <div class="swipe">
             <div class="swipe-menu">
-                <a href="https://livedemo00.template-help.com/magento_50897/" title="Главная" class="home-link">Главная</a>
-                <ul class="links">
-                    <li class="first"><a href="https://livedemo00.template-help.com/magento_50897/customer/account/" title="Мой профайл">Мой профайл</a></li>
-                    <li><a href="https://livedemo00.template-help.com/magento_50897/checkout/" title="Оформить заказ" class="top-link-checkout">Оформить заказ</a></li>
-                    <li class=" last"><a href="https://livedemo00.template-help.com/magento_50897/customer/account/login/" title="Войти">Войти</a></li>
-                </ul>
                 <div class="footer-links-menu">
                     <ul>
                         <li><a href="https://livedemo00.template-help.com/magento_50897/about-magento-demo-store">О компании</a></li>
@@ -82,12 +76,19 @@
                                 <ul class="links">
                                     <li class="first"><a href="https://livedemo00.template-help.com/magento_50897/customer/account/" title="Мой профайл">Мой профайл</a></li>
                                     <li><a href="https://livedemo00.template-help.com/magento_50897/checkout/" title="Оформить заказ" class="top-link-checkout">Оформить заказ</a></li>
+                                    <li class=" last"><a href="https://livedemo00.template-help.com/magento_50897/customer/account/login/" title="Войти">Регистрация
+                                        </a></li>
                                     <li class=" last"><a href="https://livedemo00.template-help.com/magento_50897/customer/account/login/" title="Войти">Войти</a></li>
                                 </ul>
                                 <p class="welcome-msg">Добро пожаловать в наш интернет-магазин! </p>
                             </div>
                             <div class="clear"></div>
-                            <h1 class="logo"><strong>Magento Commerce</strong><a href="https://livedemo00.template-help.com/magento_50897/" title="Magento Commerce"><img src="https://livedemo00.template-help.com/magento_50897/skin/frontend/default/theme288k/images/logo.gif" alt="Magento Commerce"/></a></h1>
+                            <h1 class="logo">
+                                <strong>Агенство Диоген</strong>
+                                <a href="{{ route('Home') }}" title='Агенство "Диоген"'>
+                                    <img src="/public/images/logo.png" alt='Агенство "Диоген"'/>
+                                </a>
+                            </h1>
                             <div class="right_head">
                                 <form id="search_mini_form" action="https://livedemo00.template-help.com/magento_50897/catalogsearch/result/" method="get">
                                     <div class="form-search">
@@ -115,8 +116,8 @@
                                     <span>Новостройки</span>
                                 </a>
                             </li>
-                            <li class="level0 nav-2 level-top">
-                                <a href="https://livedemo00.template-help.com/magento_50897/rentals.html" class="level-top">
+                            <li class="level0 nav-2 @if(Route::is('Rent')) active @endif level-top">
+                                <a href="{{ route('Rent') }}" class="level-top">
                                     <span>Аренда</span>
                                 </a>
                             </li>
@@ -131,197 +132,10 @@
                 <div class="clear"></div>
             </div>
         </div>
-        <div class="index-container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="index_block">
 
-                            <div class="banners_row">
-                                <div class="banner ban1">
-                                    <div class="ban_img"><img src="https://livedemo00.template-help.com/magento_50897/skin/frontend/default/theme288k/images/banner1.jpg" alt=""/></div>
-                                    <div class="ban_sale">Sale</div>
-                                    <div class="ban_wrap">
-                                        <a href="https://livedemo00.template-help.com/magento_50897/new-constructions.html/" class="view_details">Details</a>
-                                        <div class="ban_price">$4 340 000</div>
-                                    </div>
-                                </div>
-                                <div class="banner ban2">
-                                    <div class="ban_img"><img src="https://livedemo00.template-help.com/magento_50897/skin/frontend/default/theme288k/images/banner2.jpg" alt=""/></div>
-                                    <div class="ban_wrap">
-                                        <a href="https://livedemo00.template-help.com/magento_50897/rentals.html/" class="view_details">Details</a>
-                                        <div class="ban_price">$2 520 000</div>
-                                    </div>
-                                </div>
-                                <div class="banner ban3">
-                                    <div class="ban_img"><img src="https://livedemo00.template-help.com/magento_50897/skin/frontend/default/theme288k/images/banner3.jpg" alt=""/></div>
-                                    <div class="ban_sale">Sale</div>
-                                    <div class="ban_wrap">
-                                        <a href="https://livedemo00.template-help.com/magento_50897/sales.html/" class="view_details">Details</a>
-                                        <div class="ban_price">$3 740 000</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <div class="main-container col1-layout">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="main">
-                            <div class="col-main">
-                                <div class="padding-s">
-                                    <div class="page-title category-title">
-                                        <h1>Новые товары</h1>
-                                    </div>
-                                    <ul class="products-grid row">
-                                        <li class="item col-xs-3 first">
-                                            <a href="https://livedemo00.template-help.com/magento_50897/single-family-colonial.html" title="Single Family, Colonial " class="product-image"><img src="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/small_image/270x/9df78eab33525d08d6e5fb8d27136e95/s/i/single_family_colonial_1.png" alt="Single Family, Colonial "/></a>
-                                            <div class="product-shop">
-                                                <h3 class="product-name"><a href="https://livedemo00.template-help.com/magento_50897/single-family-colonial.html" title="Single Family, Colonial ">Single Family, Colonial </a></h3>
-                                                <div class="price-box">
-<span class="regular-price" id="product-price-12-new">
-<span class="price">9 000 000,00 $</span> </span>
-                                                </div>
-                                                <div class="actions">
-                                                    <button type="button" title="Добавить в корзину" class="button btn-cart" onclick="setLocation('https://livedemo00.template-help.com/magento_50897/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b181MDg5Ny8,/product/12/form_key/idv4jCPEF6GnUqh2/')"><span><span>Добавить в корзину</span></span></button>
+        @yield('Top')
+        @yield('Posts')
 
-                                                </div>
-                                            </div>
-                                            <div class="label-product">
-                                            </div>
-                                        </li>
-                                        <li class="item col-xs-3">
-                                            <a href="https://livedemo00.template-help.com/magento_50897/bedroom-condo-direct-gulf-and-beach-views.html" title="Bedroom condo, direct gulf and beach views" class="product-image"><img src="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/small_image/270x/9df78eab33525d08d6e5fb8d27136e95/2/_/2_bedroom_condo_direct_gulf_and_beach_views_2.png" alt="Bedroom condo, direct gulf and beach views"/></a>
-                                            <div class="product-shop">
-                                                <h3 class="product-name"><a href="https://livedemo00.template-help.com/magento_50897/bedroom-condo-direct-gulf-and-beach-views.html" title="Bedroom condo, direct gulf and beach views">Bedroom condo, direct gulf and beach views</a></h3>
-                                                <div class="price-box">
-<span class="regular-price" id="product-price-7-new">
-<span class="price">6 500 400,00 $</span> </span>
-                                                </div>
-                                                <div class="actions">
-                                                    <button type="button" title="Добавить в корзину" class="button btn-cart" onclick="setLocation('https://livedemo00.template-help.com/magento_50897/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b181MDg5Ny8,/product/7/form_key/idv4jCPEF6GnUqh2/')"><span><span>Добавить в корзину</span></span></button>
-
-                                                </div>
-                                            </div>
-                                            <div class="label-product">
-                                            </div>
-                                        </li>
-                                        <li class="item col-xs-3">
-                                            <a href="https://livedemo00.template-help.com/magento_50897/fabulous-home-located-on-a-beautifully-landscaped.html" title="Fabulous home located on a beautifully landscaped" class="product-image"><img src="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/small_image/270x/9df78eab33525d08d6e5fb8d27136e95/f/a/fabulous_home_located_on_a_beautifully_landscaped_1.png" alt="Fabulous home located on a beautifully landscaped"/></a>
-                                            <div class="product-shop">
-                                                <h3 class="product-name"><a href="https://livedemo00.template-help.com/magento_50897/fabulous-home-located-on-a-beautifully-landscaped.html" title="Fabulous home located on a beautifully landscaped">Fabulous home located on a beautifully landscaped</a></h3>
-                                                <div class="price-box">
-<span class="regular-price" id="product-price-5-new">
-<span class="price">22 900 900,00 $</span> </span>
-                                                </div>
-                                                <div class="actions">
-                                                    <button type="button" title="Добавить в корзину" class="button btn-cart" onclick="setLocation('https://livedemo00.template-help.com/magento_50897/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b181MDg5Ny8,/product/5/form_key/idv4jCPEF6GnUqh2/')"><span><span>Добавить в корзину</span></span></button>
-
-                                                </div>
-                                            </div>
-                                            <div class="label-product">
-                                            </div>
-                                        </li>
-                                        <li class="item col-xs-3 last">
-                                            <a href="https://livedemo00.template-help.com/magento_50897/appx-10-acre-ranch-with-beautiful-3-bdrm.html" title="Appx 10 Acre Ranch with Beautiful 3 bdrm" class="product-image"><img src="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/small_image/270x/9df78eab33525d08d6e5fb8d27136e95/a/p/appx_10_acre_ranch_with_beautiful_3_bdrm_3.png" alt="Appx 10 Acre Ranch with Beautiful 3 bdrm"/></a>
-                                            <div class="product-shop">
-                                                <h3 class="product-name"><a href="https://livedemo00.template-help.com/magento_50897/appx-10-acre-ranch-with-beautiful-3-bdrm.html" title="Appx 10 Acre Ranch with Beautiful 3 bdrm">Appx 10 Acre Ranch with Beautiful 3 bdrm</a></h3>
-                                                <div class="price-box">
-<span class="regular-price" id="product-price-20-new">
-<span class="price">8 000 000,00 $</span> </span>
-                                                </div>
-                                                <div class="actions">
-                                                    <button type="button" title="Добавить в корзину" class="button btn-cart" onclick="setLocation('https://livedemo00.template-help.com/magento_50897/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b181MDg5Ny8,/product/20/form_key/idv4jCPEF6GnUqh2/')"><span><span>Добавить в корзину</span></span></button>
-
-                                                </div>
-                                            </div>
-                                            <div class="label-product">
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <ul class="products-grid row">
-                                        <li class="item col-xs-3 first">
-                                            <a href="https://livedemo00.template-help.com/magento_50897/gorgeous-4-bedroom-mini-farm-for-sale-in-coldwater.html" title="Gorgeous 4 bedroom mini-farm for sale in Coldwater " class="product-image"><img src="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/small_image/270x/9df78eab33525d08d6e5fb8d27136e95/g/o/gorgeous_4_bedroom_mini-farm_for_sale_in_coldwater_2.png" alt="Gorgeous 4 bedroom mini-farm for sale in Coldwater "/></a>
-                                            <div class="product-shop">
-                                                <h3 class="product-name"><a href="https://livedemo00.template-help.com/magento_50897/gorgeous-4-bedroom-mini-farm-for-sale-in-coldwater.html" title="Gorgeous 4 bedroom mini-farm for sale in Coldwater ">Gorgeous 4 bedroom mini-farm for sale in Coldwater </a></h3>
-                                                <div class="price-box">
-<span class="regular-price" id="product-price-23-new">
-<span class="price">50 005 000,00 $</span> </span>
-                                                </div>
-                                                <div class="actions">
-                                                    <button type="button" title="Добавить в корзину" class="button btn-cart" onclick="setLocation('https://livedemo00.template-help.com/magento_50897/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b181MDg5Ny8,/product/23/form_key/idv4jCPEF6GnUqh2/')"><span><span>Добавить в корзину</span></span></button>
-
-                                                </div>
-                                            </div>
-                                            <div class="label-product">
-                                            </div>
-                                        </li>
-                                        <li class="item col-xs-3">
-                                            <a href="https://livedemo00.template-help.com/magento_50897/single-family-home-for-sale.html" title="Single Family Home for Sale " class="product-image"><img src="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/small_image/270x/9df78eab33525d08d6e5fb8d27136e95/s/i/single_family_home_for_sale_1.png" alt="Single Family Home for Sale "/></a>
-                                            <div class="product-shop">
-                                                <h3 class="product-name"><a href="https://livedemo00.template-help.com/magento_50897/single-family-home-for-sale.html" title="Single Family Home for Sale ">Single Family Home for Sale </a></h3>
-                                                <div class="price-box">
-<span class="regular-price" id="product-price-6-new">
-<span class="price">16 500 500,00 $</span> </span>
-                                                </div>
-                                                <div class="actions">
-                                                    <button type="button" title="Добавить в корзину" class="button btn-cart" onclick="setLocation('https://livedemo00.template-help.com/magento_50897/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b181MDg5Ny8,/product/6/form_key/idv4jCPEF6GnUqh2/')"><span><span>Добавить в корзину</span></span></button>
-
-                                                </div>
-                                            </div>
-                                            <div class="label-product">
-                                            </div>
-                                        </li>
-                                        <li class="item col-xs-3">
-                                            <a href="https://livedemo00.template-help.com/magento_50897/free-standing-traditional-single-family-home.html" title="Free Standing, Traditional Single Family Home " class="product-image"><img src="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/small_image/270x/9df78eab33525d08d6e5fb8d27136e95/f/r/free_standing_traditional_single_family_home_1.png" alt="Free Standing, Traditional Single Family Home "/></a>
-                                            <div class="product-shop">
-                                                <h3 class="product-name"><a href="https://livedemo00.template-help.com/magento_50897/free-standing-traditional-single-family-home.html" title="Free Standing, Traditional Single Family Home ">Free Standing, Traditional Single Family Home </a></h3>
-                                                <div class="price-box">
-<span class="regular-price" id="product-price-29-new">
-<span class="price">750 000,00 $</span> </span>
-                                                </div>
-                                                <div class="actions">
-                                                    <button type="button" title="Добавить в корзину" class="button btn-cart" onclick="setLocation('https://livedemo00.template-help.com/magento_50897/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b181MDg5Ny8,/product/29/form_key/idv4jCPEF6GnUqh2/')"><span><span>Добавить в корзину</span></span></button>
-
-                                                </div>
-                                            </div>
-                                            <div class="label-product">
-                                            </div>
-                                        </li>
-                                        <li class="item col-xs-3 last">
-                                            <a href="https://livedemo00.template-help.com/magento_50897/luxury-on-the-river-single-family-home.html" title="Luxury on the river - Single Family Home" class="product-image"><img src="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/small_image/270x/9df78eab33525d08d6e5fb8d27136e95/l/u/luxury_on_the_river_-_single_family_home_2.png" alt="Luxury on the river - Single Family Home"/></a>
-                                            <div class="product-shop">
-                                                <h3 class="product-name"><a href="https://livedemo00.template-help.com/magento_50897/luxury-on-the-river-single-family-home.html" title="Luxury on the river - Single Family Home">Luxury on the river - Single Family Home</a></h3>
-                                                <div class="price-box">
-<span class="regular-price" id="product-price-11-new">
-<span class="price">18 900 000,00 $</span> </span>
-                                                </div>
-                                                <div class="actions">
-                                                    <button type="button" title="Добавить в корзину" class="button btn-cart" onclick="setLocation('https://livedemo00.template-help.com/magento_50897/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b181MDg5Ny8,/product/11/form_key/idv4jCPEF6GnUqh2/')"><span><span>Добавить в корзину</span></span></button>
-
-                                                </div>
-                                            </div>
-                                            <div class="label-product">
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="std"><div class="banner_bottom_wrap">
-                                            <div class="banner_bottom">
-                                                <a href="https://livedemo00.template-help.com/magento_50897/rentals.html/">
-                                                    <div class="ban_img"><img src="https://livedemo00.template-help.com/magento_50897/skin/frontend/default/theme288k/images/banner_bottom.jpg" alt=""/></div>
-                                                    <div class="ban_wrap">Construction of your dreams</div>
-                                                </a>
-                                            </div>
-                                        </div></div> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="footer-container">
             <div class="container">
                 <div class="row">
@@ -446,24 +260,7 @@
         });
     });
 </script> <script type="text/javascript">var mdate = new Date(); document.write(mdate.getFullYear());</script>
-<script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
-        f[z]=function(){
-            (a.s=a.s||[]).push(arguments)};var a=f[z]._={
-        },q=c.methods.length;while(q--){(function(n){f[z][n]=function(){
-            f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={
-            0:+new Date};a.P=function(u){
-            a.p[u]=new Date-a.p[0]};function s(){
-            a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){
-            hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){
-            return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){
-            b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{
-            b.contentWindow[g].open()}catch(w){
-            c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{
-            var t=b.contentWindow[g];t.write(p());t.close()}catch(x){
-            b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({
-        loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
-    /* custom configuration goes here (www.olark.com/documentation) */
-    olark.identify('7830-582-10-3714');/*]]>*/</script><script type="text/javascript">
+<script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-7078796-5']);
     _gaq.push(['_trackPageview']);
