@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    protected const pagination_vars = [10, 25, 50, 100];
+    protected const pagination_vars = [10, 25, 50];
 
     protected const sort_vars = [
         'Сначала новые' => [
@@ -43,7 +43,7 @@ class PostController extends Controller
 
         if(!in_array($paginate, self::pagination_vars)) $paginate = self::pagination_vars[0];
 
-        if(!self::rigth_field($sort)) $sort = self::sort_vars[0]['field'];
+        if(!self::rigth_field($sort)) $sort = 'created_at';
 
         $Posts = Post::where('type_id', 1);
 

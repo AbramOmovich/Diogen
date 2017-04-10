@@ -2,7 +2,7 @@
 <div class="toolbar">
     <div class="pager">
         <p class="amount">
-            Позиции с 1 по 5 из 6 </p>
+            Позиции с {{ $Posts->firstItem() }} по {{ $Posts->lastItem() }} из {{ $Posts->total() }}  </p>
         <div class="limiter">
             <label>Показать</label>
             <select id="pager" onchange="setLocation(this.value)">
