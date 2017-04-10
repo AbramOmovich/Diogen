@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    protected static $types = [
+        'rent'  => 1,
+        'buy'   => 2,
+        'build' => 3
+    ];
+
+
     protected const pagination_vars = [10, 25, 50];
 
     protected const sort_vars = [
@@ -31,6 +38,10 @@ class PostController extends Controller
         return false;
     }
 
+    public function makePost(){
+        return view('Add');
+    }
+
     public function index(){
         return view('Posts', ['Posts' => Post::Latest(), 'title' => 'Последние объявления']);
     }
@@ -40,14 +51,22 @@ class PostController extends Controller
     }
 
     public function rent($paginate = 10, $sort = 'created_at', $ord ='asc'){
+       return $this->stock(__FUNCTION__,$paginate,$sort,$ord);
+    }
+
+    public function buy($paginate = 10, $sort = 'created_at', $ord ='asc'){
+       return $this->stock(__FUNCTION__,$paginate,$sort,$ord);
+    }
+
+    protected function stock($method, $paginate, $sort, $ord){
 
         if(!in_array($paginate, self::pagination_vars)) $paginate = self::pagination_vars[0];
 
         if(!self::rigth_field($sort)) $sort = 'created_at';
 
-        $Posts = Post::where('type_id', 1);
+        $Posts = Post::where('type_id', self::$types[$method]);
 
-        return view('Rent', [
+        return view('Stock', [
             'Posts' => $Posts->orderBy($sort, $ord)->paginate($paginate),
             'paginate' => $paginate,
             'sort' => $sort,
@@ -57,7 +76,4 @@ class PostController extends Controller
         ]);
     }
 
-    public function buy(){
-
-    }
 }

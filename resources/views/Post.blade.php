@@ -82,6 +82,9 @@
                                                     <div class="clear"></div>
                                                     <div class="add-to-box">
                                                         <div class="add-to-cart">
+                                                            <div class="qty-block">
+                                                                <label> Добавленно: {{ $Post->created_at }}</label>
+                                                            </div>
                                                             <button type="button" title="Отправить заявку" class="button btn-cart" onclick=""><span><span>Отправить заявку</span></span></button>
                                                         </div>
                                                     </div>

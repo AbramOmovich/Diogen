@@ -1,13 +1,15 @@
-
+<?php  ?>
 <div class="toolbar">
     <div class="pager">
         <p class="amount">
             Позиции с {{ $Posts->firstItem() }} по {{ $Posts->lastItem() }} из {{ $Posts->total() }}  </p>
         <div class="limiter">
             <label>Показать</label>
+
             <select id="pager" onchange="setLocation(this.value)">
                 @foreach($pagination_vars as $var)
-                    <option value="{{ route('Rent',['paginate' => $var ,'sort' => $sort, 'ord' => $ord]) }}" @if($var == $paginate) selected @endif>{{ $var }}</option>
+
+                    <option value="{{ route(Route::currentRouteName(),['paginate' => $var ,'sort' => $sort, 'ord' => $ord]) }}" @if($var == $paginate) selected @endif>{{ $var }}</option>
                 @endforeach
             </select> </div>
         <div class="pages">
@@ -21,7 +23,7 @@
             <label>Тип сортировки</label>
             <select onchange="setLocation(this.value)">
                 @foreach($sort_vars as $title => $var)
-                    <option value="{{ route('Rent',['paginate' => $paginate ,'sort' => $var['field'] , 'ord' => $var['ord']]) }}" @if($sort == $var['field'] && $ord == $var['ord']) selected @endif> {{ $title }}</option>
+                    <option value="{{ route(Route::currentRouteName(),['paginate' => $paginate ,'sort' => $var['field'] , 'ord' => $var['ord']]) }}" @if($sort == $var['field'] && $ord == $var['ord']) selected @endif> {{ $title }}</option>
                 @endforeach
             </select>
         </div>

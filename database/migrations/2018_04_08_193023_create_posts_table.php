@@ -23,7 +23,9 @@ class CreatePostsTable extends Migration
             $table->text('photo');
             $table->unsignedInteger('type_id');
             $table->timestamps();
+            $table->unsignedInteger('user_id');
 
+            $table->foreign('user_id', 'post_of_user')->references('id')->on('users');
             $table->foreign('type_id','type')->references('id')->on('post_types');
         });
     }
@@ -37,6 +39,7 @@ class CreatePostsTable extends Migration
     {
         Schema::table('posts',function (Blueprint $table){
             $table->dropForeign('type');
+            $table->dropForeign('post_of_user');
         });
         Schema::dropIfExists('posts');
     }
