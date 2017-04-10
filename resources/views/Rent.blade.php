@@ -14,47 +14,7 @@
                                     </div>
 
                                     <div class="category-products">
-                                        <div class="toolbar">
-                                            <div class="pager">
-                                                <p class="amount">
-                                                    Позиции с 1 по 5 из 6 </p>
-                                                <div class="limiter">
-                                                    <label>Показать</label>
-                                                    <select onchange="setLocation(this.value)">
-                                                        <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?limit=5" selected="selected">
-                                                            5 </option>
-                                                        <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?limit=10">
-                                                            10 </option>
-                                                        <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?limit=15">
-                                                            15 </option>
-                                                        <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?limit=20">
-                                                            20 </option>
-                                                        <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?limit=25">
-                                                            25 </option>
-                                                    </select> </div>
-                                                <div class="pages">
-
-                                                    <strong>Страница:</strong>
-                                                    {{ $Posts->links() }}
-                                                </div>
-                                            </div>
-                                            <div class="sorter">
-                                                <div class="sort-by">
-                                                    <div class="right">
-                                                        <a class="fa fa-arrow-up" href="https://livedemo00.template-help.com/magento_50897/rentals.html?dir=desc&amp;order=position" title="Сортируется по возрастанию. Установить по убыванию"> </a>
-                                                    </div>
-                                                    <label>Тип сортировки</label>
-                                                    <select onchange="setLocation(this.value)">
-                                                        <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?dir=asc&amp;order=position" selected="selected">
-                                                            Позиция </option>
-                                                        <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?dir=asc&amp;order=name">
-                                                            Название </option>
-                                                        <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?dir=asc&amp;order=price">
-                                                            Цена </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @include('part.pageToolbar')
 
                                         <ol class="products-list" id="products-list">
                                             @foreach($Posts as $post)
@@ -83,54 +43,7 @@
                                             @endforeach
                                         </ol>
                                         <div class="toolbar-bottom">
-                                            <div class="toolbar">
-                                                <div class="pager">
-                                                    <p class="amount">
-                                                        Позиции с 1 по 5 из 6 </p>
-                                                    <div class="limiter">
-                                                        <label>Показать</label>
-                                                        <select onchange="setLocation(this.value)">
-                                                            <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?limit=5" selected="selected">
-                                                                5 </option>
-                                                            <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?limit=10">
-                                                                10 </option>
-                                                            <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?limit=15">
-                                                                15 </option>
-                                                            <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?limit=20">
-                                                                20 </option>
-                                                            <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?limit=25">
-                                                                25 </option>
-                                                        </select> </div>
-                                                    <div class="pages">
-                                                        <strong>Страница:</strong>
-                                                        <ol>
-                                                            <li class="current">1</li>
-                                                            <li><a href="https://livedemo00.template-help.com/magento_50897/rentals.html?p=2">2</a></li>
-                                                            <li>
-                                                                <a class="next i-next fa fa-caret-right" href="https://livedemo00.template-help.com/magento_50897/rentals.html?p=2" title="Следующая">
-
-                                                                </a>
-                                                            </li>
-                                                        </ol>
-                                                    </div>
-                                                </div>
-                                                <div class="sorter">
-                                                    <div class="sort-by">
-                                                        <div class="right">
-                                                            <a class="fa fa-arrow-up" href="https://livedemo00.template-help.com/magento_50897/rentals.html?dir=desc&amp;order=position" title="Сортируется по возрастанию. Установить по убыванию"> </a>
-                                                        </div>
-                                                        <label>Тип сортировки</label>
-                                                        <select onchange="setLocation(this.value)">
-                                                            <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?dir=asc&amp;order=position" selected="selected">
-                                                                Позиция </option>
-                                                            <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?dir=asc&amp;order=name">
-                                                                Название </option>
-                                                            <option value="https://livedemo00.template-help.com/magento_50897/rentals.html?dir=asc&amp;order=price">
-                                                                Цена </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @include('part.pageToolbar')
                                         </div>
                                     </div>
 

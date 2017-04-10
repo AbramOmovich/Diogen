@@ -183,12 +183,12 @@
     </div>
 </div>
 
-<!--<script type="text/javascript" src="/public/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/public/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="/public/js/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="/public/js/superfish.js"></script>
 <script type="text/javascript" src="/public/js/scripts.js"></script>
 <script type="text/javascript" src="/public/js/media1.js"></script>
-
+<!--
 <script type="text/javascript" src="/public/js/camera.js"></script>
 -->
 <script type="text/javascript">
