@@ -16,7 +16,7 @@ class PostController extends Controller
     }
 
     public function rent(){
-        return view('Rent');
+        return view('Rent', ['Posts' => Post::where('type_id', 1)->paginate(10)]);
     }
 
     public function buy(){
