@@ -15,7 +15,7 @@ class CreateTypesOfPostsTable extends Migration
     {
         Schema::create('post_types',function (Blueprint $table){
             $table->increments('id');
-            $table->text('title');
+            $table->string('title');
         });
     }
 

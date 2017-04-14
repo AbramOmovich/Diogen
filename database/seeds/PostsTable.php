@@ -16,11 +16,10 @@ class PostsTable extends Seeder
 
         $db = DB::table('posts');
 
-        for($i = 0; $i < 508; $i++){
+        for($i = 0; $i < 308; $i++){
             $values ['title']= $this->faker->sentence;
             $values ['slug'] = str_slug($values['title']);
-            $values ['short_description'] = $this->faker->realText(600);
-            $values ['description'] = $this->faker->realText(1500);
+            $values ['description'] = $this->faker->realText(650);
             $values ['created_at']= $this->faker->dateTimeBetween('-1 years');
             $values ['updated_at'] = clone $values['created_at'];
             $values ['updated_at']->add($values['created_at']->diff(new $this->faker->dateTimeBetween('-1 years'),true));

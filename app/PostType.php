@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostTypes extends Model
+class PostType extends Model
 {
     public $timestamps = false;
 }

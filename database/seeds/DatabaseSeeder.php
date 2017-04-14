@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CurrenciesTable::class);
         $this->call(PostsTable::class);
         $this->call(AdressesTable::class);
+        $this->call(CommentsTable::class);
 
     }
 }

@@ -25,7 +25,7 @@
                                                         <div class="list-left">
                                                             <h2 class="product-name"><a href="{{ route('post', ['slug' => $post->slug]) }}" title="{{ $post->title }}">{{ $post->title }}</a></h2>
                                                             <div class="desc std">
-                                                                {{ $post->short_description }}
+                                                                {{ $post->description }}
                                                                 <a href="{{ route('post', ['slug' => $post->slug]) }}" title="{{ $post->title }}">Узнать больше</a>
                                                             </div>
                                                         </div>

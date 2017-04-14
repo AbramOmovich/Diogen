@@ -28,6 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function comment(){
+        return $this->hasMany(Comment::class);
+    }
+
+
     public function phone(){
         return $this->hasMany(UserPhone::class, 'user_id');
     }

@@ -37,18 +37,9 @@
                                                                             </div>
                                                                         </li>
                                                                         <li class="wide">
-                                                                            <label for="short_description" class="required"><em>*</em>Краткое описание</label>
+                                                                            <label for="description" class="required"><em>*</em>Краткое описание</label>
                                                                             <div class="input-box">
-                                                                                <textarea name="short_description" id="short_description" class="required-entry form-control short @if($errors->has('short_description')) validation-failed @endif">{{ old('short_description') }}</textarea>
-                                                                                @if($errors->has('short_description'))
-                                                                                    <div class="validation-advice"><p>{{ $errors->first('short_description') }}</p></div>
-                                                                                @endif
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="wide">
-                                                                            <label for="description" class="required"><em>*</em>Описание</label>
-                                                                            <div class="input-box">
-                                                                                <textarea name="description" id="description" class="required-entry form-control @if($errors->has('description')) validation-failed @endif ">{{ old('description') }}</textarea>
+                                                                                <textarea name="description" id="description" class="required-entry form-control short @if($errors->has('description')) validation-failed @endif ">{{ old('description') }}</textarea>
                                                                                 @if($errors->has('description'))
                                                                                     <div class="validation-advice"><p>{{ $errors->first('description') }}</p></div>
                                                                                 @endif
@@ -63,7 +54,7 @@
                                                                                 <div class="input-box">
                                                                                     <select id="type" name="type" title="Вид объявления" class="form-control @if($errors->has('type')) validation-failed @endif " >
                                                                                         <option value="">Пожалуйста, выберите тип объявления</option>
-                                                                                        @foreach(\App\PostTypes::all() as $type)
+                                                                                        @foreach(\App\PostType::all() as $type)
                                                                                             <option value="{{ $type->id }}" @if(old('type') == $type->id) selected @endif>{{ $type->title }}</option>
                                                                                         @endforeach
                                                                                     </select>

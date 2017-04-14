@@ -15,6 +15,14 @@ class UserTable extends Seeder
 
         $this->faker = Faker\Factory::create();
 
+        $values ['firstName'] = 'Роман';
+        $values ['lastName'] = 'Телепнёв';
+        $values ['email'] = 'AbramOmovich@gmail.com';
+        $values ['password'] = bcrypt('123123');
+        $values ['role_id'] = 2;
+
+        $db->insert($values);
+
         for($i = 0; $i < 10; $i++) {
 
             $values ['firstName'] = $this->faker->firstName;

@@ -66,17 +66,19 @@
                                                 <div class="product-shop">
                                                     <div class="product-name">
                                                         <h1>{{ $Post->title }}</h1>
+                                                        <div class="pull-right"><p> {{ $Post->type->title }} </p></div>
                                                     </div>
                                                     <hr>
                                                     <div class="price-box">
 <span class="regular-price" id="product-price-6">
 <span class="price">{{ separate($Post->price) }} $</span> </span>
+
                                                     </div>
                                                     <div class="clear"></div>
                                                     <h2>Краткая информация</h2>
                                                     <div class="short-description">
                                                         <div class="std">
-                                                            {{ $Post->short_description }}
+                                                            {{ $Post->description }}
                                                         </div>
                                                     </div>
                                                     <div class="clear"></div>
@@ -123,39 +125,50 @@
                                                 </div>
                                             </div>
 
+                                            @if(Auth::check())
                                             <div class="box-collateral form-add">
                                                 <h2>Напишите ваш собственный отзыв<span class="toggle opened"></span></h2>
                                                 <div class="box-collateral-content" style="display: block;">
-                                                    <form action="https://livedemo00.template-help.com/magento_50897/review/product/post/id/6/" method="post" id="review-form">
-                                                        <input name="form_key" type="hidden" value="ZO8ZxfjOj5v6Air9">
+                                                    <form action="{{ route('addComment', ['slug' => Route::current()->slug ] )}}" method="post" id="review-form">
+                                                        {{ csrf_field() }}
                                                         <fieldset>
                                                             <ul class="form-list">
-                                                                <li>
-                                                                    <label for="nickname_field" class="required"><em>*</em>Псевдоним пользователя</label>
+                                                                <li style="width: 60%">
+                                                                    <label for="review_field" class="required">Комментарий</label>
                                                                     <div class="input-box">
-                                                                        <input type="text" name="nickname" id="nickname_field" class="input-text required-entry form-control" value="">
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <label for="summary_field" class="required"><em>*</em>Название вашего отзыва (основная мысль)</label>
-                                                                    <div class="input-box">
-                                                                        <input type="text" name="title" id="summary_field" class="input-text required-entry form-control" value="">
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <label for="review_field" class="required"><em>*</em>Отзыв</label>
-                                                                    <div class="input-box">
-                                                                        <textarea name="detail" id="review_field" cols="5" rows="3" class="required-entry form-control"></textarea>
+                                                                        <textarea style="height: 100%" name="comment" id="review_field" rows="3" class="required-entry form-control @if($errors->has('comment')) validation-failed @endif">{{ old('comment') }}</textarea>
+                                                                        @if($errors->has('comment'))
+                                                                            <div class="validation-advice"><p>{{ $errors->first('comment') }}</p></div>
+                                                                        @endif
                                                                     </div>
                                                                 </li>
                                                             </ul>
                                                         </fieldset>
-                                                        <div class="buttons-set">
-                                                            <button type="submit" title="Добавить отзыв" class="button"><span><span>Добавить отзыв</span></span></button>
+                                                        <div class="buttons-set pull-left">
+                                                            <button type="submit" title="Добавить коментарий" class="button"><span><span>Добавить коментарий</span></span></button>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
+                                            @endif
+                                            <br><br><br>
+                                            @if(!$Post->comments->isEmpty())
+                                            <div class="box-collateral box-reviews" id="customer-reviews">
+                                                <h2>Отзывы пользователей</h2>
+                                                <br>
+                                                <div class="box-collateral-content" style="padding-left: 3%; padding-right: 15%">
+                                                    <dl>
+                                                        @foreach($Post->comments as $comment)
+                                                            <dt>
+                                                                <a href="#">{{ $comment->user->firstName }}</a></dt>
+                                                            <dd>
+                                                                {{ $comment->text }}<br><small class="date">(Отзыв написан {{ $comment->created_at }})</small>
+                                                            </dd>
+                                                        @endforeach
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

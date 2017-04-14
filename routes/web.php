@@ -6,6 +6,7 @@ Route::get('/', 'PostController@index')->name('Home');
 Route::get('rent/{paginate?}/{sort?}/{ord?}','PostController@rent')->name('Rent');
 Route::get('buy/{paginate?}/{sort?}/{ord?}','PostController@buy')->name('Buy');
 
+
 Route::match(['get','head'],'login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('login','Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -19,5 +20,8 @@ Route::post('register','Auth\RegisterController@register');
 Route::group(['prefix' => 'adv'] , function($route){
     $route->get('add', 'PostController@makePost')->name('make')->middleware('auth');
     $route->put('add', 'PostController@putPost')->middleware('auth');
-    $route->get('{slug}', 'PostController@getPost')->name('post');
+    $route->group(['prefix' => '{slug}'] , function ($slugRoute){
+        $slugRoute->get('/', 'PostController@getPost')->name('post');
+        $slugRoute->post('/addComment','CommentController@make')->name('addComment')->middleware('auth');
+    });
 });

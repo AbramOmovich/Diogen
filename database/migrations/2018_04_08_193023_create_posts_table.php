@@ -17,8 +17,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('slug');
-            $table->mediumText('short_description');
-            $table->longText('description');
+            $table->text('description');
             $table->unsignedBigInteger('price');
             $table->unsignedInteger('currency_id');
             $table->text('photo');

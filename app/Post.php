@@ -13,5 +13,13 @@ class Post extends Model
     public function address(){
         return $this->hasOne(Address::class,'post_id');
     }
+
+    public function type(){
+        return $this->belongsTo(PostType::class,'type_id');
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class)->orderBy('created_at','desc');
+    }
 }
 
