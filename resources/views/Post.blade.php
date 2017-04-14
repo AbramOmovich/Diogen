@@ -16,8 +16,8 @@
                                                 <div class="product-img-box">
                                                     <div class="product-box-customs">
                                                         <p class="product-image">
-                                                        <div id="wrap" style="top:0px;z-index:99;position:relative;"><a href="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/image/600x600/9df78eab33525d08d6e5fb8d27136e95/s/i/single_family_home_for_sale_1.png" class="cloud-zoom" id="zoom1" rel="position:'right',showTitle:1,titleOpacity:0.5,lensOpacity:0.5,adjustX: 10,adjustY:-4" style="position: relative; display: block;">
-                                                                <img class="big" src="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/image/308x308/9df78eab33525d08d6e5fb8d27136e95/s/i/single_family_home_for_sale_1.png" alt="" title="Single Family Home for Sale " style="display: block;">
+                                                        <div id="wrap" style="top:0px;z-index:99;position:relative;"><a href="/public/images/single_family_colonial_1.png" class="cloud-zoom" id="zoom1" rel="position:'right',showTitle:1,titleOpacity:0.5,lensOpacity:0.5,adjustX: 10,adjustY:-4" style="position: relative; display: block;">
+                                                                <img class="big" src="/public/images/single_family_colonial_1.png" alt="" title="Single Family Home for Sale " style="display: block;">
                                                                 <div class="cloud-zoom-lens" style="z-index: 98; position: absolute; width: 157.08px; height: 157.08px; opacity: 0; left: 150.92px; top: 0px; background-position: -150.92px 0px;"></div></a><div class="mousetrap" style="background: rgb(255, 255, 255); opacity: 0; z-index: 99; position: absolute; width: 308px; height: 308px; left: 0px; top: 0px; cursor: move;"></div><div id="cloud-zoom-big" class="cloud-zoom-big" style="position: absolute; left: 318px; top: -4px; width: 308px; height: 308px; background-image: url(&quot;https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/image/600x600/9df78eab33525d08d6e5fb8d27136e95/s/i/single_family_home_for_sale_1.png&quot;); z-index: 99; opacity: 0; background-position: -262px -125px;"><div class="cloud-zoom-title" style="opacity: 0.5;">Single Family Home for Sale </div></div></div>
                                                         <span></span></p>
                                                         <div class="more-views">
@@ -93,15 +93,36 @@
                                                 </div>
                                                 <div class="clearer"></div>
                                         </div>
+
                                         <div class="product-collateral">
+                                            <div class="box-collateral box-description ">
+                                                <h2>Адрес</h2>
+                                                <div class="box-collateral-content">
+                                                    <table style="color: #4c4c4c; font-size: large; margin: 10px;">
+                                                        <tr>
+                                                            <td class="pull-right" style="padding: 5px">Улица: </td><td style="padding: 5px">{{ $Post->address->street }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pull-right" style="padding: 5px">Дом: </td><td style="padding: 5px">{{ $Post->address->house }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pull-right" style="padding: 5px">Город: </td><td style="padding: 5px">{{ $Post->address->city }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pull-right" style="padding: 5px">Область: </td><td style="padding: 5px">{{ $Post->address->region->title }}</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
                                             <div class="box-collateral box-description">
-                                                <h2>Подробности<span class="toggle"></span></h2>
+                                                <h2>Подробности</h2>
                                                 <div class="box-collateral-content">
                                                     <div class="std">
                                                         {{ $Post->description }}
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="box-collateral form-add">
                                                 <h2>Напишите ваш собственный отзыв<span class="toggle opened"></span></h2>
                                                 <div class="box-collateral-content" style="display: block;">

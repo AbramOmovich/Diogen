@@ -55,6 +55,25 @@
                                                                             </div>
                                                                         </li>
 
+                                                                        <h2 class="legend">Вид Обявления</h2>
+                                                                        <hr>
+                                                                        <li class="fields">
+                                                                            <div class="field">
+                                                                                <label for="type" class="required"><em>*</em>Вид объявления</label>
+                                                                                <div class="input-box">
+                                                                                    <select id="type" name="type" title="Вид объявления" class="form-control @if($errors->has('type')) validation-failed @endif " >
+                                                                                        <option value="">Пожалуйста, выберите тип объявления</option>
+                                                                                        @foreach(\App\PostTypes::all() as $type)
+                                                                                            <option value="{{ $type->id }}" @if(old('type') == $type->id) selected @endif>{{ $type->title }}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                    @if($errors->has('type'))
+                                                                                        <div class="validation-advice"><p>{{ $errors->first('type') }}</p></div>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+
                                                                         <h2 class="legend">Адрес объекта</h2>
                                                                         <hr>
                                                                         <li class="fields">

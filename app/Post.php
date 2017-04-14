@@ -9,4 +9,9 @@ class Post extends Model
     public function scopeLatest ($builder){
         return $builder->orderBy('created_at', 'desc')->paginate(16);
     }
+
+    public function address(){
+        return $this->hasOne(Address::class,'post_id');
+    }
 }
+

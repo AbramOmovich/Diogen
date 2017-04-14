@@ -34,16 +34,10 @@
 </div>
 
 <script type="text/javascript" src="/public/js/jquery_1.12.4.js"></script>
-@if(session()->has('alert'))
-    <script>
-        window.onload = function(){
-            swal("{{ session('alert.title') }}", "{{ session('alert.message') }}", "{{ session('alert.type') }}")
-        };
-    </script>
-@endif
 <script src="/public/js/sweetalert.min.js"></script>
 <script src="/public/js/bootstrap.min.js"></script>
 <script src="/public/js/helpers.js"></script>
 <script type="text/javascript">var mdate = new Date(); document.write(mdate.getFullYear() + ' &copy');</script>
+@include('part.alert')
 </body>
 </html>
