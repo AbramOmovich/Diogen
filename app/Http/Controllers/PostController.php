@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Currency;
 use App\Post;
+use App\Region;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -12,7 +16,6 @@ class PostController extends Controller
         'buy'   => 2,
         'build' => 3
     ];
-
 
     protected const pagination_vars = [10, 25, 50];
 
@@ -36,10 +39,6 @@ class PostController extends Controller
             if (in_array($sort,$var)) return true;
         }
         return false;
-    }
-
-    public function makePost(){
-        return view('Add');
     }
 
     public function index(){
@@ -74,6 +73,54 @@ class PostController extends Controller
             'pagination_vars' => self::pagination_vars,
             'sort_vars' => self::sort_vars
         ]);
+    }
+
+    public function makePost(){
+        return view('Add');
+    }
+
+    public function putPost(Request $request){
+
+        $data = $request->all();
+        $data ['slug'] = str_slug( $data['title']);
+
+        if( !in_array( $data ['region'], Region::all()->pluck('id')->toArray() )) unset($data['region']);
+        if( !in_array( $data ['currency'], Currency::all()->pluck('id')->toArray() )) unset($data['currency']);
+
+        $validator = Validator::make($data, [
+            'title' => 'required|max:255',
+            'slug' => 'unique:posts',
+            'short_description' => 'required|min:10',
+            'description' => 'required|min:10',
+            'street' => 'required',
+            'house' => 'required',
+            'city' => 'required',
+            'region' => 'required',
+            'price' => 'required|min:0',
+            'currency' => 'required',
+            'phone' => 'required'
+        ]);
+
+        if ($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
+            $post = new Post();
+            $post->title = $data['title'];
+            $post->slug = $data['slug'];
+            $post->short_description = $data['short_description'];
+            $post->description = $data['description'];
+            $post->price = $data['price'];
+            $post->currency_id = $data['currency'];
+            $post->photo = 'single_family_colonial_1.png';
+            $post->type_id = 1;
+            $post->user_id = Auth::id();
+            $post->save();
+
+            alert('Объявление добавленно', "Обявление {$post->title} успешно добавленно");
+            return redirect()->route('post', ['slug' => $post->slug ]);
+        }
+
+
     }
 
 }

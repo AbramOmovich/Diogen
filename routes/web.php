@@ -18,5 +18,6 @@ Route::post('register','Auth\RegisterController@register');
 
 Route::group(['prefix' => 'adv'] , function($route){
     $route->get('add', 'PostController@makePost')->name('make')->middleware('auth');
+    $route->put('add', 'PostController@putPost')->middleware('auth');
     $route->get('{slug}', 'PostController@getPost')->name('post');
 });

@@ -11,8 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(RegionsTable::class);
         $this->call(CreateTypes::class);
         $this->call(UserTable::class);
+        $this->call(UserPhones::class);
+        $this->call(CurrenciesTable::class);
         $this->call(PostsTable::class);
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\UserPhone;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +27,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function phone(){
+        return $this->hasMany(UserPhone::class, 'user_id');
+    }
 }

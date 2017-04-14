@@ -22,7 +22,8 @@
             "App\\": "app/"
         },
         "files":[
-            "app/helpers/separate.php"
+            "app/helpers/functions/separate.php",
+            "app/helpers/functions/alert.php"
         ]
     },
     "autoload-dev": {

@@ -16,6 +16,8 @@
                                         <a class="dropdown-toggle" href="#" id="userDrop" data-toggle="dropdown" role="button" >{{ Auth::user()->email }}<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="">Профиль</a></li>
+                                            <li><a href="">Сообщения</a></li>
+                                            <li role="separator" class="divider"></li>
                                             <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выйти</a></li>
                                         </ul>
                                     </div>

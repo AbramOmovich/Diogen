@@ -21,21 +21,27 @@
                                                         <div class="field name-firstname">
                                                             <label for="firstName" class="required"><em>*</em>Имя</label>
                                                             <div class="input-box">
-                                                                <input type="text" id="firstName" name="firstName" value="" title="Имя" maxlength="255" class="input-text required-entry form-control">
+                                                                <input type="text" id="firstName" name="firstName" value="{{ old('firstName') }}" title="Имя" maxlength="255" class="input-text required-entry form-control">
                                                             </div>
                                                         </div>
                                                         <div class="field name-lastname">
                                                             <label for="lastName" class="required"><em>*</em>Фамилия</label>
                                                             <div class="input-box">
-                                                                <input type="text" id="lastName" name="lastName" value="" title="Фамилия" maxlength="255" class="input-text required-entry form-control">
+                                                                <input type="text" id="lastName" name="lastName" value="{{ old('lastName') }}" title="Фамилия" maxlength="255" class="input-text required-entry form-control">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li>
+                                                    <label for="phone" class="required"><em>*</em>Телефон для связи</label>
+                                                    <div class="input-box">
+                                                        <input type="text" name="phone" id="phone" value="{{ old('phone') }}" title="Телефон для связи" class="input-text required-entry form-control">
+                                                    </div>
+                                                </li>
+                                                <li>
                                                     <label for="email_address" class="required"><em>*</em>Адрес электронной почты (email)</label>
                                                     <div class="input-box">
-                                                        <input type="email" name="email" id="email_address" value="" title="Адрес электронной почты (email)" class="input-text validate-email required-entry form-control">
+                                                        <input type="email" name="email" id="email_address" value="{{ old('email') }}" title="Адрес электронной почты (email)" class="input-text validate-email required-entry form-control">
                                                     </div>
                                                 </li>
                                                 <li class="control">

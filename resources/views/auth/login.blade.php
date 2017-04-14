@@ -27,7 +27,7 @@
                                                                 <li>
                                                                     <label for="email" class="required"><em>*</em>Адрес электронной почты (email)</label>
                                                                     <div class="input-box">
-                                                                        <input type="email" name="email" value="" id="email" class="input-text required-entry validate-email form-control" title="Адрес электронной почты (email)">
+                                                                        <input type="email" name="email" value="{{ old('email') }}" id="email" class="input-text required-entry validate-email form-control" title="Адрес электронной почты (email)">
                                                                     </div>
                                                                 </li>
                                                                 <li>
@@ -36,8 +36,12 @@
                                                                         <input type="password" name="password" class="input-text required-entry validate-password form-control" id="pass" title="Пароль">
                                                                     </div>
                                                                 </li>
+                                                                <li>
+                                                                    <div class="input-box">
+                                                                        <label for="remember"><input id="remember" type="checkbox" name="remember"> Запомнить меня</label>
+                                                                    </div>
+                                                                </li>
                                                             </ul>
-
 
                                                             <p class="required">* Обязательные поля</p>
                                                             <div class="buttons-set">
