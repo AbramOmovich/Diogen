@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RegionsTable::class);
         $this->call(CreateTypes::class);
+        $this->call(UserRoleTable::class);
         $this->call(UserTable::class);
         $this->call(UserPhones::class);
         $this->call(CurrenciesTable::class);

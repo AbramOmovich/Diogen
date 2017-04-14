@@ -21,6 +21,7 @@ class UserTable extends Seeder
             $values ['lastName'] = $this->faker->lastName;
             $values ['email'] = $this->faker->email;
             $values ['password'] = bcrypt('123123');
+            $values ['role_id'] = 1;
 
             $db->insert($values);
         }
