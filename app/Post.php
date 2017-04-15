@@ -25,5 +25,9 @@ class Post extends Model
     public function dwellingType(){
         return $this->belongsTo(DwellingType::class);
     }
+
+    public function details(){
+        return $this->hasOne(Detail::class);
+    }
 }
 

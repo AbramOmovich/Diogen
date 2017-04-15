@@ -20,7 +20,7 @@ class CreateAdressesTable extends Migration
             $table->string('city');
             $table->unsignedInteger('region_id');
 
-            $table->unique('post_id');
+            $table->primary('post_id');
             $table->foreign('post_id','address_post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->foreign('region_id','address_region_id')->references('id')->on('regions')->onDelete('cascade');
         });

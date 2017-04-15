@@ -13,7 +13,7 @@ class UserRoleTable extends Seeder
     {
         $db = DB::table('user_roles');
 
-        $db->insert(['title' => 'Пользователь']);
-        $db->insert(['title' => 'Админ']);;
+        $db->insert(['id' => 1, 'title' => 'Пользователь']);
+        $db->insert(['id' => 2, 'title' => 'Админ']);;
     }
 }

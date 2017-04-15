@@ -18,6 +18,15 @@ class PostController extends Controller
         'build' => 3
     ];
 
+    protected const details_types = [
+        'square' =>   ['title' => 'Площадь', 'general' => 0],
+        'rooms' =>    ['title' => 'Комнаты', 'general' => 0],
+        'floor' =>    ['title' => 'Этаж', 'general' => 0],
+        'balcony' =>  ['title' => 'Балкон', 'general' => 1],
+        'internet' => ['title' => 'Интернет', 'general' => 1],
+        'parking' =>  ['title' => 'Парковочное место', 'general' => 1]
+    ];
+
     protected const pagination_vars = [10, 25, 50];
 
     protected const sort_vars = [
@@ -48,7 +57,7 @@ class PostController extends Controller
 
     public function getPost($slug, Request $request){
         $post = Post::where('slug', $slug)->first();
-        if($post) return view('Post', ['Post' => $post]);
+        if($post) return view('Post', ['Post' => $post, 'details_types' => self::details_types]);
         else return redirect()->route('Home');
     }
 
@@ -92,23 +101,34 @@ class PostController extends Controller
         if( !PostType::all()->contains('id', '=', $data['type'])) unset($data['type']);
 
         $validator = Validator::make($data, [
-            'title' => 'required|max:255',
-            'slug' => 'unique:posts',
-            'description' => 'required|min:10|max:650',
-            'type' => 'required',
-            'street' => 'required',
-            'house' => 'required',
-            'city' => 'required',
-            'region' => 'required',
-            'price' => 'required|min:0',
-            'currency' => 'required',
-            'phone' => 'required',
+            'title'         => 'required|max:255',
+            'slug'          => 'unique:posts',
+            'description'   => 'required|min:10|max:650',
+            'type'          => 'required',
+            'dwelling_type' => 'required',
+            'street'        => 'required',
+            'house'         => 'required',
+            'city'          => 'required',
+            'region'        => 'required',
+            'price'         => 'required|min:0',
+            'currency'      => 'required',
+            'phone'         => 'required',
+
+            'square'        => 'min:0',
+            'rooms'         => 'min:0',
+            'floor'         => 'min:0',
+            'balcony'       => 'min:0|max:1',
+            'parking'       => 'min:0|max:1',
+            'internet'      => 'min:0|max:1',
         ]);
 
         if ($validator->fails()){
+
             alert()->error('Не удалось создать обявление', 'Поля заполнены неверно');
             return redirect()->back()->withErrors($validator)->withInput();
+
         }else{
+
             $post = new Post();
             $post->title = $data['title'];
             $post->slug = $data['slug'];
@@ -118,6 +138,8 @@ class PostController extends Controller
             $post->photo = 'single_family_colonial_1.png';
             $post->type_id = $data['type'];
             $post->user_id = Auth::id();
+            $post->type_id = $data['type'];
+            $post->dwelling_type_id = $data['dwelling_type'];
             $post->save();
 
             $post->address()->create([
@@ -127,6 +149,26 @@ class PostController extends Controller
                 'region_id' => $data['region']
             ]);
 
+            $details = [
+                'square'    => $data['square'  ],
+                'rooms'     => $data['rooms'   ],
+                'floor'     => $data['floor'   ],
+                'balcony'   => $data['balcony' ],
+                'parking'   => $data['parking' ],
+                'internet'  => $data['internet'],
+            ];
+
+            $details = array_filter($details,function ($detail){
+                return !is_null($detail);
+            });
+
+            if(!empty($details)){
+                foreach ($details as $key => &$detail){
+                    if ($key == 'square') $detail = (float) $detail;
+                    else $detail = (int) $detail;
+                }
+                $post->details()->create($details);
+            }
 
             alert('Объявление добавленно', "Обявление {$post->title} успешно добавленно");
             return redirect()->route('post', ['slug' => $post->slug ]);

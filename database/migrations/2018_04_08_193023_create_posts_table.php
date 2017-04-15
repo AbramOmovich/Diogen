@@ -26,9 +26,9 @@ class CreatePostsTable extends Migration
             $table->unsignedInteger('dwelling_type_id');
             $table->unsignedInteger('user_id');
 
-            $table->foreign('user_id', 'post_of_user')->references('id')->on('users');
-            $table->foreign('dwelling_type_id','post_dwelling_type')->references('id')->on('dwelling_types');
-            $table->foreign('type_id','type')->references('id')->on('post_types');
+            $table->foreign('type_id','type')->references('id')->on('post_types')->onDelete('cascade');
+            $table->foreign('user_id', 'post_of_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('dwelling_type_id','post_dwelling_type')->references('id')->on('dwelling_types')->onDelete('cascade');
             $table->foreign('currency_id', 'id_of_currency')->references('id')->on('currencies');
         });
     }

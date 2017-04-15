@@ -16,6 +16,5 @@ class DwellingTypes extends Seeder
         $db->insert(['id' => 1, 'title' => 'Комната']);
         $db->insert(['id' => 2, 'title' => 'Квартира']);
         $db->insert(['id' => 3, 'title' => 'Дом']);
-        $db->insert(['id' => 4, 'title' => 'Строительство']);
     }
 }

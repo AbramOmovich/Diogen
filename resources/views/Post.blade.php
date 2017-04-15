@@ -101,7 +101,7 @@
                                             <div class="box-collateral box-description ">
                                                 <h2>Адрес</h2>
                                                 <div class="box-collateral-content">
-                                                    <table style="color: #4c4c4c; font-size: large; margin: 10px;">
+                                                    <table style="color: #4c4c4c; font-size: medium; margin: 10px;">
                                                         <tr>
                                                             <td class="pull-right" style="padding: 5px">Улица: </td><td style="padding: 5px">{{ $Post->address->street }}</td>
                                                         </tr>
@@ -117,14 +117,33 @@
                                                     </table>
                                                 </div>
                                             </div>
+                                            @if(!is_null($Post->details))
                                             <div class="box-collateral box-description">
                                                 <h2>Подробности</h2>
-                                                <div class="box-collateral-content">
-                                                    <div class="std">
-                                                        {{ $Post->description }}
-                                                    </div>
+                                                            <div style="float: left; color: #2c2c2c; font-size: medium; width: 100%">
+                                                                @foreach($Post->details->toArray() as $key => $detail)
+                                                                    @if((!is_null($detail)))
+
+                                                                        <div style="display: inline-block; padding: 10px">
+                                                                            <div style="padding-bottom: 5px">
+                                                                                {{ $details_types[$key]['title'] }}
+                                                                            </div>
+                                                                            <div style="text-align: center">
+                                                                                @if ($details_types[$key]['general'] == 1)
+                                                                                    @if($detail == 0) Нет
+                                                                                    @else Да
+                                                                                    @endif
+                                                                                @else
+                                                                                    {{ $detail }}
+                                                                                @endif
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
                                                 </div>
                                             </div>
+                                            @endif
 
                                             @if(Auth::check())
                                             <div class="box-collateral form-add">

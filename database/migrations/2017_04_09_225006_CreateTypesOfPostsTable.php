@@ -17,7 +17,7 @@ class CreateTypesOfPostsTable extends Migration
             $table->unsignedInteger('id');
             $table->string('title');
 
-            $table->unique('id');
+            $table->primary('id');
         });
     }
 
