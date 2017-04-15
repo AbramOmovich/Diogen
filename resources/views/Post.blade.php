@@ -65,8 +65,9 @@
                                                 </div>
                                                 <div class="product-shop">
                                                     <div class="product-name">
-                                                        <h1>{{ $Post->title }}</h1>
-                                                        <div class="pull-right"><p> {{ $Post->type->title }} </p></div>
+                                                        <h1 style="color: #5c5c5c;">{{ $Post->title }}</h1>
+                                                        <div class="pull-right" style="text-align: right ;font-size: medium; color: #ee2d54;"><p> {{ $Post->type->title }} </p><br>
+                                                            <p>{{ $Post->dwellingType->title }}</p></div>
                                                     </div>
                                                     <hr>
                                                     <div class="price-box">

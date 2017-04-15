@@ -21,11 +21,13 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('price');
             $table->unsignedInteger('currency_id');
             $table->text('photo');
-            $table->unsignedInteger('type_id');
             $table->timestamps();
+            $table->unsignedInteger('type_id');
+            $table->unsignedInteger('dwelling_type_id');
             $table->unsignedInteger('user_id');
 
             $table->foreign('user_id', 'post_of_user')->references('id')->on('users');
+            $table->foreign('dwelling_type_id','post_dwelling_type')->references('id')->on('dwelling_types');
             $table->foreign('type_id','type')->references('id')->on('post_types');
             $table->foreign('currency_id', 'id_of_currency')->references('id')->on('currencies');
         });
@@ -40,6 +42,7 @@ class CreatePostsTable extends Migration
     {
         Schema::table('posts',function (Blueprint $table){
             $table->dropForeign('type');
+            $table->dropForeign('post_dwelling_type');
             $table->dropForeign('post_of_user');
             $table->dropForeign('id_of_currency');
         });

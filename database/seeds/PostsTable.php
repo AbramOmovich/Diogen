@@ -28,6 +28,7 @@ class PostsTable extends Seeder
             $values ['photo'] = 'single_family_colonial_1.png';
             $values ['type_id'] = $this->faker->numberBetween(1,3);
             $values ['user_id'] = $this->faker->numberBetween(1,10);
+            $values ['dwelling_type_id'] = $this->faker->numberBetween(1,4);
 
             $db->insert($values);
         }

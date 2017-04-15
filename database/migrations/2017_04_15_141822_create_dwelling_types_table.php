@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTypesOfPostsTable extends Migration
+class CreateDwellingTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTypesOfPostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_types',function (Blueprint $table){
+        Schema::create('dwelling_types', function (Blueprint $table) {
             $table->unsignedInteger('id');
             $table->string('title');
 
@@ -28,6 +28,6 @@ class CreateTypesOfPostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_types');
+        Schema::dropIfExists('dwelling_types');
     }
 }

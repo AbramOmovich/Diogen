@@ -13,8 +13,8 @@ class CreateTypes extends Seeder
     {
         $db = DB::table('post_types');
 
-        $db->insert(['title' => 'Аренда']);
-        $db->insert(['title' => 'Продажа']);
-        $db->insert(['title' => 'Строительство']);
+        $db->insert(['id' => 1, 'title' => 'Аренда']);
+        $db->insert(['id' => 2, 'title' => 'Продажа']);
+        $db->insert(['id' => 3, 'title' => 'Строительство']);
     }
 }
