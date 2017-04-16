@@ -488,7 +488,7 @@ auto 5px}.products-grid .ratings
                                                             .products-list .product-name{font-size:12px;font-weight:300;line-height:14px;text-transform:uppercase;margin:0
     0 19px}.cms-index-index .products-grid .product-name{min-height:28px}.products-grid .product-name a,
                                                                          .products-list .product-name
-                                                                         a{color:#aaa;text-decoration:none}.products-grid .product-name a:hover,
+                                                                         a{color: #3c3c3c; font-size: medium}.products-grid .product-name a:hover,
                                                                                                            .products-list .product-name a:hover{color:#ee2d54}.products-grid .product-image img,
                                                                                                                                                               .products-list .product-image
                                                                                                                                                               img{max-width:100%}.products-list{}.products-list

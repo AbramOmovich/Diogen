@@ -24,19 +24,6 @@
                                                                     <hr>
                                                                     <ul>
                                                                         <li class="wide">
-                                                                            <label for="title" class="required"><em>*</em>Заголовок</label>
-                                                                            <div class="input-box">
-                                                                                <input type="text" title="Заголовок" name="title" id="title" value="{{ old('title') }}" class="input-text  required-entry form-control @if($errors->has('title') || $errors->has('slug')) validation-failed @endif ">
-                                                                                @if($errors->has('title'))
-                                                                                    <div class="validation-advice"><p>{{ $errors->first('title') }}</p></div>
-                                                                                @else
-                                                                                    @if($errors->has('slug'))
-                                                                                    <div class="validation-advice"><p>{{ $errors->first('slug') }}</p></div>
-                                                                                    @endif
-                                                                                @endif
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="wide">
                                                                             <label for="description" class="required"><em>*</em>Краткое описание</label>
                                                                             <div class="input-box">
                                                                                 <textarea name="description" id="description" class="required-entry form-control short @if($errors->has('description')) validation-failed @endif ">{{ old('description') }}</textarea>

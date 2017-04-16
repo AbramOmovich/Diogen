@@ -56,7 +56,7 @@ class PostController extends Controller
     }
 
     public function getPost($id, Request $request){
-        $post = Post::find($id)->first();
+        $post = Post::where('id',$id)->first();
         if($post) return view('Post', ['Post' => $post, 'details_types' => self::details_types]);
         else return redirect()->route('Home');
     }
@@ -127,15 +127,12 @@ class PostController extends Controller
         }else{
 
             $post = new Post();
-            $post->title = $data['title'];
-            $post->slug = $data['slug'];
             $post->description = $data['description'];
             $post->price = $data['price'];
             $post->currency_id = $data['currency'];
             $post->photo = 'single_family_colonial_1.png';
             $post->type_id = $data['type'];
             $post->user_id = Auth::id();
-            $post->type_id = $data['type'];
             $post->dwelling_type_id = $data['dwelling_type'];
             $post->save();
 
@@ -167,7 +164,7 @@ class PostController extends Controller
                 $post->details()->create($details);
             }
 
-            alert('Объявление добавленно', "Обявление {$post->title} успешно добавленно");
+            alert('Объявление добавленно', "Обявление {$post->title()} успешно добавленно");
             return redirect()->route('post', ['id' => $post->id ]);
         }
     }

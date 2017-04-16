@@ -23,7 +23,7 @@
                                                 <div class="product-shop">
                                                     <div class="f-fix">
                                                         <div class="list-left">
-                                                            <h2 class="product-name"><a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}">{{ $post->title() }}</a></h2>
+                                                            <h2 class="product-name" ><a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}">{{ $post->title() }}</a></h2>
                                                             <div class="desc std">
                                                                 {{ $post->description }}
                                                                 <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}">Узнать больше</a>
