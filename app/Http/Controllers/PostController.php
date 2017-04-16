@@ -55,8 +55,8 @@ class PostController extends Controller
         return view('Posts', ['Posts' => Post::Latest(), 'title' => 'Последние объявления']);
     }
 
-    public function getPost($slug, Request $request){
-        $post = Post::where('slug', $slug)->first();
+    public function getPost($id, Request $request){
+        $post = Post::find($id)->first();
         if($post) return view('Post', ['Post' => $post, 'details_types' => self::details_types]);
         else return redirect()->route('Home');
     }
@@ -94,15 +94,12 @@ class PostController extends Controller
     public function putPost(Request $request){
 
         $data = $request->all();
-        $data ['slug'] = str_slug( $data['title']);
 
         if( !in_array( $data ['region'], Region::all()->pluck('id')->toArray() )) unset($data['region']);
         if( !in_array( $data ['currency'], Currency::all()->pluck('id')->toArray() )) unset($data['currency']);
         if( !PostType::all()->contains('id', '=', $data['type'])) unset($data['type']);
 
         $validator = Validator::make($data, [
-            'title'         => 'required|max:255',
-            'slug'          => 'unique:posts',
             'description'   => 'required|min:10|max:650',
             'type'          => 'required',
             'dwelling_type' => 'required',
@@ -171,10 +168,7 @@ class PostController extends Controller
             }
 
             alert('Объявление добавленно', "Обявление {$post->title} успешно добавленно");
-            return redirect()->route('post', ['slug' => $post->slug ]);
+            return redirect()->route('post', ['id' => $post->id ]);
         }
-
-
     }
-
 }

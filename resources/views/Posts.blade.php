@@ -21,12 +21,12 @@
                                 <ul class="products-grid row">
                                     @foreach($Posts as $post)
                                         <li class="item col-xs-3 first">
-                                            <a href="{{ route('post', ['slug' => $post->slug]) }}" title="{{ $post->title }}" class="product-image">
-                                                <img src="/public/images/single_family_colonial_1.png" alt="{{ $post->title }}"/>
+                                            <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}" class="product-image">
+                                                <img src="/public/images/single_family_colonial_1.png" alt="{{ $post->title() }}"/>
                                             </a>
                                             <div class="product-shop">
                                                 <h3 class="product-name">
-                                                    <a href="{{ route('post', ['slug' => $post->slug]) }}" title="{{ $post->title }}">{{ $post->title }}</a>
+                                                    <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}">{{ $post->title() }}</a>
                                                 </h3>
                                                 <div class="price-box">
                     <span class="regular-price" id="product-price-12-new">

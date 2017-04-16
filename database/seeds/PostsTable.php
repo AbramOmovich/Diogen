@@ -17,8 +17,6 @@ class PostsTable extends Seeder
         $db = DB::table('posts');
 
         for($i = 0; $i < 308; $i++){
-            $values ['title']= $this->faker->sentence;
-            $values ['slug'] = str_slug($values['title']);
             $values ['description'] = $this->faker->realText(650);
             $values ['created_at']= $this->faker->dateTimeBetween('-1 years');
             $values ['updated_at'] = clone $values['created_at'];

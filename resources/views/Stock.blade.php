@@ -19,14 +19,14 @@
                                         <ol class="products-list" id="products-list">
                                             @foreach($Posts as $post)
                                             <li class="item">
-                                                <a href="{{ route('post', ['slug' => $post->slug]) }}" title="{{ $post->title }}" class="product-image"><img src="/public/images/{{ $post->photo }}" alt="{{ $post->title }}"></a>
+                                                <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}" class="product-image"><img src="/public/images/{{ $post->photo }}" alt="{{ $post->title() }}"></a>
                                                 <div class="product-shop">
                                                     <div class="f-fix">
                                                         <div class="list-left">
-                                                            <h2 class="product-name"><a href="{{ route('post', ['slug' => $post->slug]) }}" title="{{ $post->title }}">{{ $post->title }}</a></h2>
+                                                            <h2 class="product-name"><a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}">{{ $post->title() }}</a></h2>
                                                             <div class="desc std">
                                                                 {{ $post->description }}
-                                                                <a href="{{ route('post', ['slug' => $post->slug]) }}" title="{{ $post->title }}">Узнать больше</a>
+                                                                <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}">Узнать больше</a>
                                                             </div>
                                                         </div>
                                                         <div class="list-right">

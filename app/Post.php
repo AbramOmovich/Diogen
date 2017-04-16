@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    public function  title(){
+        return ucfirst($this->address->street).', '.$this->address->house;
+    }
+
     public function scopeLatest ($builder){
         return $builder->orderBy('created_at', 'desc')->paginate(16);
     }
