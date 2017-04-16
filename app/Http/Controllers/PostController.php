@@ -149,7 +149,8 @@ class PostController extends Controller
                     $data['phone'] []= $phone->id;
                 }
             }
-            
+
+
             foreach ($data['phone'] as $phone){
                 $post->user_phone()->attach($phone);
             }

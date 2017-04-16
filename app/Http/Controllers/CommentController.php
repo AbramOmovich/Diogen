@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
-    public function make(Request $request,$slug){
+    public function make(Request $request,$id){
 
         $validator = Validator::make($request->all(),[
             'comment' => 'required|min:5|max:250'
@@ -22,7 +22,7 @@ class CommentController extends Controller
         }else{
             Auth::user()->comment()->create([
                 'text' => $request->comment,
-                'post_id' => Post::whereSlug($slug)->first()->id
+                'post_id' => Post::where('id',$id)->first()->id
             ]);
             alert('Комментарий добавлен', 'Комментарий '.str_limit($request->comment,50).' успешно добавлен');
             return redirect()->back();

@@ -160,7 +160,7 @@
                                             <div class="box-collateral form-add">
                                                 <h2>Напишите ваш собственный отзыв<span class="toggle opened"></span></h2>
                                                 <div class="box-collateral-content" style="display: block;">
-                                                    <form action="{{ route('addComment', ['slug' => Route::current()->slug ] )}}" method="post" id="review-form">
+                                                    <form action="{{ route('addComment', ['id' => Route::current()->id ] )}}" method="post" id="review-form">
                                                         {{ csrf_field() }}
                                                         <fieldset>
                                                             <ul class="form-list">

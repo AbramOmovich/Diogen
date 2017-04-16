@@ -8,7 +8,6 @@
 
             <select id="pager" onchange="setLocation(this.value)">
                 @foreach($pagination_vars as $var)
-
                     <option value="{{ route(Route::currentRouteName(),['paginate' => $var ,'sort' => $sort, 'ord' => $ord]) }}" @if($var == $paginate) selected @endif>{{ $var }}</option>
                 @endforeach
             </select> </div>

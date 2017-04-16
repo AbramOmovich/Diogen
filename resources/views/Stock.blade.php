@@ -49,49 +49,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-right sidebar col-xs-12 col-sm-3">
-                                <div class="block block-layered-nav first">
-                                    <div class="block-title">
-                                        <strong><span>Фильтр</span></strong>
-                                        <span class="toggle"></span></div>
-                                    <div class="block-content">
-                                        <p class="block-subtitle">Доступные параметры</p>
-                                        <dl id="narrow-by-list">
-                                            <dt class="odd">Цена</dt>
-                                            <dd class="odd">
-                                                <ol>
-                                                    <li>
-                                                        <a href="https://livedemo00.template-help.com/magento_50897/rentals.html?price=-10000000"><span class="price">0,00&nbsp;$</span> - <span class="price">9&nbsp;999&nbsp;999,99&nbsp;$</span></a>
-                                                        (2)
-                                                    </li>
-                                                    <li>
-                                                        <a href="https://livedemo00.template-help.com/magento_50897/rentals.html?price=10000000-"><span class="price">10&nbsp;000&nbsp;000,00&nbsp;$</span> and above</a>
-                                                        (4)
-                                                    </li>
-                                                </ol>
-                                            </dd>
-                                            <dt class="odd">Rooms</dt>
-                                            <dd class="odd">
-                                                <ol>
-                                                    <li>
-                                                        <a href="https://livedemo00.template-help.com/magento_50897/rentals.html?room=11">3</a>
-                                                        (3)
-                                                    </li>
-                                                    <li>
-                                                        <a href="https://livedemo00.template-help.com/magento_50897/rentals.html?room=10">4</a>
-                                                        (1)
-                                                    </li>
-                                                    <li>
-                                                        <a href="https://livedemo00.template-help.com/magento_50897/rentals.html?room=9">5+</a>
-                                                        (2)
-                                                    </li>
-                                                </ol>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-
-                            </div>
+                            @include('part.stockSideBar')
                         </div>
                     </div>
                 </div>

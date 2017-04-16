@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdressesTable::class);
         $this->call(CommentsTable::class);
         $this->call(DetailsTable::class);
+        $this->call(UserContacts::class);
 
     }
 }
