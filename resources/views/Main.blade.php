@@ -38,6 +38,7 @@
 <script src="/public/js/bootstrap.min.js"></script>
 <script src="/public/js/helpers.js"></script>
 <script type="text/javascript">var mdate = new Date(); document.write(mdate.getFullYear() + ' &copy');</script>
+@yield('javascript')
 @include('part.alert')
 </body>
 </html>

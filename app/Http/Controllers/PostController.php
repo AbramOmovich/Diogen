@@ -143,6 +143,17 @@ class PostController extends Controller
                 'region_id' => $data['region']
             ]);
 
+            if (!is_null($data['phone_new'])){
+                if(!Auth::user()->phone->contains('phone',$data['phone_new'])){
+                    $phone = Auth::user()->phone()->create([ 'phone' => $data['phone_new']]);
+                    $data['phone'] []= $phone->id;
+                }
+            }
+            
+            foreach ($data['phone'] as $phone){
+                $post->user_phone()->attach($phone);
+            }
+
             $details = [
                 'square'    => $data['square'  ],
                 'rooms'     => $data['rooms'   ],

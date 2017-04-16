@@ -33,5 +33,13 @@ class Post extends Model
     public function details(){
         return $this->hasOne(Detail::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function user_phone(){
+        return $this->belongsToMany(UserPhone::class,'post_user_phone');
+    }
 }
 

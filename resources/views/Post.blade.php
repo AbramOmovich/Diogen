@@ -1,6 +1,5 @@
 @extends('Main')
 
-
 @section('Posts')
     <div class="main-container col2-right-layout">
         <div class="container">
@@ -90,8 +89,20 @@
                                                             </div>
                                                             <button type="button" title="Отправить заявку" class="button btn-cart" onclick=""><span><span>Отправить заявку</span></span></button>
                                                         </div>
-                                                    </div>
-                                                    <div class="row-product">
+                                                        <div class="add-to-cart">
+                                                            <h2>Контакты</h2>
+                                                            <div class="pull-left" style="height: 75px ;color: #2c2c2c; font-size: medium;"><p style="margin-left: 15px">{{ $Post->user->firstName }}</p>
+                                                                <br>
+                                                                <button type="button" id="showBtn" title="Показать контакты" class="btn btn-warning" onclick="showContacts()"><span><span>Показать контакты</span></span></button>
+                                                            </div>
+                                                            <div id="contacts" style="display: none; color: #2c2c2c; font-size: medium; padding-right: 25px" class="pull-right">
+                                                                <ul>
+                                                                    @foreach($Post->user_phone as $phone)
+                                                                        <li style="padding-bottom: 5px"><p>{{ $phone->phone }}</p></li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="clearer"></div>
@@ -200,4 +211,16 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script>
+        function showContacts() {
+            btn = document.getElementById('showBtn');
+            contacts = document.getElementById('contacts');
+
+            contacts.style.display = "block";
+            btn.style.display = 'none';
+        }
+    </script>
 @endsection
