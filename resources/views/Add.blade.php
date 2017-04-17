@@ -56,7 +56,7 @@
                                                                                         <select id="dwelling_type" name="dwelling_type" title="Вид объявления" class="form-control @if($errors->has('dwelling_type')) validation-failed @endif " >
                                                                                             <option value="">Пожалуйста, выберите вид объекта</option>
                                                                                             @foreach(\App\DwellingType::all() as $type)
-                                                                                                <option value="{{ $type->id }}" @if(old('dwelling_type') == $type->id) selected @endif>{{ $type->title }}</option>
+                                                                                                <option value="{{ $type->dwelling_id }}" @if(old('dwelling_type') == $type->dwelling_id) selected @endif>{{ $type->title }}</option>
                                                                                             @endforeach
                                                                                         </select>
                                                                                         @if($errors->has('dwelling_type'))

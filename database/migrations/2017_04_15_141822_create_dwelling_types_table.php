@@ -14,10 +14,10 @@ class CreateDwellingTypesTable extends Migration
     public function up()
     {
         Schema::create('dwelling_types', function (Blueprint $table) {
-            $table->unsignedInteger('id');
+            $table->unsignedInteger('dwelling_id');
             $table->string('title');
 
-            $table->primary('id');
+            $table->primary('dwelling_id');
         });
     }
 

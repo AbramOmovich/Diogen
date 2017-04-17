@@ -8,21 +8,21 @@
 
             <select id="pager" onchange="setLocation(this.value)">
                 @foreach($pagination_vars as $var)
-                    <option value="{{ route(Route::currentRouteName(),['paginate' => $var ,'sort' => $sort, 'ord' => $ord]) }}" @if($var == $paginate) selected @endif>{{ $var }}</option>
+                    <option value="{{ route(Route::currentRouteName(),['paginate' => $var ,'sort' => $sort, 'ord' => $ord, 'filter' => Request::input('filter',[])]) }}" @if($var == $paginate) selected @endif>{{ $var }}</option>
                 @endforeach
             </select> </div>
-        <div class="pages">
 
-            <strong>Страница:</strong>
-            {{ $Posts->links() }}
+        <div class="pages">
+            {{ $Posts->withPath(Request::fullUrl()) }}
         </div>
+
     </div>
     <div class="sorter">
         <div class="sort-by">
             <label>Тип сортировки</label>
             <select onchange="setLocation(this.value)">
                 @foreach($sort_vars as $title => $var)
-                    <option value="{{ route(Route::currentRouteName(),['paginate' => $paginate ,'sort' => $var['field'] , 'ord' => $var['ord']]) }}" @if($sort == $var['field'] && $ord == $var['ord']) selected @endif> {{ $title }}</option>
+                    <option value="{{ route(Route::currentRouteName(),['paginate' => $paginate ,'sort' => $var['field'] , 'ord' => $var['ord'], 'filter' => Request::input('filter',[])]) }}" @if($sort == $var['field'] && $ord == $var['ord']) selected @endif> {{ $title }}</option>
                 @endforeach
             </select>
         </div>

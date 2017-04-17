@@ -13,8 +13,8 @@ class DwellingTypes extends Seeder
     {
         $db = DB::table('dwelling_types');
 
-        $db->insert(['id' => 1, 'title' => 'Комната']);
-        $db->insert(['id' => 2, 'title' => 'Квартира']);
-        $db->insert(['id' => 3, 'title' => 'Дом']);
+        $db->insert(['dwelling_id' => 1, 'title' => 'Комната']);
+        $db->insert(['dwelling_id' => 2, 'title' => 'Квартира']);
+        $db->insert(['dwelling_id' => 3, 'title' => 'Дом']);
     }
 }

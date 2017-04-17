@@ -1,8 +1,9 @@
 @if ($paginator->hasPages())
+    <strong>Страница:</strong>
     <ol>
         {{-- Previous Page Link --}}
         @if (! $paginator->onFirstPage())
-            <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev">&laquo;</a></li>
+            <li><a href="{{  $paginator->previousPageUrl() }}" rel="prev">&laquo;</a></li>
         @endif
 
         {{-- Pagination Elements --}}

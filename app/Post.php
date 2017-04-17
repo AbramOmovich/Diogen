@@ -27,7 +27,7 @@ class Post extends Model
     }
 
     public function dwellingType(){
-        return $this->belongsTo(DwellingType::class);
+        return $this->belongsTo(DwellingType::class, 'dwelling_type_id','dwelling_id');
     }
 
     public function details(){

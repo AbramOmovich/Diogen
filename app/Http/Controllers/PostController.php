@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
 use App\Currency;
 use App\Post;
 use App\PostType;
@@ -55,27 +56,48 @@ class PostController extends Controller
         return view('Posts', ['Posts' => Post::Latest(), 'title' => 'Последние объявления']);
     }
 
-    public function getPost($id, Request $request){
+    public function getPost($id){
         $post = Post::where('id',$id)->first();
         if($post) return view('Post', ['Post' => $post, 'details_types' => self::details_types]);
         else return redirect()->route('Home');
     }
 
-    public function rent($paginate = 10, $sort = 'created_at', $ord ='desc'){
-       return $this->stock(__FUNCTION__,$paginate,$sort,$ord);
+    public function rent(Request $request){
+       return $this->stock(__FUNCTION__,$request);
     }
 
-    public function buy($paginate = 10, $sort = 'created_at', $ord ='desc'){
-       return $this->stock(__FUNCTION__,$paginate,$sort,$ord);
+    public function buy(Request $request){
+       return $this->stock(__FUNCTION__,$request);
     }
 
-    protected function stock($method, $paginate, $sort, $ord){
+    protected function postFilter($posts,array $filter){
+
+        if ($filter){
+            $old_posts = clone $posts;
+
+            $posts->join('details','posts.id','=','details.post_id')->join('dwelling_types','dwelling_type_id','=','dwelling_id');
+
+            foreach ($filter as $field => $values){
+                $posts->whereIn($field, $values);
+            }
+        }
+
+        return $posts;
+    }
+
+    protected function stock($method, $request){
+
+        $paginate = $request->input('paginate',10);
+        $sort = $request->input('sort','created_at');
+        $ord = $request->input('ord','desc');
 
         if(!in_array($paginate, self::pagination_vars)) $paginate = self::pagination_vars[0];
 
         if(!self::rigth_field($sort)) $sort = 'created_at';
 
         $Posts = Post::where('type_id', self::$types[$method]);
+
+        $Posts = $this->postFilter($Posts,$request->input('filter',[]));
 
         return view('Stock', [
             'Posts' => $Posts->orderBy($sort, $ord)->paginate($paginate),

@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PostController@index')->name('Home');
-Route::get('rent/{paginate?}/{sort?}/{ord?}','PostController@rent')->name('Rent');
-Route::get('buy/{paginate?}/{sort?}/{ord?}','PostController@buy')->name('Buy');
+Route::get('rent/','PostController@rent')->name('Rent');
+Route::get('buy/','PostController@buy')->name('Buy');
 
 
 Route::match(['get','head'],'login','Auth\LoginController@showLoginForm')->name('login');
