@@ -77,6 +77,11 @@ class PostController extends Controller
             $posts->join('details','posts.id','=','details.post_id')->join('dwelling_types','dwelling_type_id','=','dwelling_id');
 
             foreach ($filter as $field => $values){
+                if ($field == 'price') {
+                    if (isset($values['min'])) $posts->where('price','>=',$values['min']);
+                    if (isset($values['max'])) $posts->where('price','<=',$values['max']);
+                    continue;
+                }
                 $posts->whereIn($field, $values);
             }
         }
@@ -97,6 +102,7 @@ class PostController extends Controller
         $Posts = Post::where('type_id', self::types[$method]['type_id']);
 
         $Posts = $this->postFilter($Posts,$request->input('filter',[]));
+        //dd($Posts);
 
         return view('Stock', [
             'Posts' => $Posts->orderBy($sort, $ord)->paginate($paginate),

@@ -9,8 +9,19 @@
             <form action="{{ Request::url() }}" method="get">
             <p class="block-subtitle">Доступные параметры</p>
                 <button style="padding-bottom: 15px" type="submit" class="button"><span><span>Подобрать</span></span></button>
-                <dl id="narrow-by-list">
+            <dl id="narrow-by-list">@php(dump(Request::all()))
                 <dt class="odd">Цена</dt>
+                <dd class="odd">
+                    <ol>
+                        <li>
+                            <input style="width: 35%" class="input-text" value="@if(isset($filter['price']['min'])){{ $filter['price']['min'] }}@endif" type="number" name="filter[price][min]"><a> Минимальная </a>
+                        </li>
+                        <li>
+                            <input style="width: 35%" class="input-text" value="@if(isset($filter['price']['max'])){{ $filter['price']['max'] }}@endif" type="number" name="filter[price][max]"><a> Максимальная </a>
+                        </li>
+                    </ol>
+                </dd>
+                <dt class="odd">Тип</dt>
                 <dd class="odd">
                     <?php
                         if (isset($filter['dwelling_type_id'])) $types = $filter['dwelling_type_id'];

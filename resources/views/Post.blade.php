@@ -135,27 +135,28 @@
                                             @if(!is_null($Post->details))
                                             <div class="box-collateral box-description">
                                                 <h2>Подробности</h2>
-                                                            <div style="float: left; color: #2c2c2c; font-size: medium; width: 100%">
-                                                                @foreach($Post->details->toArray() as $key => $detail)
-                                                                    @if((!is_null($detail)))
-
-                                                                        <div style="display: inline-block; padding: 10px">
-                                                                            <div style="padding-bottom: 5px">
-                                                                                {{ $details_types[$key]['title'] }}
-                                                                            </div>
-                                                                            <div style="text-align: center">
-                                                                                @if ($details_types[$key]['general'] == 1)
-                                                                                    @if($detail == 0) Нет
-                                                                                    @else Да
-                                                                                    @endif
-                                                                                @else
-                                                                                    {{ $detail }}
-                                                                                @endif
-                                                                            </div>
-                                                                        </div>
-                                                                    @endif
-                                                                @endforeach
-                                                            </div>
+                                                    <div style="float: left; color: #2c2c2c; font-size: medium; width: 100%">
+                                                        @foreach($Post->details->toArray() as $key => $detail)
+                                                            @if($key != 'floor_max' && (!is_null($detail)))
+                                                                <div style="display: inline-block; padding: 10px">
+                                                                    <div style="padding-bottom: 5px">
+                                                                        {{ $details_types[$key]['title'] }}
+                                                                    </div>
+                                                                    <div style="text-align: center">
+                                                                        @if ($details_types[$key]['general'] == 1)
+                                                                            @if($detail == 0) Нет
+                                                                            @else Да
+                                                                            @endif
+                                                                        @else
+                                                                            @if($key == 'floor') {{ $Post->floor() }}
+                                                                            @else {{ $detail }}
+                                                                            @endif
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                             </div>
                                             @endif
@@ -207,7 +208,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @include('part.sidebar')
                         </div>
                     </div>
@@ -215,6 +215,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('javascript')

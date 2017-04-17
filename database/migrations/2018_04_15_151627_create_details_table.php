@@ -18,7 +18,7 @@ class CreateDetailsTable extends Migration
             $table->float('square')->unsigned()->nullable();
             $table->unsignedTinyInteger('rooms')->nullable();
             $table->unsignedTinyInteger('floor')->nullable();
-
+            $table->unsignedTinyInteger('floor_max')->nullable();
             $table->unsignedTinyInteger('balcony')->nullable();
             $table->unsignedTinyInteger('parking')->nullable();
 

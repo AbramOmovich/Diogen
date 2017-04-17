@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    public function floor(){
+        return $this->details->floor.'/'.$this->details->floor_max;
+    }
+
     public function  title(){
         return ucfirst($this->address->street).', '.$this->address->house;
     }

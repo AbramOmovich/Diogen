@@ -23,22 +23,28 @@ class DetailsTable extends Seeder
             $values ['post_id'] = $post_ids[$i];
 
             switch ($types[$i]){
+                //room
                 case 1 : {
 
                     $values ['floor'] = $faker->numberBetween(1, 18);
+                    $values ['floor_max'] = $faker->numberBetween($values['floor'],18);
                     $values ['balcony'] = $faker->numberBetween(0,1);
                     $values ['internet'] = $faker->numberBetween(0,1);
                     break;
                 }
+                //apartment
                 case 2 : {
                     $values ['rooms'] = $faker->numberBetween(1,5);
                     $values ['square'] = $faker->numberBetween(1, 100);
                     $values ['floor'] = $faker->numberBetween(1, 18);
+                    $values ['floor_max'] = $faker->numberBetween($values['floor'],18);
                     $values ['balcony'] = $faker->numberBetween(0,1);
                     $values ['internet'] = $faker->numberBetween(0,1);
                     break;
                 }
+                //house
                 case 3 : {
+                    $values ['rooms'] = $faker->numberBetween(1,5);
                     $values ['square'] = $faker->numberBetween(1, 100);
                     $values ['internet'] = $faker->numberBetween(0,1);
                     break;
