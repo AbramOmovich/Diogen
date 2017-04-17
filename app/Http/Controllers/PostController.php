@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
-    protected static $types = [
-        'rent'  => 1,
-        'buy'   => 2,
-        'build' => 3
+    protected const types = [
+        'rent'  => [ 'type_id' => 1, 'title' => 'Аренда'],
+        'buy'   => [ 'type_id' => 2, 'title' => 'Продажа'],
+        'build' => [ 'type_id' => 3, 'title' => 'Новостройки']
     ];
 
     protected const details_types = [
@@ -73,7 +73,6 @@ class PostController extends Controller
     protected function postFilter($posts,array $filter){
 
         if ($filter){
-            $old_posts = clone $posts;
 
             $posts->join('details','posts.id','=','details.post_id')->join('dwelling_types','dwelling_type_id','=','dwelling_id');
 
@@ -85,7 +84,7 @@ class PostController extends Controller
         return $posts;
     }
 
-    protected function stock($method, $request){
+    protected function stock($method, Request $request){
 
         $paginate = $request->input('paginate',10);
         $sort = $request->input('sort','created_at');
@@ -95,7 +94,7 @@ class PostController extends Controller
 
         if(!self::rigth_field($sort)) $sort = 'created_at';
 
-        $Posts = Post::where('type_id', self::$types[$method]);
+        $Posts = Post::where('type_id', self::types[$method]['type_id']);
 
         $Posts = $this->postFilter($Posts,$request->input('filter',[]));
 
@@ -105,7 +104,9 @@ class PostController extends Controller
             'sort' => $sort,
             'ord' => $ord,
             'pagination_vars' => self::pagination_vars,
-            'sort_vars' => self::sort_vars
+            'sort_vars' => self::sort_vars,
+            'pageTitle' => self::types[$method]['title']
+
         ]);
     }
 

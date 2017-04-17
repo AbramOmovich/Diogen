@@ -3,7 +3,7 @@
 <html xmlns="https://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>@yield('title', 'Агенство недвижимости "Диоген"')</title>
+    <title>Агенство недвижимости "Диоген" @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
     <meta name="robots" content="INDEX,FOLLOW"/>

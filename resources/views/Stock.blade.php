@@ -1,5 +1,9 @@
 @extends('Main')
 
+@section('title')
+    | {{ $pageTitle }}
+@endsection
+
 @section('Posts')
     <div class="main-container col2-right-layout">
         <div class="container">
@@ -10,7 +14,7 @@
                             <div class="col-main col-xs-12 col-sm-9">
                                 <div class="padding-s">
                                     <div class="page-title category-title">
-                                        <h1>Аренда</h1>
+                                        <h1>{{ $pageTitle }}</h1>
                                     </div>
 
                                     <div class="category-products">

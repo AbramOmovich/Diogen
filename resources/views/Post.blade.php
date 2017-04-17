@@ -1,5 +1,9 @@
 @extends('Main')
 
+@section('title')
+    | {{ $Post->title() }}
+@endsection
+
 @section('Posts')
     <div class="main-container col2-right-layout">
         <div class="container">
