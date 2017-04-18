@@ -30,6 +30,7 @@ class DetailsTable extends Seeder
                     $values ['floor_max'] = $faker->numberBetween($values['floor'],18);
                     $values ['balcony'] = $faker->numberBetween(0,1);
                     $values ['internet'] = $faker->numberBetween(0,1);
+                    $values ['parking'] = $faker->numberBetween(0,1);
                     break;
                 }
                 //apartment
@@ -40,6 +41,7 @@ class DetailsTable extends Seeder
                     $values ['floor_max'] = $faker->numberBetween($values['floor'],18);
                     $values ['balcony'] = $faker->numberBetween(0,1);
                     $values ['internet'] = $faker->numberBetween(0,1);
+                    $values ['parking'] = $faker->numberBetween(0,1);
                     break;
                 }
                 //house
@@ -47,6 +49,7 @@ class DetailsTable extends Seeder
                     $values ['rooms'] = $faker->numberBetween(1,5);
                     $values ['square'] = $faker->numberBetween(1, 100);
                     $values ['internet'] = $faker->numberBetween(0,1);
+                    $values ['parking'] = $faker->numberBetween(0,1);
                     break;
                 }
             }

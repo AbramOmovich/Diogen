@@ -77,12 +77,33 @@ class PostController extends Controller
             $posts->join('details','posts.id','=','details.post_id')->join('dwelling_types','dwelling_type_id','=','dwelling_id');
 
             foreach ($filter as $field => $values){
-                if ($field == 'price') {
-                    if (isset($values['min'])) $posts->where('price','>=',$values['min']);
-                    if (isset($values['max'])) $posts->where('price','<=',$values['max']);
-                    continue;
+                switch ($field){
+                    case 'price':{
+                        if (isset($values['min'])) $posts->where('price','>=',$values['min']);
+                        if (isset($values['max'])) $posts->where('price','<=',$values['max']);
+                        continue;
+                    }
+                    case 'dwelling_type_id':{
+                        $posts->whereIn($field, $values);
+                        continue;
+                    }
+                    case 'rooms':{
+                        if (in_array(5,$values)) $posts->where('rooms', '>=', 4);
+                        $posts->whereIn($field, $values);
+                        continue;
+                    }
+                    case 'additional':{
+                        if(isset($values['middle'])) {
+                            $posts->where('floor','>',1);
+                            $posts->whereRaw('floor < floor_max');
+                            unset($values['middle']);
+                        }
+                        foreach ($values as $add_field => $value){
+                            if ($value > 0) $posts->where($add_field,1);
+                        }
+                        continue;
+                    }
                 }
-                $posts->whereIn($field, $values);
             }
         }
 
