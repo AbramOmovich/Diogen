@@ -52,6 +52,33 @@ class PostController extends Controller
         return false;
     }
 
+    public function alterUserPosts(Request $request){
+        if ($request->input('action','') == 'delete') {
+
+            $post = Post::where('id', $request->input('post_id'))->first();
+            alert()->warning("Объявление удалено", "Объявление {$post->title()} удалено");
+            $post->delete();
+
+            return redirect()->back();
+        }
+    }
+
+    public function getUserPosts(Request $request){
+        $paginate = $request->input('paginate',10);
+        $sort = $request->input('sort','created_at');
+        $ord = $request->input('ord','desc');
+
+        return view('UserStock',[
+            'Posts' => Post::where('user_id',Auth::id())->orderBy($sort, $ord)->paginate($paginate),
+            'pageTitle' => 'Мои обЪявления',
+            'pagination_vars' => self::pagination_vars,
+            'sort_vars' => self::sort_vars,
+            'sort' => $sort,
+            'ord' => $ord,
+            'paginate' => $paginate,
+        ]);
+    }
+
     public function index(){
         return view('Posts', ['Posts' => Post::Latests(), 'title' => 'Последние объявления']);
     }
