@@ -17,12 +17,11 @@ class CreateAdressesTable extends Migration
             $table->unsignedInteger('post_id');
             $table->string('street');
             $table->string('house');
-            $table->string('city');
-            $table->unsignedInteger('region_id');
+            $table->unsignedInteger('city_id');
 
             $table->primary('post_id');
             $table->foreign('post_id','address_post_id')->references('id')->on('posts')->onDelete('cascade');
-            $table->foreign('region_id','address_region_id')->references('id')->on('regions')->onDelete('cascade');
+            $table->foreign('city_id','address_city_id')->references('city_id')->on('cities')->onDelete('cascade');
         });
     }
 
@@ -35,7 +34,7 @@ class CreateAdressesTable extends Migration
     {
         Schema::table('addresses', function (Blueprint $table) {
             $table->dropForeign('address_post_id');
-            $table->dropForeign('address_region_id');
+            $table->dropForeign('address_city_id');
         });
         Schema::dropIfExists('addresses');
     }

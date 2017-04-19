@@ -10,7 +10,34 @@
             <form id="filter_form" action="{{ Request::url() }}" method="get">
             <p class="block-subtitle">Доступные параметры</p>
                 <button style="padding-bottom: 15px" type="submit" class="button"><span><span>Подобрать</span></span></button>
-            <dl id="narrow-by-list">@php(dump(Request::all()))
+            <dl id="narrow-by-list">
+                <dt class="odd">Местоположение</dt>
+                <dd class="odd">
+                    <table>
+                        <tr style="">
+                            <td style="padding-right: 15px;padding-bottom: 10px; color: #2c2c2c">Область</td>
+                            <td>
+                                <select onchange="getCities(this.value,'cities')" style="width: 150px" name="filter[region]" id="region">
+                                    <option value="">Все области</option>
+                                    @foreach(\App\Region::all() as $region)
+                                        <option value="{{ $region->region_id }}" @if( isset($filter['region']) && $region->region_id == $filter['region']) selected @endif>{{ $region->title }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: #2c2c2c; width: 50px">
+                                Город
+                            </td>
+                            <td>
+                                <select id="cities" style="width: 150px"  name="filter[city]">
+                                    <option value="">Все города</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+
+                </dd>
                 <dt class="odd">Цена</dt>
                 <dd class="odd">
                     <ol>
@@ -35,6 +62,17 @@
                                 <a>{{ $type->title }}</a>
                             </li>
                         @endforeach
+                    </ol>
+                </dd>
+                <dt class="odd">Площадь</dt>
+                <dd class="odd">
+                    <ol>
+                        <li>
+                            <input style="width: 35%" class="input-text" value="@if(isset($filter['square']['min'])){{ $filter['square']['min'] }}@endif" type="number" name="filter[square][min]"><a style="padding-left: 10px">Минимальная </a>
+                        </li>
+                        <li>
+                            <input style="width: 35%" class="input-text" value="@if(isset($filter['square']['max'])){{ $filter['square']['max'] }}@endif" type="number" name="filter[square][max]"><a style="padding-left: 10px">Максимальная </a>
+                        </li>
                     </ol>
                 </dd>
                 <dt class="odd">Комнаты</dt>
@@ -77,5 +115,15 @@
             </form>
         </div>
     </div>
-
 </div>
+
+@section('javascript')
+    <script>
+        region = document.getElementById('region').value;
+        if (region){
+            city = "@if(isset($filter['city'])){{ $filter['city'] }}@else{{ '' }}@endif" ;
+
+            getCities(region,'cities', "{{csrf_token()}}", city);
+        }
+    </script>
+@endsection

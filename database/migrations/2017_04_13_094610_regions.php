@@ -14,7 +14,7 @@ class Regions extends Migration
     public function up()
     {
         Schema::create('regions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->unsignedInteger('region_id')->primary();
             $table->string('title');
         });
     }

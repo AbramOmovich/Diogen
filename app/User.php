@@ -34,7 +34,7 @@ class User extends Authenticatable
 
 
     public function phone(){
-        return $this->hasMany(UserPhone::class);
+        return $this->hasMany(UserPhone::class)->orderBy('id','desc');
     }
 
     public function role(){

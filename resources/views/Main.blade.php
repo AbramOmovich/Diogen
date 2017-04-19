@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
     <meta name="robots" content="INDEX,FOLLOW"/>
+    <meta name="_token" content="{{csrf_token()}}">
 
     <link rel="stylesheet" type="text/css" href="/public/css/media1.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="/public/css/print.css" media="print"/>
@@ -34,11 +35,19 @@
 </div>
 
 <script type="text/javascript" src="/public/js/jquery_1.12.4.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.ajaxSetup({
+            headers: { 'X-CSRF-TOKEN' :
+                $('meta[name="_token"]').attr('content')}
+        });
+    });
+</script>
 <script src="/public/js/sweetalert.min.js"></script>
 <script src="/public/js/bootstrap.min.js"></script>
 <script src="/public/js/helpers.js"></script>
 <script type="text/javascript">var mdate = new Date(); document.write(mdate.getFullYear() + ' &copy');</script>
-@yield('javascript')
 @include('part.alert')
+@yield('javascript')
 </body>
 </html>

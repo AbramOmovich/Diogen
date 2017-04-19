@@ -14,8 +14,8 @@ class Post extends Model
         return ucfirst($this->address->street).', '.$this->address->house;
     }
 
-    public function scopeLatest ($builder){
-        return $builder->orderBy('created_at', 'desc')->paginate(16);
+    public function scopeLatests ($builder){
+        return $builder->orderBy('created_at', 'desc')->limit(16)->get();
     }
 
     public function address(){

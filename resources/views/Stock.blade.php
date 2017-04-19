@@ -16,8 +16,10 @@
                                     <div class="page-title category-title">
                                         <h1>{{ $pageTitle }}</h1>
                                     </div>
-
-                                    <div class="category-products">
+                                    @if(!$Posts->total())
+                                       <h1>К сожалению, по вашему запросу ничего не найдено</h1>
+                                    @else
+                                        <div class="category-products">
                                         @include('part.pageToolbar')
 
                                         <ol class="products-list" id="products-list">
@@ -50,7 +52,7 @@
                                             @include('part.pageToolbar')
                                         </div>
                                     </div>
-
+                                    @endif
                                 </div>
                             </div>
                             @include('part.stockSideBar')
@@ -60,4 +62,7 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
 @endsection

@@ -19,10 +19,11 @@ class DatabaseSeeder extends Seeder
         $this->call(UserPhones::class);
         $this->call(CurrenciesTable::class);
         $this->call(PostsTable::class);
-        $this->call(AdressesTable::class);
         $this->call(CommentsTable::class);
         $this->call(DetailsTable::class);
         $this->call(UserContacts::class);
+        $this->call(CitiesTableSeeder::class);
+        $this->call(AdressesTable::class);
 
     }
 }

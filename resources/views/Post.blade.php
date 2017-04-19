@@ -124,10 +124,10 @@
                                                             <td class="pull-right" style="padding: 5px">Дом: </td><td style="padding: 5px">{{ $Post->address->house }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="pull-right" style="padding: 5px">Город: </td><td style="padding: 5px">{{ $Post->address->city }}</td>
+                                                            <td class="pull-right" style="padding: 5px">Город: </td><td style="padding: 5px">{{ $Post->address->city->name }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="pull-right" style="padding: 5px">Область: </td><td style="padding: 5px">{{ $Post->address->region->title }}</td>
+                                                            <td class="pull-right" style="padding: 5px">Область: </td><td style="padding: 5px">{{ $Post->address->city->region->title }}</td>
                                                         </tr>
                                                     </table>
                                                 </div>

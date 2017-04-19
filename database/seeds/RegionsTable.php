@@ -13,11 +13,11 @@ class RegionsTable extends Seeder
     {
         $db = DB::table('regions');
 
-        $db->insert(['title' => 'Брестская область']);
-        $db->insert(['title' => 'Гродненская область']);
-        $db->insert(['title' => 'Витебская область']);
-        $db->insert(['title' => 'Могилёвская область']);
-        $db->insert(['title' => 'Гомельская область']);
-        $db->insert(['title' => 'Минская область']);
+        $db->insert(['region_id' => 1, 'title' => 'Минская область']);
+        $db->insert(['region_id' => 2, 'title' => 'Брестская область']);
+        $db->insert(['region_id' => 3, 'title' => 'Гродненская область']);
+        $db->insert(['region_id' => 4, 'title' => 'Витебская область']);
+        $db->insert(['region_id' => 5, 'title' => 'Могилёвская область']);
+        $db->insert(['region_id' => 6, 'title' => 'Гомельская область']);
     }
 }

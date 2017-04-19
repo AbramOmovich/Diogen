@@ -8,9 +8,9 @@ class Address extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['street','house','city','region_id'];
+    protected $fillable = ['street','house','city_id'];
 
-    public function region(){
-        return $this->belongsTo(Region::class,'region_id');
+    public function city(){
+        return $this->belongsTo(City::class,'city_id','city_id');
     }
 }

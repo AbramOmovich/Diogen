@@ -6,6 +6,10 @@ Route::get('/', 'PostController@index')->name('Home');
 Route::get('rent/','PostController@rent')->name('Rent');
 Route::get('buy/','PostController@buy')->name('Buy');
 
+Route::get('/test','CityController@test');
+
+Route::post('/get_cities','CityController@getCities');
+
 
 Route::match(['get','head'],'login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('login','Auth\LoginController@login');

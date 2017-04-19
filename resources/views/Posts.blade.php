@@ -1,6 +1,5 @@
 @extends('Main')
 
-
 @section('Posts')
 
     <div class="main-container col1-layout">

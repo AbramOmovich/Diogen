@@ -53,7 +53,7 @@ class PostController extends Controller
     }
 
     public function index(){
-        return view('Posts', ['Posts' => Post::Latest(), 'title' => 'Последние объявления']);
+        return view('Posts', ['Posts' => Post::Latests(), 'title' => 'Последние объявления']);
     }
 
     public function getPost($id){
@@ -74,13 +74,28 @@ class PostController extends Controller
 
         if ($filter){
 
-            $posts->join('details','posts.id','=','details.post_id')->join('dwelling_types','dwelling_type_id','=','dwelling_id');
+            $posts->join('details','posts.id','=','details.post_id')
+                  ->join('dwelling_types','posts.dwelling_type_id','=','dwelling_types.dwelling_id')
+                  ->join('addresses','posts.id', '=', 'addresses.post_id')
+                  ->join('cities','addresses.city_id','=', 'cities.city_id')
+                  ->join('regions', 'cities.region_id','=','regions.region_id');
 
             foreach ($filter as $field => $values){
                 switch ($field){
+                    case 'city': {
+                        if (isset($values)) $posts->whereRaw("addresses.city_id = {$values}"); break;
+                    }
+                    case 'region':{
+                        if (isset($values)) $posts->whereRaw("cities.region_id = {$values}"); break;
+                    }
                     case 'price':{
                         if (isset($values['min'])) $posts->where('price','>=',$values['min']);
                         if (isset($values['max'])) $posts->where('price','<=',$values['max']);
+                        continue;
+                    }
+                    case 'square':{
+                        if (isset($values['min'])) $posts->where('square','>=',$values['min']);
+                        if (isset($values['max'])) $posts->where('square','<=',$values['max']);
                         continue;
                     }
                     case 'dwelling_type_id':{
@@ -145,12 +160,13 @@ class PostController extends Controller
 
         $data = $request->all();
 
-        if( !in_array( $data ['region'], Region::all()->pluck('id')->toArray() )) unset($data['region']);
+        //dd($data);
+        if( !in_array( $data ['region'], Region::all()->pluck('region_id')->toArray() )) unset($data['region']);
         if( !in_array( $data ['currency'], Currency::all()->pluck('id')->toArray() )) unset($data['currency']);
         if( !PostType::all()->contains('id', '=', $data['type'])) unset($data['type']);
 
         $validator = Validator::make($data, [
-            'description'   => 'required|min:10|max:650',
+            'description'   => 'required|min:10|max:450',
             'type'          => 'required',
             'dwelling_type' => 'required',
             'street'        => 'required',
@@ -189,8 +205,8 @@ class PostController extends Controller
             $post->address()->create([
                 'street' => $data['street'],
                 'house' => $data['house'],
-                'city' => $data['city'],
-                'region_id' => $data['region']
+                'city_id' => $data['city'],
+
             ]);
 
             if (!is_null($data['phone_new'])){
@@ -208,21 +224,23 @@ class PostController extends Controller
             $details = [
                 'square'    => $data['square'  ],
                 'rooms'     => $data['rooms'   ],
-                'floor'     => $data['floor'   ],
                 'balcony'   => $data['balcony' ],
                 'parking'   => $data['parking' ],
                 'internet'  => $data['internet'],
             ];
+
+            if(isset($data['floor']) && isset($data['floor_max']) && $data['floor_max'] >= $data['floor']){
+                $details ['floor'] = $data['floor'];
+                $details ['floor_max'] = $data ['floor_max'];
+            }
 
             $details = array_filter($details,function ($detail){
                 return !is_null($detail);
             });
 
             if(!empty($details)){
-                foreach ($details as $key => &$detail){
-                    if ($key == 'square') $detail = (float) $detail;
-                    else $detail = (int) $detail;
-                }
+                if(isset($details['square'])) $details['square'] = $detail = (float) $details['square'];
+
                 $post->details()->create($details);
             }
 

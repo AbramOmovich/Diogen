@@ -69,44 +69,30 @@
                                                                         <h2 class="legend">Адрес объекта</h2>
                                                                         <hr>
                                                                         <li class="fields">
+                                                                            @include('part.fields.input',['title' => 'Улица', 'name' => 'street'])
+                                                                            @include('part.fields.input',['title' => 'Дом', 'name' => 'house'])
                                                                             <div class="field">
-                                                                                <label for="street" class="required"><em>*</em>Улица</label>
+                                                                                <label for="region" class="required"><em>*</em>Область</label>
                                                                                 <div class="input-box">
-                                                                                    <input type="text" title="Улица" name="street" value="{{ old('street') }}" class="input-text  required-entry form-control @if($errors->has('street')) validation-failed @endif ">
-                                                                                    @if($errors->has('street'))
-                                                                                        <div class="validation-advice"><p>{{ $errors->first('street') }}</p></div>
-                                                                                    @endif
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <label for="house" class="required"><em>*</em>Дом</label>
-                                                                                <div class="input-box">
-                                                                                    <input type="text" title="Дом" name="house" value="{{ old('house') }}" class="input-text  required-entry form-control @if($errors->has('house')) validation-failed @endif ">
-                                                                                    @if($errors->has('house'))
-                                                                                        <div class="validation-advice"><p>{{ $errors->first('house') }}</p></div>
+                                                                                    <select id="region" onchange="getCities(this.value,'city')" name="region" title="Область" class="form-control @if($errors->has('region')) validation-failed @endif " >
+                                                                                        <option value="">Пожалуйста, выберите область</option>
+                                                                                        @foreach(\App\Region::all() as $region)
+                                                                                            <option value="{{ $region->region_id }}" @if(old('region') == $region->region_id) selected @endif>{{ $region->title }}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                    @if($errors->has('region'))
+                                                                                        <div class="validation-advice"><p>{{ $errors->first('region') }}</p></div>
                                                                                     @endif
                                                                                 </div>
                                                                             </div>
                                                                             <div class="field">
                                                                                 <label for="city" class="required"><em>*</em>Город</label>
                                                                                 <div class="input-box">
-                                                                                    <input type="text" title="Город" name="city" value="{{ old('city') }}" class="input-text  required-entry form-control @if($errors->has('city')) validation-failed @endif ">
+                                                                                    <select id="city" name="city" title="Город" class="form-control @if($errors->has('city')) validation-failed @endif " >
+                                                                                        <option value="">Пожалуйста, выберите город</option>
+                                                                                    </select>
                                                                                     @if($errors->has('city'))
                                                                                         <div class="validation-advice"><p>{{ $errors->first('city') }}</p></div>
-                                                                                    @endif
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <label for="region" class="required"><em>*</em>Область</label>
-                                                                                <div class="input-box">
-                                                                                    <select id="region" name="region" title="Область" class="form-control @if($errors->has('region')) validation-failed @endif " >
-                                                                                        <option value="">Пожалуйста, выберите область</option>
-                                                                                        @foreach(\App\Region::all() as $region)
-                                                                                            <option value="{{ $region->id }}" @if(old('region') == $region->id) selected @endif>{{ $region->title }}</option>
-                                                                                        @endforeach
-                                                                                    </select>
-                                                                                    @if($errors->has('region'))
-                                                                                        <div class="validation-advice"><p>{{ $errors->first('region') }}</p></div>
                                                                                     @endif
                                                                                 </div>
                                                                             </div>
@@ -115,72 +101,13 @@
                                                                         <h2 class="legend">Подробности</h2>
                                                                         <hr>
                                                                         <li class="fields">
-                                                                            <div class="field">
-                                                                                <label for="square">Площадь</label>
-                                                                                <div class="input-box">
-                                                                                    <input type="text" title="Площадь" id="square" name="square" value="{{ old('square') }}" class="input-text  required-entry form-control @if($errors->has('square')) validation-failed @endif ">
-                                                                                    @if($errors->has('square'))
-                                                                                        <div class="validation-advice"><p>{{ $errors->first('square') }}</p></div>
-                                                                                    @endif
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <label for="floor">Этаж</label>
-                                                                                <div class="input-box">
-                                                                                    <input type="number" title="Этаж" name="floor" value="{{ old('floor') }}" class="input-text  required-entry form-control @if($errors->has('floor')) validation-failed @endif ">
-                                                                                    @if($errors->has('floor'))
-                                                                                        <div class="validation-advice"><p>{{ $errors->first('floor') }}</p></div>
-                                                                                    @endif
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <label for="rooms">Количество комнат</label>
-                                                                                <div class="input-box">
-                                                                                    <input type="number" title="Количество комнат" name="rooms" value="{{ old('rooms') }}" class="input-text  required-entry form-control @if($errors->has('rooms')) validation-failed @endif ">
-                                                                                    @if($errors->has('rooms'))
-                                                                                        <div class="validation-advice"><p>{{ $errors->first('rooms') }}</p></div>
-                                                                                    @endif
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <label for="balcony">Наличие балкона</label>
-                                                                                <div class="input-box">
-                                                                                    <select id="balcony" name="balcony" title="Наличие балкона" class="form-control @if($errors->has('balcony')) validation-failed @endif " >
-                                                                                        <option value="">Выбрать</option>
-                                                                                        <option value="1">Да</option>
-                                                                                        <option value="0">Нет</option>
-                                                                                    </select>
-                                                                                    @if($errors->has('balcony'))
-                                                                                        <div class="validation-advice"><p>{{ $errors->first('balcony') }}</p></div>
-                                                                                    @endif
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <label for="parking">Наличие парковочного места</label>
-                                                                                <div class="input-box">
-                                                                                    <select id="parking" name="parking" title="Наличие парковочного места" class="form-control @if($errors->has('parking')) validation-failed @endif " >
-                                                                                        <option value="">Выбрать</option>
-                                                                                        <option value="1">Да</option>
-                                                                                        <option value="0">Нет</option>
-                                                                                    </select>
-                                                                                    @if($errors->has('parking'))
-                                                                                        <div class="validation-advice"><p>{{ $errors->first('parking') }}</p></div>
-                                                                                    @endif
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <label for="internet">Наличие интернета</label>
-                                                                                <div class="input-box">
-                                                                                    <select id="internet" name="internet" title="Наличие интернета" class="form-control @if($errors->has('internet')) validation-failed @endif " >
-                                                                                        <option value="">Выбрать</option>
-                                                                                        <option value="1">Да</option>
-                                                                                        <option value="0">Нет</option>
-                                                                                    </select>
-                                                                                    @if($errors->has('internet'))
-                                                                                        <div class="validation-advice"><p>{{ $errors->first('internet') }}</p></div>
-                                                                                    @endif
-                                                                                </div>
-                                                                            </div>
+                                                                            @include('part.fields.input',['title' => 'Площадь', 'name' => 'square', 'optional' => true])
+                                                                            @include('part.fields.input',['title' => 'Количество комнат', 'name' => 'rooms', 'type' => 'number', 'optional' => true])
+                                                                            @include('part.fields.input',['title' => 'Этаж', 'name' => 'floor', 'type' => 'number', 'optional' => true])
+                                                                            @include('part.fields.input',['title' => 'Всего этажей', 'name' => 'floor_max', 'type' => 'number', 'optional' => true])
+                                                                            @include('part.fields.yesNoSelect',['title' => 'Наличие балкона', 'name' => 'balcony'])
+                                                                            @include('part.fields.yesNoSelect',['title' => 'Наличие парковочного места', 'name' => 'parking'])
+                                                                            @include('part.fields.yesNoSelect',['title' => 'Наличие интернета', 'name' => 'internet'])
                                                                         </li>
 
                                                                         <h2 class="legend">Контакты</h2>
@@ -192,7 +119,7 @@
                                                                                 <label for="phone" class="required"><em>*</em>Телефон</label>
                                                                                 <select name="phone[]" id="phone" multiple class="form-control @if($errors->has('phone')) validation-failed @endif">
                                                                                     @foreach(Auth::user()->phone as $phone)
-                                                                                        <option value="{{ $phone->id }}">{{ $phone->phone }}</option>
+                                                                                        <option value="{{ $phone->id }}" @if(old('phone')) @if(in_array($phone->id,old('phone'))) selected @endif @endif>{{ $phone->phone }}</option>
                                                                                     @endforeach
                                                                                 </select>
                                                                                 @if($errors->has('phone'))
@@ -213,15 +140,7 @@
                                                                         <h2 class="legend">Стоимость</h2>
                                                                         <hr>
                                                                         <li class="fields">
-                                                                            <div class="field">
-                                                                                <label for="price" class="required"><em>*</em>Цена</label>
-                                                                                <div class="input-box">
-                                                                                    <input id="price" type="text" title="Цена" name="price" value="{{ old('price') }}" class="input-text  required-entry form-control @if($errors->has('price')) validation-failed @endif ">
-                                                                                    @if($errors->has('price'))
-                                                                                        <div class="validation-advice"><p>{{ $errors->first('price') }}</p></div>
-                                                                                    @endif
-                                                                                </div>
-                                                                            </div>
+                                                                            @include('part.fields.input',['title' => 'Цена', 'name' => 'price'])
                                                                             <label for=""> </label>
                                                                             <div class="field">
                                                                                 <label for="currency" class="">Валюта</label>
@@ -283,4 +202,15 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script>
+        region = document.getElementById('region').value;
+        if (region){
+            city = "{{old('city')}}" ;
+
+            getCities(region,'city', "{{csrf_token()}}", city);
+        }
+    </script>
 @endsection
