@@ -13,6 +13,26 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
+    protected const postRules = [
+        'description'   => 'required|min:10|max:450',
+        'type'          => 'required',
+        'dwelling_type' => 'required',
+        'street'        => 'required',
+        'house'         => 'required',
+        'city'          => 'required',
+        'region'        => 'required',
+        'price'         => 'required|min:0',
+        'currency'      => 'required',
+        'phone'         => 'required',
+
+        'square'        => 'min:0',
+        'rooms'         => 'min:0',
+        'floor'         => 'min:0',
+        'balcony'       => 'min:0|max:1',
+        'parking'       => 'min:0|max:1',
+        'internet'      => 'min:0|max:1',
+    ];
+
     protected const types = [
         'rent'  => [ 'type_id' => 1, 'title' => 'Аренда'],
         'buy'   => [ 'type_id' => 2, 'title' => 'Продажа'],
@@ -52,18 +72,110 @@ class PostController extends Controller
         return false;
     }
 
-    public function alterUserPosts(Request $request){
-        if ($request->input('action','') == 'delete') {
+    public function syncPost(Request $request, $id){
 
-            $post = Post::where('id', $request->input('post_id'))->first();
-            alert()->warning("Объявление удалено", "Объявление {$post->title()} удалено");
-            $post->delete();
+        $post = Post::where('id', $id)->first();
 
-            return redirect()->back();
+        if($post){
+            $data = $request->all();
+
+            if( !in_array( $data ['region'], Region::all()->pluck('region_id')->toArray() )) unset($data['region']);
+            if( !in_array( $data ['currency'], Currency::all()->pluck('id')->toArray() )) unset($data['currency']);
+            if( !PostType::all()->contains('id', '=', $data['type'])) unset($data['type']);
+        }
+
+        $validator = Validator::make($data, self::postRules);
+
+        if ($validator->fails()){
+
+            alert()->error('Не удалось создать обявление', 'Поля заполнены неверно');
+            return redirect()->back()->withErrors($validator)->withInput();
+
+        }else{
+
+            $post->description = $data['description'];
+            $post->price = $data['price'];
+            $post->currency_id = $data['currency'];
+            $post->photo = 'single_family_colonial_1.png';
+            $post->type_id = $data['type'];
+            $post->dwelling_type_id = $data['dwelling_type'];
+            $post->save();
+
+            $post->address->street = $data['street'];
+            $post->address->house = $data['house'];
+            $post->address->city_id =  $data['city'];
+
+            $post->address->save();
+
+            if (!is_null($data['phone_new'])){
+                if(!Auth::user()->phone->contains('phone',$data['phone_new'])){
+                    $phone = Auth::user()->phone()->create([ 'phone' => $data['phone_new']]);
+                    $data['phone'] []= $phone->id;
+                }
+            }
+
+            $post->user_phone()->sync($data['phone']);
+
+            $details = [
+                'square'    => $data['square'  ],
+                'rooms'     => $data['rooms'   ],
+                'balcony'   => $data['balcony' ],
+                'parking'   => $data['parking' ],
+                'internet'  => $data['internet'],
+            ];
+
+            if(isset($data['floor']) && isset($data['floor_max']) && $data['floor_max'] >= $data['floor']){
+                $details ['floor'] = $data['floor'];
+                $details ['floor_max'] = $data ['floor_max'];
+            }
+
+            $details = array_filter($details,function ($detail){
+                return !is_null($detail);
+            });
+
+            if(!empty($details)){
+
+                if(isset($details['square'])) $post->details->square = (float) $details['square']; else $post->details->square = null;
+                if(isset($details['rooms'])) $post->details->rooms = $details['rooms']; else $post->details->rooms = null;
+                if(isset($details['balcony'])) $post->details->balcony = $details['balcony']; else $post->details->balcony = null;
+                if(isset($details['parking'])) $post->details->parking = $details['parking']; else $post->details->parking = null;
+                if(isset($details['internet'])) $post->details->internet = $details['internet']; else $post->details->internet = null;
+                if(isset($details['floor'])) $post->details->floor = $details['floor']; else $post->details->floor = null;
+                if(isset($details['floor_max'])) $post->details->floor_max = $details['floor_max']; else $post->details->floor_max = null;
+
+                $post->details->save();
+            }
+
+            alert('Объявление изменено', "Обявление {$post->title()} успешно изменено");
+            return redirect()->route('post', ['id' => $post->id ]);
         }
     }
 
-    public function getUserPosts(Request $request){
+    public function editPost($id){
+
+        $post = Post::where('id', $id)->first();
+
+        if($post->user_id == Auth::id()) return view('Edit', ['post' => $post]);
+        else return redirect()->back();
+    }
+
+    public function deletePost(Request $request){
+
+        if($request->has('post_id')){
+
+            $post = Post::where('id', $request->input('post_id'))->first();
+
+            if($post->user_id == Auth::id()){
+                alert()->warning("Объявление удалено", "Объявление {$post->title()} удалено");
+                $post->delete();
+            }
+        }
+
+        return redirect()->back();
+    }
+
+
+        public function getUserPosts(Request $request){
         $paginate = $request->input('paginate',10);
         $sort = $request->input('sort','created_at');
         $ord = $request->input('ord','desc');
@@ -192,25 +304,7 @@ class PostController extends Controller
         if( !in_array( $data ['currency'], Currency::all()->pluck('id')->toArray() )) unset($data['currency']);
         if( !PostType::all()->contains('id', '=', $data['type'])) unset($data['type']);
 
-        $validator = Validator::make($data, [
-            'description'   => 'required|min:10|max:450',
-            'type'          => 'required',
-            'dwelling_type' => 'required',
-            'street'        => 'required',
-            'house'         => 'required',
-            'city'          => 'required',
-            'region'        => 'required',
-            'price'         => 'required|min:0',
-            'currency'      => 'required',
-            'phone'         => 'required',
-
-            'square'        => 'min:0',
-            'rooms'         => 'min:0',
-            'floor'         => 'min:0',
-            'balcony'       => 'min:0|max:1',
-            'parking'       => 'min:0|max:1',
-            'internet'      => 'min:0|max:1',
-        ]);
+        $validator = Validator::make($data, self::postRules);
 
         if ($validator->fails()){
 

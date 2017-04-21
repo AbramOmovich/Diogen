@@ -32,7 +32,7 @@
                                                             <h2 class="product-name" ><a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}">{{ $post->title() }}</a></h2>
                                                             <div class="desc std">
                                                                 {{ $post->description }}
-                                                                <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}">Узнать больше</a>
+                                                                <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}" class="link-learn">Узнать больше</a>
                                                             </div>
                                                         </div>
                                                         <div class="list-right">

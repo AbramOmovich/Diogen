@@ -1,20 +1,21 @@
 @extends('Main')
 @section('Posts')
+
     <div class="main-container col2-right-layout">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="main">
                         <div class="row">
-                            <div class="col-main col-xs-12 col-sm-9">
+                            <div class="col-main col-xs-12 col-sm-9" style="margin-left: 15%;">
                                 <div class="padding-s">
                                     <div class="page-title">
-                                        <h1>Подать объявление</h1>
+                                        <h1>Редакторование объявления</h1>
                                     </div>
                                     <ol class="opc" id="checkoutSteps">
                                         <li id="opc-billing" class="section allow active">
                                             <div id="checkout-step-billing" class="step a-item">
-                                                <form action="{{ route('make') }}" method="post">
+                                                <form action="{{ route('syncPost', ['id' => $post->id]) }}" method="post">
                                                     {{ method_field('put') }}
                                                     <fieldset>
                                                         <ul class="form-list">
@@ -26,7 +27,7 @@
                                                                         <li class="wide">
                                                                             <label for="description" class="required"><em>*</em>Краткое описание</label>
                                                                             <div class="input-box">
-                                                                                <textarea name="description" id="description" class="required-entry form-control short @if($errors->has('description')) validation-failed @endif ">{{ old('description') }}</textarea>
+                                                                                <textarea name="description" id="description" class="required-entry form-control short @if($errors->has('description')) validation-failed @endif ">@if(old('description')) {{ old('description') }} @else {{ $post->description }} @endif</textarea>
                                                                                 @if($errors->has('description'))
                                                                                     <div class="validation-advice"><p>{{ $errors->first('description') }}</p></div>
                                                                                 @endif
@@ -42,7 +43,7 @@
                                                                                     <select id="type" name="type" title="Вид объявления" class="form-control @if($errors->has('type')) validation-failed @endif " >
                                                                                         <option value="">Пожалуйста, выберите тип объявления</option>
                                                                                         @foreach(\App\PostType::all() as $type)
-                                                                                            <option value="{{ $type->id }}" @if(old('type') == $type->id) selected @endif>{{ $type->title }}</option>
+                                                                                            <option value="{{ $type->id }}" @if(old('type')) @if(old('type') == $type->id) selected @endif @else @if($post->type_id == $type->id) selected @endif @endif>{{ $type->title }}</option>
                                                                                         @endforeach
                                                                                     </select>
                                                                                     @if($errors->has('type'))
@@ -56,7 +57,7 @@
                                                                                         <select id="dwelling_type" name="dwelling_type" title="Вид объявления" class="form-control @if($errors->has('dwelling_type')) validation-failed @endif " >
                                                                                             <option value="">Пожалуйста, выберите вид объекта</option>
                                                                                             @foreach(\App\DwellingType::all() as $type)
-                                                                                                <option value="{{ $type->dwelling_id }}" @if(old('dwelling_type') == $type->dwelling_id) selected @endif>{{ $type->title }}</option>
+                                                                                                <option value="{{ $type->dwelling_id }}"@if(old('dwelling_type')) @if(old('dwelling_type') == $type->dwelling_id) selected @endif @else @if($post->dwelling_type_id == $type->dwelling_id) selected @endif @endif>{{ $type->title }}</option>
                                                                                             @endforeach
                                                                                         </select>
                                                                                         @if($errors->has('dwelling_type'))
@@ -69,15 +70,15 @@
                                                                         <h2 class="legend">Адрес объекта</h2>
                                                                         <hr>
                                                                         <li class="fields">
-                                                                            @include('part.fields.input',['title' => 'Улица', 'name' => 'street'])
-                                                                            @include('part.fields.input',['title' => 'Дом', 'name' => 'house'])
+                                                                            @include('part.fields.editInput',['title' => 'Улица', 'name' => 'street','data' => $post->address->street])
+                                                                            @include('part.fields.editInput',['title' => 'Дом', 'name' => 'house', 'data' => $post->address->house])
                                                                             <div class="field">
                                                                                 <label for="region" class="required"><em>*</em>Область</label>
                                                                                 <div class="input-box">
                                                                                     <select id="region" onchange="getCities(this.value,'city')" name="region" title="Область" class="form-control @if($errors->has('region')) validation-failed @endif " >
                                                                                         <option value="">Пожалуйста, выберите область</option>
                                                                                         @foreach(\App\Region::all() as $region)
-                                                                                            <option value="{{ $region->region_id }}" @if(old('region') == $region->region_id) selected @endif>{{ $region->title }}</option>
+                                                                                            <option value="{{ $region->region_id }}"@if(old('region')) @if(old('region') == $region->region_id) selected @endif @else @if($post->address->city->region->region_id == $region->region_id) selected @endif @endif>{{ $region->title }}</option>
                                                                                         @endforeach
                                                                                     </select>
                                                                                     @if($errors->has('region'))
@@ -101,13 +102,13 @@
                                                                         <h2 class="legend">Подробности</h2>
                                                                         <hr>
                                                                         <li class="fields">
-                                                                            @include('part.fields.input',['title' => 'Площадь', 'name' => 'square', 'optional' => true])
-                                                                            @include('part.fields.input',['title' => 'Количество комнат', 'name' => 'rooms', 'fieldType' => 'number', 'optional' => true])
-                                                                            @include('part.fields.input',['title' => 'Этаж', 'name' => 'floor', 'fieldType' => 'number', 'optional' => true])
-                                                                            @include('part.fields.input',['title' => 'Всего этажей', 'name' => 'floor_max', 'fieldType' => 'number', 'optional' => true])
-                                                                            @include('part.fields.yesNoSelect',['title' => 'Наличие балкона', 'name' => 'balcony'])
-                                                                            @include('part.fields.yesNoSelect',['title' => 'Наличие парковочного места', 'name' => 'parking'])
-                                                                            @include('part.fields.yesNoSelect',['title' => 'Наличие интернета', 'name' => 'internet'])
+                                                                            @include('part.fields.editInput',['title' => 'Площадь', 'name' => 'square', 'optional' => true, 'data' => $post->details->square])
+                                                                            @include('part.fields.editInput',['title' => 'Количество комнат', 'name' => 'rooms', 'fieldType' => 'number', 'optional' => true, 'data' => $post->details->rooms])
+                                                                            @include('part.fields.editInput',['title' => 'Этаж', 'name' => 'floor', 'fieldType' => 'number', 'optional' => true, 'data' => $post->details->floor])
+                                                                            @include('part.fields.editInput',['title' => 'Всего этажей', 'name' => 'floor_max', 'fieldType' => 'number', 'optional' => true, 'data' => $post->details->floor_max])
+                                                                            @include('part.fields.editYesNoSelect',['title' => 'Наличие балкона', 'name' => 'balcony', 'data' => $post->details->balcony])
+                                                                            @include('part.fields.editYesNoSelect',['title' => 'Наличие парковочного места', 'name' => 'parking', 'data' => $post->details->parking])
+                                                                            @include('part.fields.editYesNoSelect',['title' => 'Наличие интернета', 'name' => 'internet', 'data' => $post->details->internet])
                                                                         </li>
 
                                                                         <h2 class="legend">Контакты</h2>
@@ -119,7 +120,7 @@
                                                                                 <label for="phone" class="required"><em>*</em>Телефон</label>
                                                                                 <select name="phone[]" id="phone" multiple class="form-control @if($errors->has('phone')) validation-failed @endif">
                                                                                     @foreach(Auth::user()->phone as $phone)
-                                                                                        <option value="{{ $phone->id }}" @if(old('phone')) @if(in_array($phone->id,old('phone'))) selected @endif @endif>{{ $phone->phone }}</option>
+                                                                                        <option value="{{ $phone->id }}" @if(old('phone')) @if(in_array($phone->id,old('phone'))) selected @endif @else @if(in_array($phone->id, $post->user_phone->pluck('id')->toArray())) selected @endif @endif>{{ $phone->phone }}</option>
                                                                                     @endforeach
                                                                                 </select>
                                                                                 @if($errors->has('phone'))
@@ -140,14 +141,14 @@
                                                                         <h2 class="legend">Стоимость</h2>
                                                                         <hr>
                                                                         <li class="fields">
-                                                                            @include('part.fields.input',['title' => 'Цена', 'name' => 'price'])
+                                                                            @include('part.fields.editInput',['title' => 'Цена', 'name' => 'price', 'data' => $post->price])
                                                                             <label for=""> </label>
                                                                             <div class="field">
                                                                                 <label for="currency" class="">Валюта</label>
                                                                                 <div class="input-box">
                                                                                     <select id="currency" name="currency" class="form-control">
                                                                                         @foreach(\App\Currency::all() as $currency)
-                                                                                            <option value="{{ $currency->id }}">{{ $currency->sign }}</option>
+                                                                                            <option value="{{ $currency->id }}" @if($post->currency_id == $currency->id) selected @endif>{{ $currency->sign }}</option>
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
@@ -171,31 +172,6 @@
                                     </ol>
                                 </div>
                             </div>
-                            <div class="col-right sidebar col-xs-12 col-sm-3"><div id="checkout-progress-wrapper"><div class="block block-progress opc-block-progress last_block first">
-                                        <div class="block-title">
-                                            <strong><span>Стадия оформления заказа</span></strong>
-                                            <span class="toggle"></span></div>
-                                        <div class="block-content">
-                                            <dl>
-                                                <div id="billing-progress-opcheckout">
-                                                    <dt>
-                                                        Адрес плательщика</dt>
-                                                </div>
-                                                <div id="shipping-progress-opcheckout">
-                                                    <dt>
-                                                        Адрес доставки</dt>
-                                                </div>
-                                                <div id="shipping_method-progress-opcheckout">
-                                                    <dt>
-                                                        Метод доставки</dt>
-                                                </div>
-                                                <div id="payment-progress-opcheckout">
-                                                    <dt>
-                                                        Метод оплаты</dt>
-                                                </div>
-                                            </dl>
-                                        </div>
-                                    </div></div></div>
                         </div>
                     </div>
                 </div>
@@ -208,9 +184,9 @@
     <script>
         region = document.getElementById('region').value;
         if (region){
-            city = "{{old('city')}}" ;
+            city = "@if(old('city')){{old('city')}}@else{{$post->address->city_id}}@endif" ;
 
-            getCities(region,'city', "{{csrf_token()}}", city);
+            getCities(region,'city', "{{csrf_token()}}", city)
         }
     </script>
 @endsection

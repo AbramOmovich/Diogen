@@ -11,16 +11,18 @@
                 <div class="col-xs-12">
                     <div class="main">
                         <div class="row">
-                            <div class="col-main col-xs-12 col-sm-9">
+                            <div class="col-main col-xs-12 col-sm-9" style="margin-left: 13%;">
                                 <div class="padding-s">
                                     <div class="page-title category-title">
                                         <h1>{{ $pageTitle }}</h1>
                                     </div>
                                     @if(!$Posts->total())
-                                       <h1>К сожалению, по вашему запросу ничего не найдено</h1>
+                                       <h1>У Вас пока нет никаких объявлений</h1>
                                     @else
                                         <div class="category-products">
-                                        @include('part.pageToolbar')
+                                            @if($Posts->hasMorePages())
+                                                @include('part.pageToolbar')
+                                            @endif
 
                                         <ol class="products-list" id="products-list">
                                             @foreach($Posts as $post)
@@ -40,13 +42,14 @@
 <span class="regular-price" id="product-price-7">
 <span class="price">{{ separate($post->price) }} $</span> </span>
                                                             </div>
-                                                            <form action="{{ route('userPosts') }}" method="post">
+                                                            <form action="{{ route('deletePost') }}" method="post">
                                                                 {{csrf_field()}}
                                                                 <input type="hidden" name="post_id" value="{{  $post->id }}">
                                                                 <button type="submit" name="action" value="delete" title="Удалить" class="btn btn-danger"><span><span>Удалить</span></span></button>
+                                                            </form>
                                                                 <br>
                                                                 <br>
-                                                                <button type="submit" name="action" value="edit" title="Редактировать" class="btn btn-warning"><span><span>Редактировать</span></span></button>
+                                                                <a href="{{ route('editPost', ['id' => $post->id ]) }}" title="Редактировать" class="btn btn-warning"><span><span>Редактировать</span></span></a>
                                                             </form>
                                                         </div>
                                                         <div class="clear"></div>
@@ -56,7 +59,9 @@
                                             @endforeach
                                         </ol>
                                         <div class="toolbar-bottom">
-                                            @include('part.pageToolbar')
+                                            @if($Posts->hasMorePages())
+                                                @include('part.pageToolbar')
+                                            @endif
                                         </div>
                                     </div>
                                     @endif

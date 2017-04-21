@@ -46,8 +46,8 @@
                                 </ul>
                                 <div class="std"><div class="banner_bottom_wrap">
                                         <div class="banner_bottom">
-                                            <a href="https://livedemo00.template-help.com/magento_50897/rentals.html/">
-                                                <div class="ban_img"><img src="https://livedemo00.template-help.com/magento_50897/skin/frontend/default/theme288k/images/banner_bottom.jpg" alt=""/></div>
+                                            <a href="#">
+                                                <div class="ban_img"><img src="/public/images/banner_bottom.jpg" alt=""/></div>
                                                 <div class="ban_wrap">Жильё вашей мечты</div>
                                             </a>
                                         </div>

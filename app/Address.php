@@ -8,6 +8,8 @@ class Address extends Model
 {
     public $timestamps = false;
 
+    protected $primaryKey = 'post_id';
+
     protected $fillable = ['street','house','city_id'];
 
     public function city(){

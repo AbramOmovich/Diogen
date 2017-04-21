@@ -5,11 +5,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'PostController@index')->name('Home');
 Route::get('rent/','PostController@rent')->name('Rent');
 Route::get('buy/','PostController@buy')->name('Buy');
-Route::get('user/','PostController@getUserPosts')->middleware('auth')->name('userPosts');
-Route::post('user/','PostController@alterUserPosts')->middleware('auth');
+
+Route::group(['prefix' => 'user'], function($userRoute){
+    $userRoute->get('/','PostController@getUserPosts')->middleware('auth')->name('userPosts');
+    $userRoute->get('edit/{id}','PostController@editPost')->middleware('auth')->name('editPost');
+    $userRoute->put('edit/{id}','PostController@syncPost')->middleware('auth')->name('syncPost');
+    $userRoute->post('delete', 'PostController@deletePost')->middleware('auth')->name('deletePost');
+});
+
 
 Route::get('/test','CityController@test');
-
 Route::post('/get_cities','CityController@getCities');
 
 
