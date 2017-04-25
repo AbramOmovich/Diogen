@@ -239,11 +239,6 @@
             },
 
             init: function() {
-                var mockFile = { name :'banner1.jpg' , size : 12345};
-                this.emit("addedfile",mockFile);
-                this.emit('thumbnail',mockFile,'/pubic/images/banner1.jpg');
-                this.emit("complete",mockFile)
-
                 this.on("complete", function(file) {
                     lastFile = file;
                     if( file.status == "success"){

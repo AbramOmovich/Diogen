@@ -20,9 +20,7 @@
                                        <h1>У Вас пока нет никаких объявлений</h1>
                                     @else
                                         <div class="category-products">
-                                            @if($Posts->hasMorePages())
                                                 @include('part.pageToolbar')
-                                            @endif
 
                                         <ol class="products-list" id="products-list">
                                             @foreach($Posts as $post)
@@ -59,9 +57,7 @@
                                             @endforeach
                                         </ol>
                                         <div class="toolbar-bottom">
-                                            @if($Posts->hasMorePages())
                                                 @include('part.pageToolbar')
-                                            @endif
                                         </div>
                                     </div>
                                     @endif

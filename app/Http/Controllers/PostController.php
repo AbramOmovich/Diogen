@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -26,12 +27,9 @@ class PostController extends Controller
         'currency'      => 'required',
         'phone'         => 'required',
 
-        'square'        => 'min:0',
-        'rooms'         => 'min:0',
-        'floor'         => 'min:0',
-        'balcony'       => 'min:0|max:1',
-        'parking'       => 'min:0|max:1',
-        'internet'      => 'min:0|max:1',
+        'square'        => 'nullable',
+        'rooms'         => 'nullable',
+        'floor'         => 'nullable',
     ];
 
     protected const types = [
@@ -89,7 +87,7 @@ class PostController extends Controller
 
         if ($validator->fails()){
 
-            alert()->error('Не удалось создать обявление', 'Поля заполнены неверно');
+            alert()->error('Не удалось изменить обявление', 'Не удалось изменить обявление, поля заполнены неверно');
             return redirect()->back()->withErrors($validator)->withInput();
 
         }else{
@@ -130,22 +128,28 @@ class PostController extends Controller
                 $details ['floor_max'] = $data ['floor_max'];
             }
 
+
             $details = array_filter($details,function ($detail){
-                return !is_null($detail);
+                return !is_null($detail) && $detail !== "-1";
             });
 
+
             if(!empty($details)){
+                if(isset($details['square'])) $details['square'] = (float) $details['square'];
 
-                if(isset($details['square'])) $post->details->square = (float) $details['square']; else $post->details->square = null;
-                if(isset($details['rooms'])) $post->details->rooms = $details['rooms']; else $post->details->rooms = null;
-                if(isset($details['balcony'])) $post->details->balcony = $details['balcony']; else $post->details->balcony = null;
-                if(isset($details['parking'])) $post->details->parking = $details['parking']; else $post->details->parking = null;
-                if(isset($details['internet'])) $post->details->internet = $details['internet']; else $post->details->internet = null;
-                if(isset($details['floor'])) $post->details->floor = $details['floor']; else $post->details->floor = null;
-                if(isset($details['floor_max'])) $post->details->floor_max = $details['floor_max']; else $post->details->floor_max = null;
+                if(is_null($post->details)) $post->details()->create($details);
+                else{
+                    if(isset($details['square'])) $post->details->square = $details['square']; else $post->details->square = null;
+                    if(isset($details['rooms'])) $post->details->rooms = $details['rooms']; else $post->details->rooms = null;
+                    if(isset($details['balcony'])) $post->details->balcony = $details['balcony']; else $post->details->balcony = null;
+                    if(isset($details['parking'])) $post->details->parking = $details['parking']; else $post->details->parking = null;
+                    if(isset($details['internet'])) $post->details->internet = $details['internet']; else $post->details->internet = null;
+                    if(isset($details['floor'])) $post->details->floor = $details['floor']; else $post->details->floor = null;
+                    if(isset($details['floor_max'])) $post->details->floor_max = $details['floor_max']; else $post->details->floor_max = null;
 
-                $post->details->save();
-            }
+                    $post->details->save();
+                }
+            }else $post->details()->delete();
 
             alert('Объявление изменено', "Обявление {$post->title()} успешно изменено");
             return redirect()->route('post', ['id' => $post->id ]);

@@ -102,13 +102,23 @@
                                                                         <h2 class="legend">Подробности</h2>
                                                                         <hr>
                                                                         <li class="fields">
-                                                                            @include('part.fields.editInput',['title' => 'Площадь', 'name' => 'square', 'optional' => true, 'data' => $post->details->square])
-                                                                            @include('part.fields.editInput',['title' => 'Количество комнат', 'name' => 'rooms', 'fieldType' => 'number', 'optional' => true, 'data' => $post->details->rooms])
-                                                                            @include('part.fields.editInput',['title' => 'Этаж', 'name' => 'floor', 'fieldType' => 'number', 'optional' => true, 'data' => $post->details->floor])
-                                                                            @include('part.fields.editInput',['title' => 'Всего этажей', 'name' => 'floor_max', 'fieldType' => 'number', 'optional' => true, 'data' => $post->details->floor_max])
-                                                                            @include('part.fields.editYesNoSelect',['title' => 'Наличие балкона', 'name' => 'balcony', 'data' => $post->details->balcony])
-                                                                            @include('part.fields.editYesNoSelect',['title' => 'Наличие парковочного места', 'name' => 'parking', 'data' => $post->details->parking])
-                                                                            @include('part.fields.editYesNoSelect',['title' => 'Наличие интернета', 'name' => 'internet', 'data' => $post->details->internet])
+                                                                            @if(!is_null($post->details))
+                                                                                @include('part.fields.editInput',['title' => 'Площадь', 'name' => 'square', 'optional' => true,  'data' => $post->details->square])
+                                                                                @include('part.fields.editInput',['title' => 'Количество комнат', 'name' => 'rooms', 'fieldType' => 'number', 'optional' => true, 'data' => $post->details->rooms])
+                                                                                @include('part.fields.editInput',['title' => 'Этаж', 'name' => 'floor', 'fieldType' => 'number', 'optional' => true, 'data' => $post->details->floor])
+                                                                                @include('part.fields.editInput',['title' => 'Всего этажей', 'name' => 'floor_max', 'fieldType' => 'number', 'optional' => true, 'data' => $post->details->floor_max])
+                                                                                @include('part.fields.editYesNoSelect',['title' => 'Наличие балкона', 'name' => 'balcony', 'data' => $post->details->balcony])
+                                                                                @include('part.fields.editYesNoSelect',['title' => 'Наличие парковочного места', 'name' => 'parking', 'data' => $post->details->parking])
+                                                                                @include('part.fields.editYesNoSelect',['title' => 'Наличие интернета', 'name' => 'internet', 'data' => $post->details->internet])
+                                                                            @else
+                                                                                @include('part.fields.input',['title' => 'Площадь', 'name' => 'square', 'optional' => true])
+                                                                                @include('part.fields.input',['title' => 'Количество комнат', 'name' => 'rooms', 'fieldType' => 'number', 'optional' => true])
+                                                                                @include('part.fields.input',['title' => 'Этаж', 'name' => 'floor', 'fieldType' => 'number', 'optional' => true])
+                                                                                @include('part.fields.input',['title' => 'Всего этажей', 'name' => 'floor_max', 'fieldType' => 'number', 'optional' => true])
+                                                                                @include('part.fields.yesNoSelect',['title' => 'Наличие балкона', 'name' => 'balcony'])
+                                                                                @include('part.fields.yesNoSelect',['title' => 'Наличие парковочного места', 'name' => 'parking'])
+                                                                                @include('part.fields.yesNoSelect',['title' => 'Наличие интернета', 'name' => 'internet'])
+                                                                            @endif
                                                                         </li>
 
                                                                         <h2 class="legend">Контакты</h2>
