@@ -31,6 +31,8 @@ Route::post('register','Auth\RegisterController@register');
 Route::group(['prefix' => 'adv'] , function($route){
     $route->get('add', 'PostController@makePost')->name('make')->middleware('auth');
     $route->put('add', 'PostController@putPost')->middleware('auth');
+    $route->post('upload', 'ImageController@upload')->name('upload-image')->middleware('auth');
+    $route->post('delete-image', 'ImageController@delete')->name('delete-image')->middleware('auth');
     $route->group(['prefix' => '{id}'] , function ($slugRoute){
         $slugRoute->get('/', 'PostController@getPost')->name('post');
         $slugRoute->post('/addComment','CommentController@make')->name('addComment')->middleware('auth');

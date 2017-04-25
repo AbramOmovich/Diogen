@@ -9,6 +9,7 @@ use App\PostType;
 use App\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
@@ -175,7 +176,7 @@ class PostController extends Controller
     }
 
 
-        public function getUserPosts(Request $request){
+    public function getUserPosts(Request $request){
         $paginate = $request->input('paginate',10);
         $sort = $request->input('sort','created_at');
         $ord = $request->input('ord','desc');
@@ -197,7 +198,11 @@ class PostController extends Controller
 
     public function getPost($id){
         $post = Post::where('id',$id)->first();
-        if($post) return view('Post', ['Post' => $post, 'details_types' => self::details_types]);
+
+        if($post){
+            $photos = Storage::files($post->id);
+            return view('Post', ['Post' => $post, 'details_types' => self::details_types, 'photos' => $photos]);
+        }
         else return redirect()->route('Home');
     }
 
@@ -297,6 +302,8 @@ class PostController extends Controller
 
     public function putPost(Request $request){
 
+        $tempDirectory = 'temp'.DIRECTORY_SEPARATOR.Auth::id();
+
         $data = $request->all();
 
         //dd($data);
@@ -309,6 +316,7 @@ class PostController extends Controller
         if ($validator->fails()){
 
             alert()->error('Не удалось создать обявление', 'Поля заполнены неверно');
+            Storage::delete(Storage::files($tempDirectory));
             return redirect()->back()->withErrors($validator)->withInput();
 
         }else{
@@ -364,6 +372,13 @@ class PostController extends Controller
 
                 $post->details()->create($details);
             }
+
+
+            foreach (Storage::files($tempDirectory) as $file){
+                Storage::move($file,$post->id.DIRECTORY_SEPARATOR.Auth::id().basename($file));
+            }
+
+            Storage::deleteDirectory($tempDirectory);
 
             alert('Объявление добавленно', "Обявление {$post->title()} успешно добавленно");
             return redirect()->route('post', ['id' => $post->id ]);

@@ -1,4 +1,9 @@
 @extends('Main')
+
+@section('css')
+    <link rel="stylesheet" href="/public/css/dropzone.css">
+@endsection
+
 @section('Posts')
     <div class="main-container col2-right-layout">
         <div class="container">
@@ -14,10 +19,10 @@
                                     <ol class="opc" id="checkoutSteps">
                                         <li id="opc-billing" class="section allow active">
                                             <div id="checkout-step-billing" class="step a-item">
-                                                <form action="{{ route('make') }}" method="post">
-                                                    {{ method_field('put') }}
                                                     <fieldset>
                                                         <ul class="form-list">
+                                                            <form action="{{ route('make') }}" id="adv-form" method="post">
+                                                                {{ method_field('put') }}
                                                             <li id="billing-new-address-form">
                                                                 <fieldset>
                                                                     <h2 class="legend">Общая информация об объекте</h2>
@@ -156,17 +161,30 @@
                                                                     </ul>
                                                                 </fieldset>
                                                             </li>
+                                                            {{ csrf_field() }}
+                                                            </form>
+                                                            <h2 class="legend">Фото</h2>
+                                                            <hr>
+                                                            <li>
+                                                                <div style="width: 100%; margin-bottom: 20px">
+                                                                    <form action="{{ route('upload-image') }}" method="post" enctype="multipart/form-data"
+                                                                          class="dropzone"
+                                                                          id="adv-dropzone">
+                                                                    </form>
+                                                                </div>
+                                                            </li>
                                                             <li>
                                                                 <p class="required pull-left">* Обязательные поля</p>
                                                             </li>
-                                                            {{ csrf_field() }}
                                                             <li>
-                                                                <button type="submit" title="Отправить" class="button"><span><span>Отправить</span></span></button>
+                                                                <button type="button" onclick="document.getElementById('adv-form').submit();" title="Отправить" class="button"><span><span>Отправить</span></span></button>
                                                             </li>
+
                                                         </ul>
                                                     </fieldset>
-                                                </form>
+
                                             </div>
+
                                         </li>
                                     </ol>
                                 </div>
@@ -211,6 +229,58 @@
             city = "{{old('city')}}" ;
 
             getCities(region,'city', "{{csrf_token()}}", city);
+        }
+    </script>
+    <script src="/public/js/dropzone.js"></script>
+    <script>
+        Dropzone.options.advDropzone = {
+            headers: {
+                'x-csrf-token': "{{ csrf_token() }}"
+            },
+
+            init: function() {
+                var mockFile = { name :'banner1.jpg' , size : 12345};
+                this.emit("addedfile",mockFile);
+                this.emit('thumbnail',mockFile,'/pubic/images/banner1.jpg');
+                this.emit("complete",mockFile)
+
+                this.on("complete", function(file) {
+                    lastFile = file;
+                    if( file.status == "success"){
+
+                    }else if(file.status == "error"){
+                        swal("Не удалось загрузить файл", "К сожалению, не удалось загрузить файл", "error")
+                        this.removeFile(file);
+                    }
+                });
+
+                this.on("removedfile", function (file) {
+                    deleteFile(file.xhr.responseText);
+                });
+            },
+
+            addRemoveLinks : true,
+            dictDefaultMessage : "Нажмите для загрузки изображений",
+            dictCancelUpload : "Отменить загрузку",
+            dictRemoveFile : "Удалить изображение",
+            paramName: 'image',
+            acceptedFiles: 'image/*',
+        };
+    </script>
+    <script>
+        function deleteFile(path) {
+            jQuery.ajax({
+                method: 'POST',
+                url: '{{route('delete-image')}}',
+                data: {
+                    path: path,
+                    _token : "{{ csrf_token() }}"
+                },
+                success: function (data, textStatus, jqXHR) {
+                },
+                error:   function (jqXHR, textStatus, errorThrown) {
+                }
+            });
         }
     </script>
 @endsection

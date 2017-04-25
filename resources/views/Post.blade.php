@@ -3,7 +3,6 @@
 @section('title')
     | {{ $Post->title() }}
 @endsection
-
 @section('Posts')
     <div class="main-container col2-right-layout">
         <div class="container">
@@ -20,7 +19,7 @@
                                                     <div class="product-box-customs">
                                                         <p class="product-image">
                                                         <div id="wrap" style="top:0px;z-index:99;position:relative;"><a href="/public/images/single_family_colonial_1.png" class="cloud-zoom" id="zoom1" rel="position:'right',showTitle:1,titleOpacity:0.5,lensOpacity:0.5,adjustX: 10,adjustY:-4" style="position: relative; display: block;">
-                                                                <img class="big" src="/public/images/single_family_colonial_1.png" alt="" title="Single Family Home for Sale " style="display: block;">
+                                                                <img class="big" src="" alt="" title="Single Family Home for Sale " style="display: block;">
                                                                 <div class="cloud-zoom-lens" style="z-index: 98; position: absolute; width: 157.08px; height: 157.08px; opacity: 0; left: 150.92px; top: 0px; background-position: -150.92px 0px;"></div></a><div class="mousetrap" style="background: rgb(255, 255, 255); opacity: 0; z-index: 99; position: absolute; width: 308px; height: 308px; left: 0px; top: 0px; cursor: move;"></div><div id="cloud-zoom-big" class="cloud-zoom-big" style="position: absolute; left: 318px; top: -4px; width: 308px; height: 308px; background-image: url(&quot;https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/image/600x600/9df78eab33525d08d6e5fb8d27136e95/s/i/single_family_home_for_sale_1.png&quot;); z-index: 99; opacity: 0; background-position: -262px -125px;"><div class="cloud-zoom-title" style="opacity: 0.5;">Single Family Home for Sale </div></div></div>
                                                         <span></span></p>
                                                         <div class="more-views">
@@ -49,7 +48,7 @@
                                                             <div class="bx-wrapper" style="max-width: 100%; margin: 0px auto;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 0px;"><ul id="gallery-swipe" class="gallery-swipe" style="width: 515%; position: relative; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
                                                                         <li style="float: left; list-style: none; position: relative; width: 100px;">
                                                                             <a href="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/thumbnail/600x600/9df78eab33525d08d6e5fb8d27136e95/s/i/single_family_home_for_sale_1.png" title="">
-                                                                                <img src="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/thumbnail/600x600/9df78eab33525d08d6e5fb8d27136e95/s/i/single_family_home_for_sale_1.png?timestamp=1491695007910" alt="">
+                                                                                <img src="" alt="">
                                                                             </a>
                                                                         </li>
                                                                         <li style="float: left; list-style: none; position: relative; width: 100px;">
@@ -95,11 +94,11 @@
                                                         </div>
                                                         <div class="add-to-cart">
                                                             <h2>Контакты</h2>
-                                                            <div class="pull-left" style="height: 75px ;color: #2c2c2c; font-size: medium;"><p style="margin-left: 15px">{{ $Post->user->firstName }}</p>
+                                                            <div class="pull-left" style="height: 75px ;color: #2c2c2c; font-size: large;"><p style="margin-left: 15px">{{ $Post->user->firstName }}</p>
                                                                 <br>
                                                                 <button type="button" id="showBtn" title="Показать контакты" class="btn btn-warning" onclick="showContacts()"><span><span>Показать контакты</span></span></button>
                                                             </div>
-                                                            <div id="contacts" style="display: none; color: #2c2c2c; font-size: medium; padding-right: 25px" class="pull-right">
+                                                            <div id="contacts" style="display: none; color: #2c2c2c; font-size: medium; padding-left: 100px" >
                                                                 <ul>
                                                                     @foreach($Post->user_phone as $phone)
                                                                         <li style="padding-bottom: 5px"><p>{{ $phone->phone }}</p></li>
@@ -158,8 +157,8 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
-                                            </div>
                                             @endif
+
 
                                             @if(Auth::check())
                                             <div class="box-collateral form-add">
@@ -208,11 +207,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            @include('part.sidebar')
+
                         </div>
                     </div>
                 </div>
+
             </div>
+                @include('part.sidebar')
         </div>
     </div>
 

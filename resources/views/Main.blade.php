@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/print.css" media="print"/>
     <link rel="stylesheet" href="/public/css/estate.css">
     <link rel="stylesheet" href="/public/css/sweetalert.css">
+    @yield('css')
 
 <body class="ps-static  cms-index-index cms-home">
 <div class="wrapper ps-static ru-lang-class">
