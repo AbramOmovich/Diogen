@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns="https://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 <head>
@@ -18,8 +17,6 @@
 <body class="ps-static  cms-index-index cms-home">
 <div class="wrapper ps-static ru-lang-class">
     <div class="page">
-        <div class="shadow"></div>
-        <div class="swipe-left"></div>
         <div class="top-icon-menu">
             <div class="swipe-control"><i class="fa fa-align-justify"></i></div>
             <div class="top-search"><i class="fa fa-search"></i></div>
