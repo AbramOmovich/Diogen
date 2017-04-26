@@ -4,7 +4,7 @@
             <div class="col-xs-12">
                 <ul id="nav" class="sf-menu">
                     <li class="level0 nav-1 first level-top">
-                        <a href="https://livedemo00.template-help.com/magento_50897/new-constructions.html" class="level-top">
+                        <a href="" class="level-top">
                             <span>Новостройки</span>
                         </a>
                     </li>

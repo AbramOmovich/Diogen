@@ -260,13 +260,14 @@
             dictRemoveFile : "Удалить изображение",
             paramName: 'image',
             acceptedFiles: 'image/*',
+            maxFiles: 12,
         };
     </script>
     <script>
         function deleteFile(path) {
             jQuery.ajax({
                 method: 'POST',
-                url: '{{route('delete-image')}}',
+                url: '{{ route('delete-image') }}',
                 data: {
                     path: path,
                     _token : "{{ csrf_token() }}"

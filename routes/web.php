@@ -18,6 +18,7 @@ Route::get('search-result/','SearchController@result')->name('search');
 Route::get('/test','CityController@test');
 Route::post('/get_cities','CityController@getCities');
 
+Route::post('message','MessageController@sendMessage')->name('message');
 
 Route::match(['get','head'],'login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('login','Auth\LoginController@login');

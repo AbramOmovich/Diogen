@@ -171,6 +171,8 @@ class PostController extends Controller
             $post = Post::where('id', $request->input('post_id'))->first();
 
             if($post->user_id == Auth::id()){
+                if(Storage::exists($post->id)) Storage::deleteDirectory($post->id);
+
                 alert()->warning("Объявление удалено", "Объявление {$post->title()} удалено");
                 $post->delete();
             }

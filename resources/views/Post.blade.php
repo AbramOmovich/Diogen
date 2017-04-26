@@ -67,7 +67,7 @@
                                                             <div class="qty-block">
                                                                 <label> Добавленно: {{ $Post->created_at }}</label>
                                                             </div>
-                                                            <button type="button" title="Отправить заявку" class="button btn-cart" onclick=""><span><span>Отправить заявку</span></span></button>
+                                                            <button type="button" title="Отправить заявку" class="button btn-cart popup" rel="popuprel" onclick="$('#post_id').val({{$Post->id}})"><span><span>Отправить заявку</span></span></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -198,17 +198,5 @@
             </div>
         </div>
     </div>
-
-@endsection
-
-@section('javascript')
-    <script>
-        function showContacts() {
-            btn = document.getElementById('showBtn');
-            contacts = document.getElementById('contacts');
-
-            contacts.style.display = "block";
-            btn.style.display = 'none';
-        }
-    </script>
+@include('part.popupForm')
 @endsection

@@ -40,7 +40,7 @@
 <span class="regular-price" id="product-price-7">
 <span class="price">{{ separate($post->price) }} $</span> </span>
                                                             </div>
-                                                            <button type="button" title="Отправить заявку" class="button btn-cart" onclick="setLocation('')"><span><span>Отправить заявку</span></span></button>
+                                                            <button type="button" rel="popuprel" title="Отправить заявку" value="{{ $post->id }}" class="button btn-cart popup" onclick="$('#post_id').val(this.value)" ><span><span>Отправить заявку</span></span></button>
                                                         </div>
                                                         <div class="clear"></div>
                                                     </div>
@@ -62,6 +62,7 @@
             </div>
         </div>
     </div>
+    @include('part.popupForm')
 @endsection
 
 @section('javascript')

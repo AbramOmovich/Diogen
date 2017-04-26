@@ -38,7 +38,7 @@
                         <span class="price">{{ separate($post->price) }} $</span> </span>
                                                 </div>
                                                 <div class="actions">
-                                                    <button type="button" title="Оставить заявку" class="button btn-cart" onclick="setLocation('https://livedemo00.template-help.com/magento_50897/checkout/cart/add/uenc/aHR0cDovL2xpdmVkZW1vMDAudGVtcGxhdGUtaGVscC5jb20vbWFnZW50b181MDg5Ny8,/product/20/form_key/idv4jCPEF6GnUqh2/')"><span><span>Оставить заявку</span></span></button>
+                                                    <button type="button" value="{{ $post->id }}" title="Оставить заявку" class="button btn-cart popup" rel="popuprel" onclick="$('#post_id').val(this.value)"><span><span>Оставить заявку</span></span></button>
 
                                                 </div>
                                             </div>
@@ -65,4 +65,6 @@
         </div>
     </div>
 
+   @include('part.popupForm')
 @endsection
+

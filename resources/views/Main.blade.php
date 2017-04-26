@@ -45,6 +45,7 @@
 <script src="/public/js/bootstrap.min.js"></script>
 <script src="/public/js/helpers.js"></script>
 <script type="text/javascript">var mdate = new Date(); document.write(mdate.getFullYear() + ' &copy');</script>
+<script src="/public/js/orderForm.js"></script>
 @include('part.alert')
 @yield('javascript')
 </body>

@@ -1,6 +1,33 @@
-
 function setLocation(url){
-    window.location.href=url;
+    window.location.href = url;
+}
+
+function apply(url,token) {
+    var msg   = $('form#popuprel').serialize();
+    $.ajax({
+        type: 'POST',
+        url: url,
+        _token : token,
+        data: msg,
+        success: function(data) {
+            $('#fade , #popuprel').fadeOut();
+            swal("Заявка отправленна", "Ваша заявка успешно отправлена", "success")
+
+        },
+        error:  function(xhr, str){
+            $('#fade , #popuprel').fadeOut();
+            swal("Не удалось отправить заявку", "К сожалению, не удалось отправить вашу заявку", "error")
+        }
+    });
+
+}
+
+function showContacts() {
+    btn = document.getElementById('showBtn');
+    contacts = document.getElementById('contacts');
+
+    contacts.style.display = "block";
+    btn.style.display = 'none';
 }
 
 function checkCity(city_id,selectorID) {
