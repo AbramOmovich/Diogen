@@ -10,20 +10,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'firstName', 'lastName', 'email', 'password','role_id'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -39,5 +29,13 @@ class User extends Authenticatable
 
     public function role(){
         return $this->belongsTo(UserRole::class);
+    }
+
+    public function messages(){
+        return $this->hasMany(Message::class,'to_user')->latest();
+    }
+
+    public function newMessages(){
+        return $this->messages()->where('watched',0)->get()->count();
     }
 }

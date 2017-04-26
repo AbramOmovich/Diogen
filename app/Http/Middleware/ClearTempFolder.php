@@ -18,6 +18,7 @@ class ClearTempFolder
      */
     public function handle($request, Closure $next)
     {
+
         if(Auth::check()){
             if($request->headers->get('referer') !== route('make') ){
                 $tempDirectory = 'temp'.DIRECTORY_SEPARATOR.Auth::id();

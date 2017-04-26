@@ -76,6 +76,22 @@
                                             <table style="width: 100%">
                                                 <tr>
                                                     <td style="width: 39%;">
+                                                        <div>
+                                                            <h2>Контакты</h2>
+                                                            <div class="pull-left" style="height: 75px ;color: #2c2c2c; font-size: large;"><p style="margin-left: 15px">{{ $Post->user->firstName }}</p>
+                                                                <br>
+                                                                <button type="button" id="showBtn" title="Показать контакты" class="btn btn-warning" onclick="showContacts()"><span><span>Показать контакты</span></span></button>
+                                                            </div>
+                                                            <div id="contacts" style="display: none; color: #2c2c2c; font-size: medium; padding-left: 150px" >
+                                                                <ul>
+                                                                    @foreach($Post->user_phone as $phone)
+                                                                        <li style="padding-bottom: 5px"><p>{{ $phone->phone }}</p></li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
                                                         <div >
                                                             <h2>Адрес</h2>
                                                             <div class="">
@@ -93,22 +109,6 @@
                                                                         <td class="pull-right" style="padding: 5px">Область: </td><td style="padding: 5px">{{ $Post->address->city->region->title }}</td>
                                                                     </tr>
                                                                 </table>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div>
-                                                            <h2>Контакты</h2>
-                                                            <div class="pull-left" style="height: 75px ;color: #2c2c2c; font-size: large;"><p style="margin-left: 15px">{{ $Post->user->firstName }}</p>
-                                                                <br>
-                                                                <button type="button" id="showBtn" title="Показать контакты" class="btn btn-warning" onclick="showContacts()"><span><span>Показать контакты</span></span></button>
-                                                            </div>
-                                                            <div id="contacts" style="display: none; color: #2c2c2c; font-size: medium; padding-left: 100px" >
-                                                                <ul>
-                                                                    @foreach($Post->user_phone as $phone)
-                                                                        <li style="padding-bottom: 5px"><p>{{ $phone->phone }}</p></li>
-                                                                    @endforeach
-                                                                </ul>
                                                             </div>
                                                         </div>
                                                     </td>

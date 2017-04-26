@@ -6,11 +6,12 @@ Route::get('/', 'PostController@index')->name('Home');
 Route::get('rent/','PostController@rent')->name('Rent');
 Route::get('buy/','PostController@buy')->name('Buy');
 
-Route::group(['prefix' => 'user'], function($userRoute){
-    $userRoute->get('/','PostController@getUserPosts')->middleware('auth')->name('userPosts');
-    $userRoute->get('edit/{id}','PostController@editPost')->middleware('auth')->name('editPost');
-    $userRoute->put('edit/{id}','PostController@syncPost')->middleware('auth')->name('syncPost');
-    $userRoute->post('delete', 'PostController@deletePost')->middleware('auth')->name('deletePost');
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function($userRoute){
+    $userRoute->get('/','PostController@getUserPosts')->name('userPosts');
+    $userRoute->get('edit/{id}','PostController@editPost')->name('editPost');
+    $userRoute->put('edit/{id}','PostController@syncPost')->name('syncPost');
+    $userRoute->post('delete', 'PostController@deletePost')->name('deletePost');
+    $userRoute->get('messages', 'UserController@showMessages')->name('showMessages');
 });
 
 Route::get('search-result/','SearchController@result')->name('search');
