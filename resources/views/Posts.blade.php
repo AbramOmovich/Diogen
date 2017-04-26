@@ -20,9 +20,15 @@
                                 <ul class="products-grid row">
                                     @foreach($Posts as $post)
                                         <li class="item col-xs-3 first">
-                                            <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}" class="product-image">
-                                                <img src="/public/images/single_family_colonial_1.png" alt="{{ $post->title() }}"/>
-                                            </a>
+                                            <div class="parentbox">
+                                                <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}">
+                                                @if(!$post->hasPhotos())
+                                                    <img class="cover" src="/public/images/nophoto.png" alt="{{ $post->title() }}"/>
+                                                @else
+                                                    <img class="cover" src="{{$post->getPhotos()[0]}}" alt="{{ $post->title() }}"/>
+                                                @endif
+                                                </a>
+                                            </div>
                                             <div class="product-shop">
                                                 <h3 class="product-name">
                                                     <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}">{{ $post->title() }}</a>

@@ -44,7 +44,7 @@
                         </a>
                     </h1>
                     <div class="right_head">
-                        <form id="search_mini_form" action="https://livedemo00.template-help.com/magento_50897/catalogsearch/result/" method="get">
+                        <form id="search_mini_form" action="{{ route('search') }}" method="get">
                             <div class="form-search">
                                 <label for="search">Search:</label>
                                 <input id="search" type="text" name="q" value="" class="input-text"/>

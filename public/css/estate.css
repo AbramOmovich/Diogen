@@ -6,3 +6,33 @@
 .title-link{
     color: #3c3c3c; font-size: medium
 }
+
+.parentbox {
+    width:270px;
+    height:270px;
+    text-align: center;  /* align the inline(-block) elements horizontally */
+    font: 0/0 a;         /* remove the gap between inline(-block) elements */
+    margin-bottom: 12px;
+}
+
+.parentbox:before {      /* create a full-height inline block pseudo-element */
+    content: ' ';
+
+    display: inline-block;
+    vertical-align: middle; /* vertical alignment of the inline element */
+    height: 100%;
+}
+
+.childbox {
+    display: inline-block;
+    vertical-align: middle;
+    min-height: 260px;
+    min-width: 260px;
+    max-height: 260px;
+    max-width: 260px;
+}
+.cover {
+    object-fit: cover;
+    width: 270px;
+    height: 270px;
+}

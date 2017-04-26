@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -44,6 +45,19 @@ class Post extends Model
 
     public function user_phone(){
         return $this->belongsToMany(UserPhone::class,'post_user_phone');
+    }
+
+    public function hasPhotos(){
+        if(Storage::exists($this->id) && Storage::files($this->id)) return true;
+        else return false;
+    }
+
+    public function getPhotos(){
+        $file_urls = [];
+        foreach (Storage::files($this->id) as $file){
+            $file_urls []= Storage::url($file);
+        }
+        return $file_urls;
     }
 }
 

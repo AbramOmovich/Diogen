@@ -14,8 +14,35 @@
                                 <div class="padding-s">
                                     <div class="product-view">
                                         <div class="product-essential">
+                                            <div class="product-img-box">
 
-                                                <div class="product-shop">
+                                                <div class="product-box-customs">
+                                                    @if(!$Post->hasPhotos())
+                                                    <div>
+                                                        <a href="/public/images/nophoto.png">
+                                                            <img class="big" src="/public/images/nophoto.png" alt="" title="Фото отсутствует">
+                                                        </a>
+                                                    </div>
+                                                    @else
+
+                                                    <div class="more-views">
+                                                        <div class="container-slider">
+                                                            <ul class="slider tumbSlider-none">
+                                                                @foreach($Post->getPhotos() as $photoUrl)
+                                                                <li>
+                                                                    <a href="{{ $photoUrl }}" class="cloud-zoom-gallery" title="{{ $Post->title() }}" >
+                                                                        <img src="{{ $photoUrl }}" alt="">
+                                                                    </a>
+                                                                </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                </div>
+
+                                            </div>
+                                            <div class="product-shop">
                                                     <div class="product-name">
                                                         <h1 style="color: #5c5c5c;">{{ $Post->title() }}</h1>
                                                         <div class="pull-right" style="text-align: right ;font-size: medium; color: #ee2d54;"><p> {{ $Post->type->title }} </p><br>

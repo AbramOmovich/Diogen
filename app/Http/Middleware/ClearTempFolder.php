@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,8 +19,10 @@ class ClearTempFolder
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            $tempDirectory = 'temp'.DIRECTORY_SEPARATOR.Auth::id();
-            if (is_dir(storage_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$tempDirectory)) Storage::deleteDirectory($tempDirectory);
+            if($request->headers->get('referer') !== route('make') ){
+                $tempDirectory = 'temp'.DIRECTORY_SEPARATOR.Auth::id();
+                if (Storage::exists($tempDirectory)) Storage::deleteDirectory($tempDirectory);
+            }
         }
 
         return $next($request);

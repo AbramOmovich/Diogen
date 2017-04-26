@@ -13,6 +13,7 @@ Route::group(['prefix' => 'user'], function($userRoute){
     $userRoute->post('delete', 'PostController@deletePost')->middleware('auth')->name('deletePost');
 });
 
+Route::get('search-result/','SearchController@result')->name('search');
 
 Route::get('/test','CityController@test');
 Route::post('/get_cities','CityController@getCities');
