@@ -7,7 +7,7 @@
                     <div class="col-xs-12">
                         <div class="main">
                             <div class="row">
-                                <div class="col-main col-xs-12 col-sm-9">
+                                <div class="col-main col-xs-12 col-sm-9" STYLE="margin-left: 10%">
                                     <div class="padding-s">
                                         <div class="product-view">
                                             <div class="product-collateral">
@@ -18,8 +18,9 @@
 
                                                             <ol class="mini-products-list" id="block-related">
                                                                 <li class="item odd" @if($message->watched === 0) style="background-color: #e6e6e6" @endif <?php $message->watched = 1; $message->save();?> >
+                                                                    <h3>{{ $message->post->title() }}</h3>
                                                                     <div class="product">
-                                                                        <a href="https://livedemo00.template-help.com/magento_50897/gorgeous-4-bedroom-mini-farm-for-sale-in-coldwater.html" title="{{ $message->post->title() }}" class="product-image"><img src="https://livedemo00.template-help.com/magento_50897/media/catalog/product/cache/4/thumbnail/90x/9df78eab33525d08d6e5fb8d27136e95/g/o/gorgeous_4_bedroom_mini-farm_for_sale_in_coldwater_2.png" alt="{{ $message->post->title() }}"></a>
+                                                                        <a href="{{ route('post',['id' => $message->post_id]) }}" title="{{ $message->post->title() }}" class="product-image"><img class="cover-message" src="{{ $message->post->showPhoto() }}" alt="{{ $message->post->title() }}"></a>
                                                                         <a href="#">
                                                                             <h3 style="color: #676767">{{ $message->senderName() }}</h3>
                                                                         </a>

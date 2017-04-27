@@ -25,10 +25,11 @@
                                                 @if(!$post->hasPhotos())
                                                     <img class="cover" src="/public/images/nophoto.png" alt="{{ $post->title() }}"/>
                                                 @else
-                                                    <img class="cover" src="{{$post->getPhotos()[0]}}" alt="{{ $post->title() }}"/>
+                                                    <img class="cover" src="{{ $post->getPhotos()[0] }}" alt="{{ $post->title() }}"/>
                                                 @endif
                                                 </a>
                                             </div>
+
                                             <div class="product-shop">
                                                 <h3 class="product-name">
                                                     <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}">{{ $post->title() }}</a>

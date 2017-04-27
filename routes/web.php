@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'PostController@index')->name('Home');
 Route::get('rent/','PostController@rent')->name('Rent');
 Route::get('buy/','PostController@buy')->name('Buy');
+Route::get('build/','PostController@build')->name('Build');
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function($userRoute){
     $userRoute->get('/','PostController@getUserPosts')->name('userPosts');

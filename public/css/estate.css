@@ -7,6 +7,32 @@
     color: #3c3c3c; font-size: medium
 }
 
+.parentbox-stock{
+    text-align: center;
+    font: 0/0 a;
+    margin-bottom: 12px;
+}
+
+.parentbox-stock:before {
+    content: ' ';
+
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.cover-stock{
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+}
+
+.cover-message{
+    object-fit: cover;
+    width: 90px;
+    height: 90px;
+}
+
 .parentbox {
     width:270px;
     height:270px;
@@ -109,4 +135,18 @@
 }
 .popupbox .telStr{
     margin-left: 5px;
+}
+
+.del {
+    width: 24px;
+    height: 24px;
+    content: url("/public/images/x.png");
+}
+
+.post-bar {
+    background: #c1e2b3;
+    padding: 5px;
+}
+
+.delete {
 }

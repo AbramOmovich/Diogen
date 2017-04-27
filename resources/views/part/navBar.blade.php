@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-xs-12">
                 <ul id="nav" class="sf-menu">
-                    <li class="level0 nav-1 first level-top">
-                        <a href="" class="level-top">
+                    <li class="level0 nav-1 first @if(Route::is('Build')) active @endif level-top">
+                        <a href="{{ route('Build') }}" class="level-top">
                             <span>Новостройки</span>
                         </a>
                     </li>

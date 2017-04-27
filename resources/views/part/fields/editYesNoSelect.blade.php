@@ -1,6 +1,6 @@
 <div class="field">
     <label for="{{ $name }}">{{ $title }}</label>
-    <div class="input-box">@php(dump($data ,old($name)))
+    <div class="input-box">
         <select id="{{ $name }}" name="{{ $name }}" title="{{ $title }}" class="form-control @if($errors->has($name)) validation-failed @endif " >
             @if( old($name) === "-1")
                 <option value="-1" selected >Выбрать</option>

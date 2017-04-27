@@ -25,9 +25,9 @@ class CreateMessagesTable extends Migration
             $table->unsignedTinyInteger('watched')->default(0);
             $table->timestamps();
 
-            $table->foreign('post_id','message_post_id')->references('id')->on('posts');
-            $table->foreign('from','message_from_id')->references('id')->on('users');
-            $table->foreign('to_user','message_to_user_id')->references('id')->on('users');
+            $table->foreign('post_id','message_post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreign('from','message_from_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('to_user','message_to_user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

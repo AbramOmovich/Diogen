@@ -11,7 +11,7 @@
                 <div class="col-xs-12">
                     <div class="main">
                         <div class="row">
-                            <div class="col-main col-xs-12 col-sm-9" style="margin-left: 13%;">
+                            <div class="col-main col-xs-12 col-sm-9" style="margin-left: 10%;">
                                 <div class="padding-s">
                                     <div class="page-title category-title">
                                         <h1>{{ $pageTitle }}</h1>
@@ -43,12 +43,11 @@
                                                             <form action="{{ route('deletePost') }}" method="post">
                                                                 {{csrf_field()}}
                                                                 <input type="hidden" name="post_id" value="{{  $post->id }}">
-                                                                <button type="submit" name="action" value="delete" title="Удалить" class="btn btn-danger"><span><span>Удалить</span></span></button>
+                                                                <button type="submit" title="Удалить" class="btn btn-danger"><span><span>Удалить</span></span></button>
                                                             </form>
                                                                 <br>
                                                                 <br>
                                                                 <a href="{{ route('editPost', ['id' => $post->id ]) }}" title="Редактировать" class="btn btn-warning"><span><span>Редактировать</span></span></a>
-                                                            </form>
                                                         </div>
                                                         <div class="clear"></div>
                                                     </div>

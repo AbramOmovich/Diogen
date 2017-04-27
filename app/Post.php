@@ -59,5 +59,10 @@ class Post extends Model
         }
         return $file_urls;
     }
+
+    public function showPhoto(){
+        if($this->hasPhotos()) return $this->getPhotos()[0];
+        else return '/public/images/nophoto.png';
+    }
 }
 

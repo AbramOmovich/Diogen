@@ -65,9 +65,22 @@
                                                     <div class="add-to-box">
                                                         <div class="add-to-cart">
                                                             <div class="qty-block">
-                                                                <label> Добавленно: {{ $Post->created_at }}</label>
+                                                                @php(setlocale(LC_TIME, 'Russian'))
+                                                                <label> Добавленно: {{ iconv('windows-1251', 'utf-8',$Post->created_at->formatLocalized('%d %B %Y') )  }}</label>
                                                             </div>
                                                             <button type="button" title="Отправить заявку" class="button btn-cart popup" rel="popuprel" onclick="$('#post_id').val({{$Post->id}})"><span><span>Отправить заявку</span></span></button>
+                                                            @if(Auth::check())
+                                                            @if(Auth::user()->role_id === 2)
+                                                                <br>
+                                                                <br>
+                                                                <form action="{{ route('deletePost') }}" method="post">
+                                                                    {{csrf_field()}}
+                                                                    <input type="hidden" name="post_id" value="{{  $Post->id }}">
+                                                                    <button class="btn btn-danger" style="margin-right: 50px">Удалить</button>
+                                                                </form>
+                                                                <a href="{{ route('editPost', ['id' => $Post->id ]) }}" class="btn btn-warning">Редактировать</a>
+                                                            @endif
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -97,16 +110,16 @@
                                                             <div class="">
                                                                 <table style="color: #4c4c4c; font-size: medium; margin: 10px;">
                                                                     <tr>
-                                                                        <td class="pull-right" style="padding: 5px">Улица: </td><td style="padding: 5px">{{ $Post->address->street }}</td>
+                                                                        <td class="" style="padding: 5px">Улица: </td><td style="padding: 5px">{{ $Post->address->street }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="pull-right" style="padding: 5px">Дом: </td><td style="padding: 5px">{{ $Post->address->house }}</td>
+                                                                        <td class="" style="padding: 5px">Дом: </td><td style="padding: 5px">{{ $Post->address->house }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="pull-right" style="padding: 5px">Город: </td><td style="padding: 5px">{{ $Post->address->city->name }}</td>
+                                                                        <td class="" style="padding: 5px">Город: </td><td style="padding: 5px">{{ $Post->address->city->name }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="pull-right" style="padding: 5px">Область: </td><td style="padding: 5px">{{ $Post->address->city->region->title }}</td>
+                                                                        <td class="" style="padding: 5px">Область: </td><td style="padding: 5px">{{ $Post->address->city->region->title }}</td>
                                                                     </tr>
                                                                 </table>
                                                             </div>

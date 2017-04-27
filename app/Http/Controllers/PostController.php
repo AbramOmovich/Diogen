@@ -73,9 +73,11 @@ class PostController extends Controller
 
     public function syncPost(Request $request, $id){
 
+
         $post = Post::where('id', $id)->first();
 
-        if($post){
+        if($post && ($post->user_id == Auth::id() || Auth::user()->role_id == 2 )){
+
             $data = $request->all();
 
             if( !in_array( $data ['region'], Region::all()->pluck('region_id')->toArray() )) unset($data['region']);
@@ -160,7 +162,7 @@ class PostController extends Controller
 
         $post = Post::where('id', $id)->first();
 
-        if($post->user_id == Auth::id()) return view('Edit', ['post' => $post]);
+        if($post->user_id == Auth::id() || Auth::user()->role_id == 2 ) return view('Edit', ['post' => $post]);
         else return redirect()->back();
     }
 
@@ -170,7 +172,7 @@ class PostController extends Controller
 
             $post = Post::where('id', $request->input('post_id'))->first();
 
-            if($post->user_id == Auth::id()){
+            if($post->user_id == Auth::id() || Auth::user()->role_id == 2){
                 if(Storage::exists($post->id)) Storage::deleteDirectory($post->id);
 
                 alert()->warning("Объявление удалено", "Объявление {$post->title()} удалено");
@@ -210,6 +212,10 @@ class PostController extends Controller
             return view('Post', ['Post' => $post, 'details_types' => self::details_types, 'photos' => $photos]);
         }
         else return redirect()->route('Home');
+    }
+
+    public function build(Request $request){
+        return $this->stock(__FUNCTION__,$request);
     }
 
     public function rent(Request $request){
@@ -374,7 +380,7 @@ class PostController extends Controller
             });
 
             if(!empty($details)){
-                if(isset($details['square'])) $details['square'] = $detail = (float) $details['square'];
+                if(isset($details['square'])) $details['square'] = $detail = (float) str_replace(',' , '.', $details['square']);
 
                 $post->details()->create($details);
             }

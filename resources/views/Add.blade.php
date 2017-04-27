@@ -11,7 +11,7 @@
                 <div class="col-xs-12">
                     <div class="main">
                         <div class="row">
-                            <div class="col-main col-xs-12 col-sm-9">
+                            <div class="col-main col-xs-12 col-sm-9" style="margin-left: 10%;">
                                 <div class="padding-s">
                                     <div class="page-title">
                                         <h1>Подать объявление</h1>
@@ -189,31 +189,7 @@
                                     </ol>
                                 </div>
                             </div>
-                            <div class="col-right sidebar col-xs-12 col-sm-3"><div id="checkout-progress-wrapper"><div class="block block-progress opc-block-progress last_block first">
-                                        <div class="block-title">
-                                            <strong><span>Стадия оформления заказа</span></strong>
-                                            <span class="toggle"></span></div>
-                                        <div class="block-content">
-                                            <dl>
-                                                <div id="billing-progress-opcheckout">
-                                                    <dt>
-                                                        Адрес плательщика</dt>
-                                                </div>
-                                                <div id="shipping-progress-opcheckout">
-                                                    <dt>
-                                                        Адрес доставки</dt>
-                                                </div>
-                                                <div id="shipping_method-progress-opcheckout">
-                                                    <dt>
-                                                        Метод доставки</dt>
-                                                </div>
-                                                <div id="payment-progress-opcheckout">
-                                                    <dt>
-                                                        Метод оплаты</dt>
-                                                </div>
-                                            </dl>
-                                        </div>
-                                    </div></div></div>
+
                         </div>
                     </div>
                 </div>

@@ -7,7 +7,7 @@
                 <div class="col-xs-12">
                     <div class="main">
                         <div class="row">
-                            <div class="col-main col-xs-12 col-sm-9" style="margin-left: 15%;">
+                            <div class="col-main col-xs-12 col-sm-9" style="margin-left: 10%;">
                                 <div class="padding-s">
                                     <div class="page-title">
                                         <h1>Редакторование объявления</h1>
@@ -123,13 +123,13 @@
 
                                                                         <h2 class="legend">Контакты</h2>
                                                                         <hr>
-
                                                                         <li class="fields">
-                                                                            @if( !Auth::user()->phone->isEmpty())
+                                                                            @if( !$post->user->phone->isEmpty())
                                                                             <div class="field">
                                                                                 <label for="phone" class="required"><em>*</em>Телефон</label>
                                                                                 <select name="phone[]" id="phone" multiple class="form-control @if($errors->has('phone')) validation-failed @endif">
-                                                                                    @foreach(Auth::user()->phone as $phone)
+
+                                                                                    @foreach($post->user->phone as $phone)
                                                                                         <option value="{{ $phone->id }}" @if(old('phone')) @if(in_array($phone->id,old('phone'))) selected @endif @else @if(in_array($phone->id, $post->user_phone->pluck('id')->toArray())) selected @endif @endif>{{ $phone->phone }}</option>
                                                                                     @endforeach
                                                                                 </select>
