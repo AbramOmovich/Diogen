@@ -25,7 +25,9 @@
                                         <ol class="products-list" id="products-list">
                                             @foreach($Posts as $post)
                                             <li class="item">
-                                                <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}" class="product-image"><img src="/public/images/{{ $post->photo }}" alt="{{ $post->title() }}"></a>
+                                                <a href="{{ route('post', ['id' => $post->id]) }}" title="{{ $post->title() }}" class="product-image">
+                                                    <img src="{{ $post->showPhoto() }}" alt="{{ $post->title() }}" class="cover-stock">
+                                                </a>
                                                 <div class="product-shop">
                                                     <div class="f-fix">
                                                         <div class="list-left">

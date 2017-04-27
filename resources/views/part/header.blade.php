@@ -11,12 +11,12 @@
                                 <li><a href="{{ route('register') }}" title="Регистрация">Регистрация</a></li>
                                 <li><a href="{{ route('login') }}" title="Войти">Войти</a></li>
                             @else
+                                <li><a href="{{ route('showMessages') }}">Мои сообщения  @if(Auth::user()->newMessages() > 0) ({{ Auth::user()->newMessages() }})@endif</a></li>
                                 <li>
                                     <div class="btn-group pull-right">
                                         <a class="dropdown-toggle" href="#" id="userDrop" data-toggle="dropdown" role="button" >{{ Auth::user()->email }}<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="{{ route('userPosts') }}">Мои обЪявления</a></li>
-                                            <li><a href="{{ route('showMessages') }}">Сообщения  @if(Auth::user()->newMessages() > 0) ({{ Auth::user()->newMessages() }})@endif</a></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выйти</a></li>
                                         </ul>
