@@ -64,5 +64,21 @@ class Post extends Model
         if($this->hasPhotos()) return $this->getPhotos()[0];
         else return '/public/images/nophoto.png';
     }
+
+    public static function getRandomPosts($amount = 3){
+        $ids = Post::all()->pluck('id')->toArray();
+
+        $rand_ids = array_rand(array_flip($ids),$amount);
+
+        return Post::whereIn('id', $rand_ids)->get();
+    }
+
+    public function currency(){
+        return $this->belongsTo(Currency::class,'currency_id');
+    }
+
+    public function price(){
+        return separate($this->price).' $';
+    }
 }
 
