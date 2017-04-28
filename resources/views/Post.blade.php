@@ -18,13 +18,17 @@
 
                                                 <div class="product-box-customs">
                                                     @if(!$Post->hasPhotos())
-                                                    <div>
+                                                    <div class="parentbox">
                                                         <a href="/public/images/nophoto.png">
                                                             <img class="big" src="/public/images/nophoto.png" alt="" title="Фото отсутствует">
                                                         </a>
                                                     </div>
                                                     @else
-
+                                                        <div>
+                                                            <a href="{{ $Post->showPhoto() }}">
+                                                                <img class="cover" src="{{ $Post->showPhoto() }}" title="{{ $Post->title() }}">
+                                                            </a>
+                                                        </div>
                                                     <div class="more-views">
                                                         <div class="container-slider">
                                                             <ul class="slider tumbSlider-none">
@@ -94,6 +98,17 @@
                                                             <div class="pull-left" style="height: 75px ;color: #2c2c2c; font-size: large;"><p style="margin-left: 15px">{{ $Post->user->firstName }}</p>
                                                                 <br>
                                                                 <button type="button" id="showBtn" title="Показать контакты" class="btn btn-warning" onclick="showContacts()"><span><span>Показать контакты</span></span></button>
+                                                                @if(Auth::check() && Auth::user()->role_id == 2)
+                                                                    <br><br>
+                                                                    <form id="stateForm" action="{{ route('changeUserState') }}" method="post">
+                                                                        <input type="hidden" name="state" value="1">
+                                                                        <input type="hidden" name="id" value="{{ $Post->user->id }}">
+                                                                        {{ csrf_field() }}
+                                                                        <button type="submit" class="btn btn-info">Заблокировать</button>
+                                                                    </form>
+
+                                                                    <button type="button" value="1" class="btn btn-danger">Удалить</button>
+                                                                @endif
                                                             </div>
                                                             <div id="contacts" style="display: none; color: #2c2c2c; font-size: medium; padding-left: 150px" >
                                                                 <ul>
@@ -194,6 +209,14 @@
                                                                 <a href="#">{{ $comment->user->firstName }}</a></dt>
                                                             <dd>
                                                                 {{ $comment->text }}<br><small class="date">(Отзыв написан {{ $comment->created_at }})</small>
+                                                                <br>
+                                                                @if(Auth::check() && Auth::user()->role_id == 2)
+                                                                    <form action="{{ route('deleteComment', ['id' => $Post->id]) }}" method="post">
+                                                                        {{ csrf_field() }}
+                                                                        <input type="hidden" value="{{ $comment->id }}" name="id">
+                                                                        <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+                                                                    </form>
+                                                                @endif
                                                             </dd>
                                                         @endforeach
                                                     </dl>

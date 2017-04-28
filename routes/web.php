@@ -13,6 +13,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function($userRoute){
     $userRoute->put('edit/{id}','PostController@syncPost')->name('syncPost');
     $userRoute->post('delete', 'PostController@deletePost')->name('deletePost');
     $userRoute->get('messages', 'UserController@showMessages')->name('showMessages');
+    $userRoute->post('change-state','UserController@changeUserState')->name('changeUserState');
 });
 
 Route::get('search-result/','SearchController@result')->name('search');
@@ -40,5 +41,6 @@ Route::group(['prefix' => 'adv'] , function($route){
     $route->group(['prefix' => '{id}'] , function ($slugRoute){
         $slugRoute->get('/', 'PostController@getPost')->name('post');
         $slugRoute->post('/addComment','CommentController@make')->name('addComment')->middleware('auth');
+        $slugRoute->post('/deleteComment','CommentController@delete')->name('deleteComment')->middleware('auth');
     });
 });

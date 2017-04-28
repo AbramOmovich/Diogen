@@ -28,4 +28,15 @@ class CommentController extends Controller
             return redirect()->back();
         }
     }
+
+    public function delete(Request $request){
+        if ($request->has('id')) $comment = Comment::where('id', $request->id)->first();
+        if(Auth::id() == $comment->user->id || Auth::user()->role_id == 2 ) {
+
+            alert()->warning('Коментарий удалён',"Коментарий  ".str_limit($comment->text,30)." успешно удалён");
+            $comment->delete();
+        }
+
+        return redirect()->back();
+    }
 }
