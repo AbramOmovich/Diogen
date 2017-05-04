@@ -24,3 +24,23 @@ $('#fade').click(function() {
     $('#fade , #popuprel').fadeOut();
     return false;
 });
+
+function apply(url,token) {
+    var msg   = $('form#popuprel').serialize();
+    $.ajax({
+        type: 'POST',
+        url: url,
+        _token : token,
+        data: msg,
+        success: function(data) {
+            $('#fade , #popuprel').fadeOut();
+            swal("Заявка отправленна", "Ваша заявка успешно отправлена", "success")
+
+        },
+        error:  function(xhr, str){
+            $('#fade , #popuprel').fadeOut();
+            swal("Не удалось отправить заявку", "К сожалению, не удалось отправить вашу заявку", "error")
+        }
+    });
+
+}

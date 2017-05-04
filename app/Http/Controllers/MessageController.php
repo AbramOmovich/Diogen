@@ -48,4 +48,42 @@ class MessageController extends Controller
            abort(404);
        }
     }
+
+    public function deleteMessage($id){
+        $message = Message::whereId($id)->first();
+
+        if($message && $message->to_user === Auth::id()){
+            alert()->warning('Сообщение удалено', 'Cообщение '.$message->comment.' успешно удалено' );
+            $message->delete();
+
+        }
+
+        return redirect()->back();
+    }
+
+    public function reply(Request $request){
+
+        if($request->has('id')){
+             $message = Message::whereId($request->id)->first();
+             if(!$message) abort(404);
+
+            try{
+
+               $this->validate($request,['reply' => 'required|max:250']);
+
+                $data = $request->all();
+                $reply = new Message();
+
+                $reply->comment = $data['reply'];
+                $reply->from = Auth::id();
+
+                $reply->post_id = $message->post_id;
+                $reply->to_user = $message->senderUser->id;
+                $reply->save();
+
+            }catch (ValidationException $vEx){
+                abort(404);
+            }
+        }
+    }
 }

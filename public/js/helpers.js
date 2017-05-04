@@ -2,24 +2,33 @@ function setLocation(url){
     window.location.href = url;
 }
 
-function apply(url,token) {
-    var msg   = $('form#popuprel').serialize();
+function showAnswerForm(msg_id) {
+    var div = $('#reply-div-' + msg_id);
+    var rep = $('#reply-form').clone();
+
+    var new_id = 'form-reply-' + msg_id;
+    if(div.children().length === 0) {
+        div.append(rep.css('display','block').attr('id',new_id));
+        $('#' + new_id).children("[name='id']").val(msg_id);
+    }
+}
+
+function replyToUser(form_id, url) {
+    var rep   = $('form#' + form_id).serialize();
     $.ajax({
         type: 'POST',
         url: url,
-        _token : token,
-        data: msg,
+        data: rep,
         success: function(data) {
             $('#fade , #popuprel').fadeOut();
-            swal("Заявка отправленна", "Ваша заявка успешно отправлена", "success")
+            swal("Сообщение отправлено", "Ваша сообщение успешно отправлено", "success")
 
         },
         error:  function(xhr, str){
             $('#fade , #popuprel').fadeOut();
-            swal("Не удалось отправить заявку", "К сожалению, не удалось отправить вашу заявку", "error")
+            swal("Не удалось отправить сообщение", "К сожалению, не удалось отправить ваше сообщение", "error")
         }
     });
-
 }
 
 function showContacts() {

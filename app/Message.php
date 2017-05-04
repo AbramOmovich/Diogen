@@ -33,4 +33,14 @@ class Message extends Model
     public function post(){
         return $this->belongsTo(Post::class,'post_id');
     }
+
+    public function hasUser(){
+        if(!is_null($this->from)) return true;
+        else return false;
+    }
+
+    public function senderUser(){
+        if ($this->hasUser()) return $this->belongsTo(User::class, 'from');
+        else return false;
+    }
 }

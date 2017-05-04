@@ -12,8 +12,12 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function($userRoute){
     $userRoute->get('edit/{id}','PostController@editPost')->name('editPost');
     $userRoute->put('edit/{id}','PostController@syncPost')->name('syncPost');
     $userRoute->post('delete', 'PostController@deletePost')->name('deletePost');
-    $userRoute->get('messages', 'UserController@showMessages')->name('showMessages');
     $userRoute->post('change-state','UserController@changeUserState')->name('changeUserState');
+
+    $userRoute->group(['prefix' => 'messages', ], function ($messRoute){
+        $messRoute->get('inbox','UserController@showMessages')->name('showMessages');
+        $messRoute->get('delete/{id}', 'MessageController@deleteMessage')->name('deleteMessage');
+    });
 });
 
 Route::get('search-result/','SearchController@result')->name('search');
@@ -22,6 +26,7 @@ Route::get('/test','CityController@test');
 Route::post('/get_cities','CityController@getCities');
 
 Route::post('message','MessageController@sendMessage')->name('message');
+Route::post('reply','MessageController@reply')->name('reply');
 
 Route::match(['get','head'],'login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('login','Auth\LoginController@login');

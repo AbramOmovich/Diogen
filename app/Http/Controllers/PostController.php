@@ -259,8 +259,13 @@ class PostController extends Controller
                         continue;
                     }
                     case 'rooms':{
-                        if (in_array(5,$values)) $posts->where('rooms', '>=', 4);
-                        $posts->whereIn($field, $values);
+                        if (in_array(5,$values)){
+                            $posts->where(function ($query) use ($values,$field) {
+                                $query->whereIn($field, $values);
+                                $query->orWhere($field,'>=',4);
+                            });
+                        }
+                        else $posts->whereIn($field, $values);
                         continue;
                     }
                     case 'additional':{

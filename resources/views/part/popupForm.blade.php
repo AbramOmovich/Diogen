@@ -3,8 +3,12 @@
     <span class="title">Оставить заявку</span>
     <div class="white">
         @if(!Auth::check())
-            <p><input name="name" id="name" placeholder="Ваше Имя" type="text" class="input-text"></p>
             <p>
+                <em class="require">*</em>
+                <input name="name" id="name" placeholder="Ваше Имя" type="text" class="input-text">
+            </p>
+            <p>
+                <em class="require">*</em>
             <span class="telStr">
                 <strong>+375</strong>
                 <select name="code" id="code" style="">
@@ -15,6 +19,7 @@
                 </select>
                 <input type="text" name="phone" placeholder="Телефон" class="tel">
             </span>
+
         </p>
             <p><input name="email" id="email" placeholder="E-mail" type="text" class="input-text"></p>
         @endif
@@ -24,6 +29,7 @@
         </div>
         <input type="hidden" id="post_id" name="id" value="">
         <hr>
+            <i class="require remark" >* обязательные поля</i>
         {{csrf_field()}}
         <button  class="button" type="submit"><span><span>Отправить</span></span></button>
     </div>

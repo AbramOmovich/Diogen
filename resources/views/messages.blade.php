@@ -40,8 +40,11 @@
                                                                                 </tr>
                                                                                 @endif
                                                                             </table>
-                                                                            <a style="padding-right: 10px" href="#" class="link-wishlist">Ответить</a>
-                                                                            <a href="" class="link-cart">Удалить</a>
+                                                                            @if($message->hasUser())<a style="padding-right: 10px" onclick="showAnswerForm('{{ $message->id }}')" class="link-cart">Ответить</a>@endif
+                                                                            <a href="{{ route('deleteMessage', ['id' => $message->id]) }}" class="link-cart">Удалить</a>
+                                                                            @if($message->hasUser())
+                                                                            <div id="reply-div-{{$message->id}}"></div>
+                                                                            @endif
                                                                         </div>
                                                                     </div>
                                                                 </li>
@@ -59,4 +62,6 @@
                 </div>
             </div>
         </div>
+        @include('part.reply-form')
 @endsection
+
