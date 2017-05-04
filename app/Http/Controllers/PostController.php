@@ -47,9 +47,9 @@ class PostController extends Controller
         'parking' =>  ['title' => 'Парковочное место', 'general' => 1]
     ];
 
-    protected const pagination_vars = [10, 25, 50];
+    public const pagination_vars = [10, 25, 50];
 
-    protected const sort_vars = [
+    public const sort_vars = [
         'Сначала новые' => [
             'field' => 'created_at',
             'ord' => 'desc'

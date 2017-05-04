@@ -47,7 +47,7 @@
                         <form id="search_mini_form" action="{{ route('search') }}" method="get">
                             <div class="form-search">
                                 <label for="search">Search:</label>
-                                <input id="search" type="text" name="q" value="" class="input-text"/>
+                                <input id="search" type="text" name="query" value="" class="input-text"/>
                                 <button type="submit" title="Поиск" class="button"><strong><i class="fa fa-search"></i></strong></button>
                                 <div id="search_autocomplete" class="search-autocomplete"></div>
                             </div>
