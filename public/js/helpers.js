@@ -2,6 +2,11 @@ function setLocation(url){
     window.location.href = url;
 }
 
+function stateVal(val) {
+    $('input[name="state"]').val(val);
+
+}
+
 function showAnswerForm(msg_id) {
     var div = $('#reply-div-' + msg_id);
     var rep = $('#reply-form').clone();

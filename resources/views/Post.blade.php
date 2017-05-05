@@ -101,13 +101,19 @@
                                                                 @if(Auth::check() && Auth::user()->role_id == 2)
                                                                     <br><br>
                                                                     <form id="stateForm" action="{{ route('changeUserState') }}" method="post">
-                                                                        <input type="hidden" name="state" value="1">
+                                                                        <input type="hidden" name="state" value="">
                                                                         <input type="hidden" name="id" value="{{ $Post->user->id }}">
                                                                         {{ csrf_field() }}
-                                                                        <button type="submit" class="btn btn-info">Заблокировать</button>
+                                                                        @if($Post->user->state == 0)
+                                                                            <button type="submit" value="1" onclick="stateVal($(this).val())" class="btn btn-info">Заблокировать</button>
+                                                                            <button type="submit" value="2" onclick="stateVal($(this).val())" class="btn btn-danger">Удалить</button>
+                                                                        @elseif($Post->user->state == 1)
+                                                                            <button type="submit" value="0" onclick="stateVal($(this).val())" class="btn btn-success">Разблокировать</button>
+                                                                            <button type="submit" value="2" onclick="stateVal($(this).val())" class="btn btn-danger">Удалить</button>
+                                                                        @elseif($Post->user->state == 2)
+                                                                            <button type="submit" value="0" onclick="stateVal($(this).val())" class="btn btn-primary">Восстановить</button>
+                                                                        @endif
                                                                     </form>
-
-                                                                    <button type="button" value="1" class="btn btn-danger">Удалить</button>
                                                                 @endif
                                                             </div>
                                                             <div id="contacts" style="display: none; color: #2c2c2c; font-size: medium; padding-left: 150px" >

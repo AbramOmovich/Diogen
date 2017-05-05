@@ -43,9 +43,9 @@ Route::group(['prefix' => 'adv'] , function($route){
     $route->put('add', 'PostController@putPost')->middleware('auth');
     $route->post('upload', 'ImageController@upload')->name('upload-image')->middleware('auth');
     $route->post('delete-image', 'ImageController@delete')->name('delete-image')->middleware('auth');
-    $route->group(['prefix' => '{id}'] , function ($slugRoute){
-        $slugRoute->get('/', 'PostController@getPost')->name('post');
-        $slugRoute->post('/addComment','CommentController@make')->name('addComment')->middleware('auth');
-        $slugRoute->post('/deleteComment','CommentController@delete')->name('deleteComment')->middleware('auth');
+    $route->group(['prefix' => '{id}'] , function ($idRoute){
+        $idRoute->get('/', 'PostController@getPost')->name('post');
+        $idRoute->post('/addComment','CommentController@make')->name('addComment')->middleware('auth');
+        $idRoute->post('/deleteComment','CommentController@delete')->name('deleteComment')->middleware('auth');
     });
 });

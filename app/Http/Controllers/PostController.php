@@ -314,7 +314,8 @@ class PostController extends Controller
     }
 
     public function makePost(){
-        return view('Add');
+        if(Auth::user()->state == 0) return view('Add');
+        else return redirect()->back();
     }
 
     public function putPost(Request $request){

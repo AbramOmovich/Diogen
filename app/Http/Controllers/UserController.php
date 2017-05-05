@@ -11,17 +11,28 @@ class UserController extends Controller
 {
     public function showMessages(){
 
-        $messages = Auth::user()->messages;
+        if(Auth::user()->state != 2){
+            $messages = Auth::user()->messages;
 
-        return view('messages',['messages' => $messages]);
+            return view('messages',['messages' => $messages]);
+        }else{
+            return redirect()->back();
+        }
     }
 
     public function changeUserState(Request $request){
         if($request->has('state') && $request->has('id') && Auth::user()->role_id == 2) {
-            $user = User::where('id',$request->input('id'))->first();
-            $user->state = $request->input('state');
+            $user = User::whereId($request->id)->first();
+            $user->state = $request->state;
+            $user->save();
 
-            alert('Пользователь заблокирован', "Пользователь {$user->firstName} {$user->lastName} успешно заблокирован");
+            switch ($request->state){
+                case '0':{ $action = 'разблокирован'; break;}
+                case '1':{ $action = 'заблокирован'; break;}
+                case '2':{ $action = 'удалён'; break;}
+            }
+
+            alert('Пользователь '.$action, "Пользователь {$user->firstName} {$user->lastName} успешно {$action}");
         }
         return redirect()->back();
     }

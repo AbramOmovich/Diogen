@@ -5,13 +5,17 @@
                 <div class="header">
                     <div class="top_row">
                         <ul class="links">
-                            <li><a href="{{ route('make') }}" title="Подать объявление">Подать объявление</a></li>
-
+                            <li>
+                                @if((Auth::check() && Auth::user()->state === 0) || Auth::guest())
+                                <a href="{{ route('make') }}" title="Подать объявление">Подать объявление</a></li>
+                                @endif
                             @if(Auth::guest())
                                 <li><a href="{{ route('register') }}" title="Регистрация">Регистрация</a></li>
                                 <li><a href="{{ route('login') }}" title="Войти">Войти</a></li>
                             @else
+                                @if(Auth::user()->state < 2)
                                 <li><a href="{{ route('showMessages') }}">Мои сообщения  @if(Auth::user()->newMessages() > 0) ({{ Auth::user()->newMessages() }})@endif</a></li>
+                                @endif
                                 <li>
                                     <div class="btn-group pull-right">
                                         <a class="dropdown-toggle" href="#" id="userDrop" data-toggle="dropdown" role="button" >{{ Auth::user()->email }}<span class="caret"></span></a>
@@ -30,7 +34,7 @@
                         </ul>
                         <p class="welcome-msg">
                         @if(!Auth::check())
-                                Добро пожаловать в наш интернет-магазин!
+                                Добро пожаловать!
                         @else
                                 Добро пожаловать, {{ Auth::user()->firstName }}
                         @endif
