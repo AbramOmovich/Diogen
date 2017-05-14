@@ -13,7 +13,7 @@ class CitiesTableSeeder extends Seeder
     {
         $db = DB::table('cities');
 
-        $cities = unserialize( file_get_contents('d:\OpenServer\domains\estate\database\seeds\citiesSeeder'));
+        $cities = unserialize( file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'citiesSeeder'));
 
         foreach ($cities as $city){
             $db->insert($city);
